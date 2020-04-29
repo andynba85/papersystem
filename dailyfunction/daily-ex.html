@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Let browser know website is optimized for mobile-->
+    <!--google font-->
+    <script src="https://kit.fontawesome.com/80f6c102d9.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Lacquer|Roboto|Source+Sans+Pro|Squada+One|Sriracha&display=swap" rel="stylesheet">
+    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <style>
+        .collection h4 , .collection p {
+            text-align: center;
+        }
+        h4{
+            font-size: 30px; 
+            margin: 20px;
+
+        }
+        p{
+            font-size: 20px;
+        }
+        .card-collection{
+            background-color: #eeeeee;
+            height:540px;
+            border-radius: 10px;
+        }
+        .card-style{
+            display: grid;
+            grid-template-columns:repeat(2,1fr);
+            gap: 15px;
+            background-color: #eeeeee;
+            max-width: 350px;
+            margin: 0 auto;
+            border-radius: 10px;
+            padding:15px;
+        }
+
+        .block {
+            border: none;
+            height:40px;
+            padding: 50px ;
+            font-size: 16px;
+            cursor: pointer;
+            text-align: center;
+            border-radius: 15px;
+            background-size: 157px 150px;
+            background-repeat: no-repeat;
+            box-shadow:1px 1px 3px #e0e0e0;
+        }
+        .add{
+            height:40px;
+            padding: 50px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            text-align: center;
+            border-radius: 15px;
+            box-shadow:1px 1px 3px #e0e0e0;
+            background-color: #fff;
+            font-size: 45px;
+        }
+        .add .fa-plus{
+            color: #eeeeee;
+        }
+
+        .add:active{
+            background-color: blanchedalmond;
+        }
+        .block:active{
+            opacity: 0.75;
+        }
+        .fa-arrow-circle-left{
+            position: relative;
+            font-size: 35px;
+            float:left;
+        }
+
+        .dialog{
+            position: absolute;
+            top:45%;
+            left:22%;
+            background-color: #F5CD6F;
+            width:220px;
+            height:100px;
+            border-radius: 20px;
+        }
+        .dialog span{
+            position: relative;
+            font-size: 18px;
+            top:40px;
+            left:20px;
+        }
+        #show{
+            opacity: 1.0;
+            transition: opacity 3s ease-out;
+        }
+    </style>
+</head>
+<body>
+<div class="collection">
+    <i onclick="location.href='../preindex.html'" class="fas fa-arrow-circle-left"></i>
+    <h4>Journey Collection</h4>
+    <p>Record your Memory</p>
+    <div class="card-collection">
+        <div id="adddaily" class="card-style">
+            <div class="add" onclick="location.href='daily_input.html'"><i class="fas fa-plus"></i></div>
+            
+        </div>
+    </div>
+</div>
+<script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-database.js"></script>
+<script src="../database_setup.js"></script>
+<script>
+    
+    auth.onAuthStateChanged(user => {
+			if (user) {
+                console.log('user logged in: ', user);
+                console.log('user logged in: ', user['uid']);
+                dbtest.ref('users/'+ user['uid'] +'/diaryset').once('value', function (snapshot) {
+                    var data = snapshot.val();
+                    console.log(snapshot);
+                    console.log(data);
+                    if(data != null){
+                    snapshot.forEach(function (item) {
+                        console.log(item);
+                        console.log(item.key);
+                        document.getElementById('adddaily').insertAdjacentHTML('beforeend',
+                            ` <div class="block" style="background-image: url('${item.val().img}');">
+                            </div>  
+                        `)
+                        console.log(item.val().img);
+                    })
+                    }
+                }); 
+            }else{
+                console.log('user logged out');
+            }
+    });
+</script>
+<!--
+<div id="show" class="dialog">
+    <span>趕快新增美好的回憶吧</span>
+</div>
+-->
+</body>
+</html>

@@ -56,8 +56,8 @@
             <img id="height-2" src="heigh_2-color.png"> 
             <img id="height-3" src="heigh_3-color.png">    
             <img id="medium-1" src="medium_1-color.png">  
-            <img id="medium-2" src="medium-2-color.png"> 
-            <img id="medium-3" src="medium-3-color.png">    
+            <img id="medium-2" src="medium_2-color.png"> 
+            <img id="medium-3" src="medium_3-color.png">    
             <img id="entry-1" src="entry_1-color.png">  
             <img id="entry-2" src="entry_2-color.png"> 
             <img id="entry-3" src="entry_3-color.png">    
@@ -280,7 +280,21 @@
                 document.querySelector('#heigh_'+arrIndex.toString()).setAttribute('visible', !boxOpen);
                 showimagid = 'heigh_'+arrIndex.toString();
                 //imgmap.get('height_'+toString(arrIndex));
-                dbtest.ref('users/'+ auth.currentUser.uid+'/badgeset/').push(showimagid)
+                dbtest.ref('users/'+ auth.currentUser.uid+'/badgeset/').on('value',function(data){
+                    var judge = false;
+                    data.forEach(function(item) {
+                        console.log(item.key+""+item.val());
+                        if(item.val() === showimagid){
+                            judge = true;
+                        }
+                    });
+                    if( judge === false){
+                        dbtest.ref('users/'+ auth.currentUser.uid+'/badgeset/').push(showimagid)
+                    }
+                    console.log(showimagid)
+                    console.log(judge)
+                });
+                //dbtest.ref('users/'+ auth.currentUser.uid+'/badgeset/').push(showimagid)
                 congra.setAttribute('visible', !boxOpen);
                 congra2.setAttribute('visible', !boxOpen);
                 //coin.setAttribute('visible', !boxOpen);
@@ -290,7 +304,21 @@
                 console.log(arrIndex.toString());
                 document.querySelector('#medium_'+arrIndex.toString()).setAttribute('visible', !boxOpen);
                 showimagid = 'medium_'+arrIndex.toString();
-                dbtest.ref('users/'+ auth.currentUser.uid+'/badgeset/').push(showimagid)
+                dbtest.ref('users/'+ auth.currentUser.uid+'/badgeset/').on('value',function(data){
+                    var judge = false;
+                    data.forEach(function(item) {
+                        console.log(item.key+""+item.val());
+                        if(item.val() === showimagid){
+                            judge = true;
+                        }
+                    });
+                    if( judge === false){
+                        dbtest.ref('users/'+ auth.currentUser.uid+'/badgeset/').push(showimagid)
+                    }
+                    console.log(showimagid)
+                    console.log(judge)
+                });
+                //dbtest.ref('users/'+ auth.currentUser.uid+'/badgeset/').push(showimagid)
                 congra.setAttribute('visible', !boxOpen);
                 congra2.setAttribute('visible', !boxOpen);
             }
@@ -299,7 +327,21 @@
                 console.log(arrIndex.toString());
                 document.querySelector('#entry_'+arrIndex.toString()).setAttribute('visible', !boxOpen);
                 showimagid = 'entry_'+arrIndex.toString();
-                dbtest.ref('users/'+ auth.currentUser.uid+'/badgeset/').push(showimagid)
+                dbtest.ref('users/'+ auth.currentUser.uid+'/badgeset/').on('value',function(data){
+                    var judge = false;
+                    data.forEach(function(item) {
+                        console.log(item.key+""+item.val());
+                        if(item.val() === showimagid){
+                            judge = true;
+                        }
+                    });
+                    if( judge === false){
+                        dbtest.ref('users/'+ auth.currentUser.uid+'/badgeset/').push(showimagid)
+                    }
+                    console.log(showimagid)
+                    console.log(judge)
+                });
+                //dbtest.ref('users/'+ auth.currentUser.uid+'/badgeset/').push(showimagid)
                 congra.setAttribute('visible', !boxOpen);
                 congra2.setAttribute('visible', !boxOpen);
             }

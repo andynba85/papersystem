@@ -240,11 +240,14 @@
             let boxOpen = false;
             dependencies: ['raycaster'];
           // animate box body
-            if (boxOpen) {
+        /*
+            if (boxOpen){
                 boxBody.setAttribute('visible', boxOpen);
             } else {
                 boxBody.setAttribute('visible', !boxOpen);   
             }
+            */
+            boxBody.setAttribute('visible', !boxOpen);
         
             boxBody.setAttribute('animation',
                                 "property: opacity; " + animToggle[!boxOpen] +

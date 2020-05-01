@@ -62,7 +62,7 @@ loginForm.addEventListener('submit', (e) => {
   return auth.signInWithEmailAndPassword(email, password).then((cred) => {
     
     // close the signup modal & reset form
-    window.location.href='../preindex.html';
+    window.location.href='preindex.html';
     loginForm.reset();
   })
 /*

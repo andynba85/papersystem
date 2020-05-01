@@ -42,8 +42,8 @@
         border: none;
         background: white;
         color: black;
-        width: 200px;
-        height: 200px;
+        width: 50px;
+        height: 50px;
     }
     </style>
 
@@ -163,7 +163,7 @@
         </a-text>
 
         <a-text id="congra"
-                value="Attraction Get"
+                value="Achievement Get"
                 scale="0.6 0.6 0.6"
                 position="-0.4 1 0" rotation="-90 0 0"
                 color="#FFFF84" material="side: double">
@@ -189,7 +189,11 @@
     
     
     <button class="back-button">Back!</button>
-
+    <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-auth.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-firestore.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-database.js"></script>
+	<script src="../database_setup.js"> </script>
 
     <script>
 /*
@@ -204,7 +208,7 @@
           // here you can change also a-scene or a-entity properties, like
           // changing your 3D model source, size, position and so on
           // or you can just open links, trigger actions...
-            location.href = `ARcollection.html?showimgid=${showimagid}`;
+            location.href = `ARcollection.html`;
         });
 
         let showimagid = '';
@@ -275,7 +279,7 @@
                 //imgmap.get('height_'+toString(arrIndex));
                 congra.setAttribute('visible', !boxOpen);
                 congra2.setAttribute('visible', !boxOpen);
-                coin.setAttribute('visible', !boxOpen);
+                //coin.setAttribute('visible', !boxOpen);
             }
             else if(x>=2 && x<=4){
                 var arrIndex = Math.floor(Math.random() * 3);
@@ -291,8 +295,10 @@
                 document.querySelector('#entry_'+arrIndex.toString()).setAttribute('visible', !boxOpen);
                 showimagid = 'entry_'+arrIndex.toString();
                 congra.setAttribute('visible', !boxOpen);
+                congra2.setAttribute('visible', !boxOpen);
             }
-        
+            
+            dbtest.ref('users/'+ auth.currentUser.uid+'/badgeset/').push(showimagid)
         
             curLoot = treasure;
             curLoot.setAttribute('visible', !boxOpen);
@@ -305,7 +311,15 @@
         // add click listener to texts to accommodate mobile and older aframe version
         //openInst.addEventListener('click', animBox);
         //closeInst.addEventListener('click', animBox);
-        boxBody.addEventListener('click', animBox);
+        auth.onAuthStateChanged(user => {
+            if (user) {
+                console.log('user logged in: ', user);
+                boxBody.addEventListener('click', animBox);
+            } else {
+                console.log('user logged out');
+            }
+        });
+        //boxBody.addEventListener('click', animBox);
         </script>
 </body>
 </html>

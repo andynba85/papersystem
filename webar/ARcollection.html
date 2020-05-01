@@ -61,7 +61,7 @@
                 display: inline-block;
                 content:"";
                 height:3px;
-                width:100px;
+                width:70px;
                 top:-5px;
                 margin:0 5px;
                 background-color:#C0C0C0;
@@ -134,7 +134,11 @@
                 </div>
             </div>
         </div>
-
+        <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-auth.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-firestore.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-database.js"></script>
+        <script src="../database_setup.js"> </script>
         <script>
             document.querySelector('.fa-expand').addEventListener('click',function(){
                 location.href = 'webarcollection.html';
@@ -143,6 +147,20 @@
                 location.href = '../preindex.html';
             })
 
+            auth.onAuthStateChanged(user => {
+                if (user) {
+                    console.log('user logged in: ', user);
+                    dbtest.ref('users/'+ auth.currentUser.uid+'/badgeset/').on('value',function(data){
+                        data.forEach(function(item) {
+                            console.log(item.key+""+item.val());
+                            document.getElementById(item.val()).setAttribute('src',item.val()+'-color.png')
+                        });
+                    });
+                } else {
+                    console.log('user logged out');
+                }
+            });
+            /*
             var url = location.href;
             console.log(url);
             if(url.indexOf("?")){
@@ -154,7 +172,7 @@
             else{
                 console.log('還沒掃');
             }
-
+            */
         </script>
     </body>
 </html>

@@ -212,7 +212,7 @@
         });
 
         let showimagid = '';
-
+        let arrIndex = '';
         // box
         const boxBody = document.querySelector('#boxBody');
         let boxCovers = ["boxCover0","boxCover1","boxCover2","boxCover3"];
@@ -237,6 +237,12 @@
         congra2.setAttribute('visible', false);
         
         function animBox() {
+            auth.onAuthStateChanged(user => {
+            if (user) {
+                console.log('user logged in: ', user);
+                console.log(1111)
+                    
+    
             let boxOpen = false;
             dependencies: ['raycaster'];
           // animate box body
@@ -272,75 +278,50 @@
         
             openInst.setAttribute('visible', boxOpen);
           //closeInst.setAttribute('visible', !boxOpen);
+
             var x = Math.floor((Math.random() * 10) + 1);
             console.log(x);
             if(x<=1){
-                var arrIndex = Math.floor(Math.random() * 3);
+                arrIndex = Math.floor(Math.random() * 3);
                 console.log(arrIndex.toString());
                 document.querySelector('#heigh_'+arrIndex.toString()).setAttribute('visible', !boxOpen);
+                //document.querySelector('#heigh_'+arrIndex.toString()).visible = !boxOpen;
                 showimagid = 'heigh_'+arrIndex.toString();
                 //imgmap.get('height_'+toString(arrIndex));
-                dbtest.ref('users/'+ auth.currentUser.uid+'/badgeset/').on('value',function(data){
-                    var judge = false;
-                    data.forEach(function(item) {
-                        console.log(item.key+""+item.val());
-                        if(item.val() === showimagid){
-                            judge = true;
-                        }
-                    });
-                    if( judge === false){
-                        dbtest.ref('users/'+ auth.currentUser.uid+'/badgeset/').push(showimagid)
-                    }
-                    console.log(showimagid)
-                    console.log(judge)
-                });
+        
+                //dbtest.ref('users/'+ auth.currentUser.uid+'/badgeset/').push(showimagid)
+                
+                console.log(showimagid)
+               // console.log(judge)
+
                 //dbtest.ref('users/'+ auth.currentUser.uid+'/badgeset/').push(showimagid)
                 congra.setAttribute('visible', !boxOpen);
                 congra2.setAttribute('visible', !boxOpen);
                 //coin.setAttribute('visible', !boxOpen);
             }
             else if(x>=2 && x<=4){
-                var arrIndex = Math.floor(Math.random() * 3);
+                arrIndex = Math.floor(Math.random() * 3);
                 console.log(arrIndex.toString());
                 document.querySelector('#medium_'+arrIndex.toString()).setAttribute('visible', !boxOpen);
+                //document.querySelector('#medium_'+arrIndex.toString()).visible = !boxOpen;
                 showimagid = 'medium_'+arrIndex.toString();
-                dbtest.ref('users/'+ auth.currentUser.uid+'/badgeset/').on('value',function(data){
-                    var judge = false;
-                    data.forEach(function(item) {
-                        console.log(item.key+""+item.val());
-                        if(item.val() === showimagid){
-                            judge = true;
-                        }
-                    });
-                    if( judge === false){
-                        dbtest.ref('users/'+ auth.currentUser.uid+'/badgeset/').push(showimagid)
-                    }
-                    console.log(showimagid)
-                    console.log(judge)
-                });
+                //dbtest.ref('users/'+ auth.currentUser.uid+'/badgeset/').push(showimagid)
+                console.log(showimagid)
+                //console.log(judge)
                 //dbtest.ref('users/'+ auth.currentUser.uid+'/badgeset/').push(showimagid)
                 congra.setAttribute('visible', !boxOpen);
                 congra2.setAttribute('visible', !boxOpen);
             }
             else{
-                var arrIndex = Math.floor(Math.random() * 3);
+                arrIndex = Math.floor(Math.random() * 3);
                 console.log(arrIndex.toString());
                 document.querySelector('#entry_'+arrIndex.toString()).setAttribute('visible', !boxOpen);
+                //document.querySelector('#entry_'+arrIndex.toString()).visible = !boxOpen;
                 showimagid = 'entry_'+arrIndex.toString();
-                dbtest.ref('users/'+ auth.currentUser.uid+'/badgeset/').on('value',function(data){
-                    var judge = false;
-                    data.forEach(function(item) {
-                        console.log(item.key+""+item.val());
-                        if(item.val() === showimagid){
-                            judge = true;
-                        }
-                    });
-                    if( judge === false){
-                        dbtest.ref('users/'+ auth.currentUser.uid+'/badgeset/').push(showimagid)
-                    }
-                    console.log(showimagid)
-                    console.log(judge)
-                });
+                //dbtest.ref('users/'+ auth.currentUser.uid+'/badgeset/').push(showimagid)
+                console.log(showimagid)
+                //console.log(judge)
+                
                 //dbtest.ref('users/'+ auth.currentUser.uid+'/badgeset/').push(showimagid)
                 congra.setAttribute('visible', !boxOpen);
                 congra2.setAttribute('visible', !boxOpen);
@@ -351,22 +332,41 @@
             curLoot = treasure;
             curLoot.setAttribute('visible', !boxOpen);
             
+            dbtest.ref('users/'+ auth.currentUser.uid+'/badgeset/').on('value',function(data){
+                let judge =[];
+                
+                data.forEach(function(item) {
+                    console.log(item.key+""+item.val());
+                    if(item.val() == showimagid){
+                        judge.push(item.val())
+                    }
+                    else{
+                        console.log('passed')
+                    }
+                });
             
-            //boxOpen = !boxOpen;
+                if( judge == null){
+                    dbtest.ref('users/'+ auth.currentUser.uid+'/badgeset/').push(showimagid)
+                }
+                else{
+                    console.log('haved')
+                }
+                console.log(showimagid)
+                console.log(judge)
+            });
+            boxOpen = !boxOpen;
             console.log(boxOpen);
+        } else {
+                    console.log('user logged out');
+                }
+            });
         }
         
         // add click listener to texts to accommodate mobile and older aframe version
         //openInst.addEventListener('click', animBox);
         //closeInst.addEventListener('click', animBox);
-        auth.onAuthStateChanged(user => {
-            if (user) {
-                console.log('user logged in: ', user);
-                boxBody.addEventListener('click', animBox);
-            } else {
-                console.log('user logged out');
-            }
-        });
+        
+        boxBody.addEventListener('click', animBox);
         //boxBody.addEventListener('click', animBox);
         </script>
 </body>

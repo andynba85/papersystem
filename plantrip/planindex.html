@@ -140,7 +140,7 @@ a{
 				console.log('user logged in: ', user);
 				console.log('user logged in: ', user['uid']);
 				dbtest.ref('/temprec').set({"flaskkey":user['uid']});
-				window.location.href = 'http://127.0.0.1:5600/';
+				window.location.href = 'https://triprec.herokuapp.com/';
 			} else {
 				console.log('user logged out');
 			}

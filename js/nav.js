@@ -3,5 +3,5 @@ $(document).ready(function(){
         fullWidth: true,
         indicators: true
     });
-    $('.carousel').height(667);
+    $('.carousel').height(580);
 });

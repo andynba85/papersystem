@@ -237,6 +237,7 @@
         congra2.setAttribute('visible', false);
         
         function animBox() {
+            console.log('5555')
             auth.onAuthStateChanged(user => {
             if (user) {
                 console.log('user logged in: ', user);
@@ -333,7 +334,7 @@
             curLoot.setAttribute('visible', !boxOpen);
             
             dbtest.ref('users/'+ auth.currentUser.uid+'/badgeset/').on('value',function(data){
-                let judge =[];
+                let judge = [];
                 
                 data.forEach(function(item) {
                     console.log(item.key+""+item.val());
@@ -345,7 +346,7 @@
                     }
                 });
             
-                if( judge == null){
+                if( judge.length == 0){
                     dbtest.ref('users/'+ auth.currentUser.uid+'/badgeset/').push(showimagid)
                 }
                 else{

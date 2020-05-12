@@ -35,7 +35,7 @@
       }
 
       .toolbar{
-        background-color: #FFF396;
+        background-color: #3949ab;
         width: 100%;
       }
 
@@ -66,19 +66,20 @@
 
       .combine_bar_2 span{
         display: block;
-        color:#ffffff;
+        color:black;
         margin-left: 6px;
       } 
 
       .combine span{
         margin-left: 8px;
+        color: #ffffff;
       }
       .combine_bar a i,.combine_bar_2 a i{
-        color: #000000;
+        color: #3949ab;
       }
       .combine a i{
-        background-color: #ffffff;
-        color: #000000;
+        background-color: #ffd31d;
+        color: #3949ab;
       }
       .container{
         background-color: #ffffff;
@@ -169,7 +170,7 @@
         z-index:1;
         left:0;
         bottom:0;
-        background-color: #111; /* Black*/
+        background-color: #ffffff; /* Black*/
         transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
       }
 
@@ -181,7 +182,8 @@
       }
 
       #addtool a i{
-        color: #000000;
+        color: #3949ab;
+        background-color: #ffffff;
       }
 
       .close{
@@ -195,6 +197,15 @@
         opacity:0;
         transition:0.5s;
       }
+      .fade-in a i{
+        color: #3949ab;
+        background-color:#ffffff;
+      } 
+      .close a i{
+        color: #ffffff;
+        background-color:#ffd31d;
+      }
+      
       .effect:active{
         background-color: #eeeeee;
       }
@@ -204,13 +215,21 @@
       .btn:hover,.btn-large:hover,.btn-floating:hover{
         background-color: #eeeeee!important;
       }
-
+      
       #test{
         margin-left: 15px;
         display: inline-block;
         border: 1px solid #eaeaea;
         width:340px;
         height:350px;
+      }
+      .fa-arrow-circle-left{
+        color:#ffd31d;
+        background-color: #ffffff;
+      }
+      .combine a .fa-arrow-circle-left{
+        background-color: #ffffff;
+        color:#3949ab;
       }
     </style>
   </head>
@@ -219,7 +238,9 @@
     <div class="toolbar">
       
       <div class="combine">
-        <a class="btn-floating btn effect "><i onclick="location.href='daily-ex.html'" class="fas fa-arrow-circle-left"></i></a>
+        <a class="btn-floating btn effect">
+          <i onclick="location.href='daily-ex.html'" class="fas fa-arrow-circle-left"></i>
+        </a>
         <span></span>
       </div>
       <div class="combine right">
@@ -292,7 +313,7 @@
     <div id="Sidenav" class="sidenavself">
         <div class="grid-2">
           <div class="combine_bar_2">
-            <a class="btn-floating btn red" id="deleteobj"><i id="tool1" class="material-icons">delete</i></a>
+            <a class="btn-floating btn effect yellow lighten-1" id="deleteobj"><i id="tool1" class="material-icons">delete</i></a>
             <span>刪除</span>
           </div>
           <div class="combine_bar_2">
@@ -349,6 +370,7 @@
     <div id="modal-bg" class="modal bottom-sheet">
       <div class="modal-content">
         <div class="bgslide" id="bgcolumn">
+          <img id="bg-0" src="bg-0.jpg">
           <img id="bg-1" src="bg-1.jpg">
           <img id="bg-2" src="bg-2.jpg">
           <img id="bg-3" src="bg-3.jpg">
@@ -546,7 +568,7 @@
               transparentCorners: false,
               borderColor: 'blue', // 邊框顏色
               cornerColor: 'grey', // 控制點填滿色
-              cornerSize: 15, // 控制點大小
+              cornerSize: 10, // 控制點大小
               cornerStrokeColor: 'blue', // 控制點邊框色
               padding: 10,
               borderDashArray: [5, 5],
@@ -577,7 +599,7 @@
               transparentCorners: false,
               borderColor: 'blue', // 邊框顏色
               cornerColor: 'grey', // 控制點填滿色
-              cornerSize: 15, // 控制點大小
+              cornerSize: 10, // 控制點大小
               cornerStrokeColor: 'blue', // 控制點邊框色
               padding: 10,
               borderDashArray: [5, 5],
@@ -599,7 +621,7 @@
               transparentCorners: false,
               borderColor: 'blue', // 邊框顏色
               cornerColor: 'grey', // 控制點填滿色
-              cornerSize: 15, // 控制點大小
+              cornerSize: 10, // 控制點大小
               cornerStrokeColor: 'blue', // 控制點邊框色
               padding: 10,
               borderDashArray: [5, 5],
@@ -620,7 +642,7 @@
               transparentCorners: false,
               borderColor: 'blue', // 邊框顏色
               cornerColor: 'grey', // 控制點填滿色
-              cornerSize: 15, // 控制點大小
+              cornerSize: 10, // 控制點大小
               cornerStrokeColor: 'blue', // 控制點邊框色
               padding: 10,
               borderDashArray: [5, 5],
@@ -646,7 +668,7 @@
               transparentCorners: false,
               borderColor: 'blue', // 邊框顏色
               cornerColor: 'grey', // 控制點填滿色
-              cornerSize: 15, // 控制點大小
+              cornerSize: 10, // 控制點大小
               cornerStrokeColor: 'blue', // 控制點邊框色
               padding: 10,
               borderDashArray: [5, 5],

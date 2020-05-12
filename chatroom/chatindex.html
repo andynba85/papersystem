@@ -24,7 +24,7 @@
         #chat-window{
             margin: 0 auto;
             width:92%;
-            height: 550px;
+            height: 530px;
             overflow: auto;
             background: #f9f9f9;
         }
@@ -72,7 +72,6 @@
             padding-top: 5px;
             padding-bottom: 5px;
             background: #fff;
-            margin:0 auto;
             border: 2px solid #e0e0e0;
             border-radius: 12px;
             width:90%;
@@ -80,13 +79,14 @@
 
         #send_bar .fa-paper-plane{
             font-size: 20px;
-            color:#0524D2;
+            color:#3949ab;
         }
 
         #send_bar #message{
             padding:10px;
             margin-left:5px;
             border:none;
+            outline: none;
             display: inline-block;
             width: 80%;
             font-family: Nunito;
@@ -96,7 +96,8 @@
         #function_bar{
             width:100%;
             height:50px;
-            background-color: #0524D2;
+            
+            background-color: #3949ab;
             display: inline-block;
             color: #fff;
         }
@@ -108,10 +109,12 @@
         }
 
         #function_bar span{
-            
-            margin-left: 30%;
-            font-size: 22px;
+            position: relative;
+            left: 30%;
+            margin:0 auto;
+            font-size: 20px;
         }
+        
         #left-output{
             display: inline-block;
             word-wrap: break-word;
@@ -120,7 +123,7 @@
             margin-left: 5px;
             margin-bottom: 5px;
             padding: 10px 15px;
-            background-color: #0524D2;
+            background-color: #3949ab;
             color:#fff;
             border-radius: 15px;
         }
@@ -138,6 +141,13 @@
             vertical-align: sub;
             font-size: 30px;
         }
+
+        #left-left img{
+            width:30px;
+            height:30px;
+            border-radius: 50%;
+            vertical-align:sub;
+        }
         #right-right{
             display: block;
             text-align: right;
@@ -149,7 +159,7 @@
             margin:10px ;
             margin-bottom: 5px;
             padding: 10px 15px;
-            background-color: #EECF06;
+            background-color: #ffd31d;
             color:#fff;
             border-radius: 15px;
         }
@@ -165,6 +175,8 @@
         <div id="function_bar">
             <i class="fas fa-arrow-left" onclick="location.href='chatfriend.html'"></i>
             <span id="chatname">Joanne</span>
+            
+            <!--<span id="chatname">Joanne</span>-->
         </div>
         <div id="chat-window">
             <!--
@@ -217,6 +229,9 @@
         var currentuserkey = url.split("?")[1].split("&")[2].split("=")[1];
         console.log(currentuserkey);
 
+        var friendkey = url.split("?")[1].split("&")[3].split("=")[1];
+        console.log(friendkey);
+
         function onekeydown(){
             document.addEventListener('keydown',function(key){
                 if(key.which === 13){
@@ -225,15 +240,17 @@
             })
         }
 
-        function loadchatmessages(chatkey) {
+        function loadchatmessages(chatkey,friendphoto) {
             dbtest.ref('chatMessages').child(chatkey).on('value',function(chats){
                 var messageDisplay = '';
                 chats.forEach(function (data) {
                     var chat = data.val();
+                    console.log(chat);
                     var sent = false;
                     //dbtest.ref('friend_list').child(chat.userid);
                     if(chat.userid !== currentuserkey){
-                        messageDisplay += `<div id="left-left"><i class="fas fa-user-circle"></i><div id="left-output">${chat.msg}</div><span>${chat.datetime}</span></div>`;
+                        //messageDisplay += `<div id="left-left"><i class="fas fa-user-circle"></i><div id="left-output">${chat.msg}</div><span>${chat.datetime}</span></div>`;
+                        messageDisplay += `<div id="left-left"><img src="${friendphoto}"><div id="left-output">${chat.msg}</div><span>${chat.datetime}</span></div>`;
                     }
                     else{
                         messageDisplay += `<div id="right-right"><div id="right-input">${chat.msg}</div><span>${chat.datetime}</span></div>`;
@@ -258,6 +275,7 @@
                     console.log(error);
                 }
                 else{
+                    document.getElementById('message').value = '';
                     //var mytime=myDate.toLocaleString();
                     //document.getElementById('message').value;
                     //console.log(document.getElementById('message').value);
@@ -272,7 +290,11 @@
 
         output.innerHTML = '';
         onekeydown();
-        loadchatmessages(chatkey);
+        dbtest.ref('users').child(friendkey).on('value',function (data) {
+            var user = data.val();
+            loadchatmessages(chatkey,user.img);
+        });
+    
         //btn.addEventListener('click',sendmessage());
         /*
         btn.addEventListener('click',function(){

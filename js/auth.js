@@ -60,7 +60,6 @@ loginForm.addEventListener('submit', (e) => {
   auth.setPersistence(firebase.auth.Auth.Persistence.SESSION).then(function(){
      // log the user in
   return auth.signInWithEmailAndPassword(email, password).then((cred) => {
-    
     // close the signup modal & reset form
     window.location.href='nav.html';
     loginForm.reset();

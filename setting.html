@@ -368,7 +368,8 @@
 
         const logout = document.querySelector('#logoutbtn');
 		logout.addEventListener('click', (e) => {
-			e.preventDefault();
+            e.preventDefault();
+            dbtest.ref('users/'+auth.currentUser.uid).update({'onlinestatus':false});
 			auth.signOut().then(() => {
 				window.location.href="index.html";
 			})

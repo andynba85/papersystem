@@ -40,6 +40,7 @@ function onStateChanged(user){
     });
     */
     if(auth.currentUser.providerData[0].providerId == 'password'){
+      dbtest.ref('users/'+auth.currentUser.uid).update({'onlinestatus':true});
       dbtest.ref('users/'+auth.currentUser.uid).on('value',function(data){
         console.log(data.val().username)
         document.getElementById('welcomename').innerHTML="Hi，"+ data.val().username;
@@ -57,6 +58,7 @@ function onStateChanged(user){
           console.log(item.key + " " + item.val())
           if( item.key === auth.currentUser.uid){
             console.log(item.key);
+            dbtest.ref('users/'+auth.currentUser.uid).update({'onlinestatus':true});
             dbtest.ref('users/'+auth.currentUser.uid).on('value',function(data){
               console.log(data.val().username)
               document.getElementById('welcomename').innerHTML="Hi，"+ data.val().username;
@@ -70,6 +72,7 @@ function onStateChanged(user){
 
         });
         if(num == false){
+          dbtest.ref('users/'+auth.currentUser.uid).update({'onlinestatus':true});
           document.getElementById('imgProfile').src=auth.currentUser.photoURL;
           document.getElementById('welcomename').innerHTML="Hi，"+auth.currentUser.displayName;
           dbtest.ref('users/'+ auth.currentUser.uid).set({
@@ -82,6 +85,7 @@ function onStateChanged(user){
     }
   }
   else{
+    dbtest.ref('users/'+auth.currentUser.uid).update({'onlinestatus':false});
     console.log('user logged out');
   }
 }

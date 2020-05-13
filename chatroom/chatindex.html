@@ -96,7 +96,7 @@
             padding:0 5px;
         }
 
-        #emoji_bar p a{
+        #emoji_bar p span{
             text-decoration: none;
         }
 
@@ -109,7 +109,7 @@
 
         #send_bar .fa-image{
             vertical-align: middle;
-            margin:0 5px;
+            margin:0 5px 0 10px;
             font-size: 20px;
             color:#3949ab;
         }
@@ -121,13 +121,26 @@
             color:#3949ab;
         }
 
+        #send_bar .fa-microphone{
+            vertical-align: middle;
+            margin:0 5px;
+            font-size: 20px;
+            color:#3949ab;
+        }
+        #send_bar .fa-stop{
+            vertical-align: middle;
+            margin:0 5px;
+            font-size: 20px;
+            color:red;
+        }
+
         #send_bar #message{
             padding:10px;
             margin-left:5px;
             border:none;
             outline: none;
             display: inline-block;
-            width: 60%;
+            width: 50%;
             font-family: Nunito;
             font-size: 16px;
         }
@@ -210,6 +223,9 @@
         .imagemsg{
             border-radius: 10%;
         }
+        audio{
+            width:205px;
+        }
     </style>
 </head>
 <body>
@@ -246,7 +262,8 @@
         <div id="send_bar">
             <i onclick="chooseImage()" class="fas fa-image"><input type="file" id="imagefile" onchange="SendImage(this)" accept="image/*" style="display: none;"></i>
             <i onclick="showemoji()" class="far fa-smile"></i>
-            <input id="message" onfocus="hideemoji()" type="text" placeholder="Message..."> 
+            <i id="sendaudio" onclick="record(this)" class="fas fa-microphone"></i>
+            <input id="message" onfocus="hideemoji()" type="text" placeholder="Type Message..."> 
             <i id="send" class="fas fa-paper-plane" onclick="sendmessage()"></i>
         </div>
 
@@ -297,8 +314,11 @@
                     var sent = false;
 
                     var msg='';
-                    if(chat.msg.indexOf("base64") !== -1){
+                    if(chat.msgType === 'image'){
                         msg = `<img src='${chat.msg}' width="195px" height="195px" class="imagemsg"/>`;
+                    }
+                    else if(chat.msgType === 'audio'){
+                        msg = `<audio controls><source src="${chat.msg}" type="video/webm"/></audio>`;
                     }
                     else{
                         msg = chat.msg;
@@ -323,10 +343,11 @@
         function sendmessage() {
             
             document.getElementById('emoji_bar').style="display:none";
-            
+
             var chatmessage = {
                 userid:currentuserkey,
                 msg:document.getElementById('message').value,
+                msgType:'normal',
                 datetime:new Date().toLocaleString()};
 
             dbtest.ref('chatMessages').child(chatkey).push(chatmessage,function(error){
@@ -363,6 +384,7 @@
                     var chatmessage = {
                         userid:currentuserkey,
                         msg:reader.result,
+                        msgType:'image',
                         datetime:new Date().toLocaleString()};
 
                     dbtest.ref('chatMessages').child(chatkey).push(chatmessage,function(error){
@@ -383,7 +405,7 @@
         function loadAllemoji(){
             var emoji = "";
             for(var i=128512 ; i <= 128567 ; i++){
-                emoji += `<a href="#" onclick="getemoji(this)">&#${i};</a>`
+                emoji += `<span onclick="getemoji(this)">&#${i};</span>`
             }
             document.getElementById('emoji').innerHTML = emoji;
         }
@@ -397,6 +419,65 @@
 
         function getemoji(control){
             document.getElementById('message').value += control.innerHTML;
+        }
+
+        
+        let chunks = [];
+        let recorder;
+        var timeout;
+
+        function record(control){
+            let device = navigator.mediaDevices.getUserMedia({audio:true});
+            device.then(stream =>{
+                if(recorder === undefined){
+                    recorder = new MediaRecorder(stream)
+                    recorder.ondataavailable = e =>{
+                        chunks.push(e.data);
+                        if(recorder.state === 'inactive'){
+                            let blob = new Blob(chunks,{type:'audio/webm'});
+                            //document.getElementById('audio').innerHTML= '<source src="' + URL.createObjectURL(blob)+'"type="video/webm"/>';
+                            
+                            var reader = new FileReader()
+                            reader.addEventListener("load",function(){
+                                var chatmessage = {
+                                    userid:currentuserkey,
+                                    msg:URL.createObjectURL(blob),
+                                    msgType:'audio',
+                                    datetime:new Date().toLocaleString()};
+
+                                dbtest.ref('chatMessages').child(chatkey).push(chatmessage,function(error){
+                                    if(error){
+                                        console.log(error);
+                                    }
+                                    else{
+                                        document.getElementById('message').value = '';
+                                    }
+                                });
+                            },false);
+                            
+                            reader.readAsDataURL(blob)
+                            
+                        }
+                    }
+                    recorder.start();
+                    control.setAttribute('class','fas fa-stop');
+                }
+            
+            
+            });
+
+            if(recorder !== undefined){
+                if(control.getAttribute('class').indexOf('stop') !== -1){
+                    recorder.stop();
+                    control.setAttribute('class','fas fa-microphone')
+                }
+                else{
+                    chunks = [];
+                    recorder.start();
+                    control.setAttribute('class','fas fa-stop')
+                }
+            }
+
         }
 
         loadAllemoji();

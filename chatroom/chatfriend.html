@@ -89,7 +89,7 @@
             height:90%;
             margin-left: 2px;
             border-radius: 50%;
-            border: 2px solid #000;
+            border: 3px solid #ffd31d;
         }
         .circle{
             width:100%;
@@ -205,7 +205,7 @@
         </div>
     </div>
     <div id="content">
-        <h3>Online users</h3>
+        <h3>ALL Users</h3>
         <div id="ulist" class="userlist">
             
         </div>
@@ -326,13 +326,13 @@
                                         <img src="${user.img}">
                                         <div class="content">
                                             <h2>${user.username}</h2>
-                                            <p>是在哈囉66666</p>
+                                            <p>Some Message...</p>
                                         </div>
                                     </div>`;
                         });
                     }
                 })
-                combine += ' <h3>Online users</h3><div id="ulist" class="userlist">'+onlineuser+'</div>'+'<div id="msglist" class="messagelist">'+listchat+'</div>';
+                combine += ' <h3>ALL Users</h3><div id="ulist" class="userlist">'+onlineuser+'</div>'+'<div id="msglist" class="messagelist">'+listchat+'</div>';
                 document.getElementById('content').innerHTML = combine;
 
             });

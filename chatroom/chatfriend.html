@@ -335,7 +335,7 @@
         var listchat = '' ;
         function loadchatlist(){
             listchat = ''
-            dbtest.ref('friend_list').once('value',function (lists) {
+            dbtest.ref('friend_list').on('value',function (lists) {
                 lists.forEach(function (data) {
                     var lst = data.val();
                     var friendkey = '';
@@ -349,7 +349,7 @@
                     console.log(friendkey);
 
                     if(friendkey !== ""){
-                        dbtest.ref('users').child(friendkey).once('value',function (data) {
+                        dbtest.ref('users').child(friendkey).on('value',function (data) {
                         var user = data.val();
                         listchat += `<div class="message" onclick="startchat('${data.key}','${user.username}')">
                                         <img src="${user.img}">

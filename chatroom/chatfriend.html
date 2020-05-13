@@ -238,6 +238,7 @@
         </div>
 
         <div id="msglist" class="messagelist">
+            <!--
             <div class="message">
                 <img src="me.jpg">
                 <div class="content">
@@ -287,7 +288,7 @@
                     <p>是在哈囉66666</p>
                 </div>
             </div>
-
+        -->
         </div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -333,7 +334,8 @@
         
         var listchat = '' ;
         function loadchatlist(){
-            dbtest.ref('friend_list').on('value',function (lists) {
+            listchat = ''
+            dbtest.ref('friend_list').once('value',function (lists) {
                 lists.forEach(function (data) {
                     var lst = data.val();
                     var friendkey = '';
@@ -347,7 +349,7 @@
                     console.log(friendkey);
 
                     if(friendkey !== ""){
-                        dbtest.ref('users').child(friendkey).on('value',function (data) {
+                        dbtest.ref('users').child(friendkey).once('value',function (data) {
                         var user = data.val();
                         listchat += `<div class="message" onclick="startchat('${data.key}','${user.username}')">
                                         <img src="${user.img}">
@@ -367,11 +369,14 @@
         }
         var combine = '';
         var onlineuser = "";
-        
+
         dbtest.ref('users').on('value',function(snapshot){
+            document.getElementById('content').innerHTML = "";
+            //document.getElementById('msglist').innerHTML = "";
             var data = snapshot.val();
             console.log(data);
-            
+            combine = '';
+            onlineuser = "";
             snapshot.forEach(function(data){
                 //檢查使用者是否在線上
                 //把自己排除掉

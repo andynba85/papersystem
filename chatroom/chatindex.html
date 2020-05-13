@@ -158,7 +158,7 @@
             font-size: 30px;
         }
 
-        #left-left img{
+        #left-left #frphoto{
             width:30px;
             height:30px;
             border-radius: 50%;
@@ -281,7 +281,7 @@
                     //dbtest.ref('friend_list').child(chat.userid);
                     if(chat.userid !== currentuserkey){
                         //messageDisplay += `<div id="left-left"><i class="fas fa-user-circle"></i><div id="left-output">${chat.msg}</div><span>${chat.datetime}</span></div>`;
-                        messageDisplay += `<div id="left-left"><img src="${friendphoto}"><div id="left-output">${msg}</div><span>${chat.datetime}</span></div>`;
+                        messageDisplay += `<div id="left-left"><img id="frphoto" src="${friendphoto}"><div id="left-output">${msg}</div><span>${chat.datetime}</span></div>`;
                     }
                     else{
                         messageDisplay += `<div id="right-right"><div id="right-input">${msg}</div><span>${chat.datetime}</span></div>`;

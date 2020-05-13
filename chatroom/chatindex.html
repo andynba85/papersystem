@@ -429,7 +429,7 @@
         function record(control){
             let device = navigator.mediaDevices.getUserMedia({audio:true});
             device.then(stream =>{
-                if(recorder === undefined){
+                if(recorder == undefined){
                     alert('1')
                     recorder = new MediaRecorder(stream)
                     recorder.ondataavailable = e =>{
@@ -467,7 +467,7 @@
             
             });
 
-            if(recorder !== undefined){
+            if(recorder != undefined){
                 alert('4')
                 if(control.getAttribute('class').indexOf('stop') !== -1){
                     alert('2')

@@ -78,6 +78,22 @@
         }
 
         #send_bar .fa-paper-plane{
+            vertical-align: middle;
+            margin:0 5px;
+            font-size: 20px;
+            color:#3949ab;
+        }
+
+        #send_bar .fa-image{
+            vertical-align: middle;
+            margin:0 5px;
+            font-size: 20px;
+            color:#3949ab;
+        }
+
+        #send_bar .fa-camera{
+            vertical-align: middle;
+            margin:0 5px;
             font-size: 20px;
             color:#3949ab;
         }
@@ -88,7 +104,7 @@
             border:none;
             outline: none;
             display: inline-block;
-            width: 80%;
+            width: 60%;
             font-family: Nunito;
             font-size: 16px;
         }
@@ -168,6 +184,9 @@
             margin-right: 15px;
             font-size:8px;
         }
+        .imagemsg{
+            border-radius: 10%;
+        }
     </style>
 </head>
 <body>
@@ -198,8 +217,11 @@
         </div>
         
         <div id="send_bar">
+            <i onclick="chooseImage()" class="fas fa-image"><input type="file" id="imagefile" onchange="SendImage(this)" accept="image/*" style="display: none;"></i>
+            <i id="camera" class="fas fa-camera"></i>
             <input id="message" type="text" placeholder="Message..."> 
             <i id="send" class="fas fa-paper-plane" onclick="sendmessage()"></i>
+            
         </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -247,13 +269,22 @@
                     var chat = data.val();
                     console.log(chat);
                     var sent = false;
+
+                    var msg='';
+                    if(chat.msg.indexOf("base64") !== -1){
+                        msg = `<img src='${chat.msg}' width="195px" height="195px" class="imagemsg"/>`;
+                    }
+                    else{
+                        msg = chat.msg;
+                    }
+
                     //dbtest.ref('friend_list').child(chat.userid);
                     if(chat.userid !== currentuserkey){
                         //messageDisplay += `<div id="left-left"><i class="fas fa-user-circle"></i><div id="left-output">${chat.msg}</div><span>${chat.datetime}</span></div>`;
-                        messageDisplay += `<div id="left-left"><img src="${friendphoto}"><div id="left-output">${chat.msg}</div><span>${chat.datetime}</span></div>`;
+                        messageDisplay += `<div id="left-left"><img src="${friendphoto}"><div id="left-output">${msg}</div><span>${chat.datetime}</span></div>`;
                     }
                     else{
-                        messageDisplay += `<div id="right-right"><div id="right-input">${chat.msg}</div><span>${chat.datetime}</span></div>`;
+                        messageDisplay += `<div id="right-right"><div id="right-input">${msg}</div><span>${chat.datetime}</span></div>`;
                     }
 
                 });
@@ -286,6 +317,39 @@
                 }
             });
 
+        }
+
+        function chooseImage(){
+            document.getElementById('imagefile').click();
+        }
+
+        function SendImage(event){
+            var file = event.files[0]
+            if(!file.type.match("image.*")){
+                alert('please select image only')
+            }
+            else{
+                //alert('image send')
+                var reader = new FileReader()
+                reader.addEventListener("load",function(){
+                    var chatmessage = {
+                        userid:currentuserkey,
+                        msg:reader.result,
+                        datetime:new Date().toLocaleString()};
+
+                    dbtest.ref('chatMessages').child(chatkey).push(chatmessage,function(error){
+                        if(error){
+                            console.log(error);
+                        }
+                        else{
+                            document.getElementById('message').value = '';
+                        }
+                    });
+                },false);
+                if(file){
+                    reader.readAsDataURL(file)
+                }
+            }
         }
 
         output.innerHTML = '';

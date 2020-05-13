@@ -432,14 +432,21 @@
                 if(recorder == undefined){
                     alert('1')
                     recorder = new MediaRecorder(stream)
+                    alert('1.1')
                     recorder.ondataavailable = e =>{
+                        alert('1.2')
                         chunks.push(e.data);
+                        alert('1.3')
                         if(recorder.state === 'inactive'){
+                            alert('1.4')
                             let blob = new Blob(chunks,{type:'audio/webm'});
+                            alert('1.5')
                             //document.getElementById('audio').innerHTML= '<source src="' + URL.createObjectURL(blob)+'"type="video/webm"/>';
                             
                             var reader = new FileReader()
+                            alert('1.6')
                             reader.addEventListener("load",function(){
+                                alert('1.7')
                                 var chatmessage = {
                                     userid:currentuserkey,
                                     msg:URL.createObjectURL(blob),
@@ -455,9 +462,9 @@
                                     }
                                 });
                             },false);
-                            
+                            alert('1.8')
                             reader.readAsDataURL(blob)
-                            
+                            alert('1.9')
                         }
                     }
                     recorder.start();

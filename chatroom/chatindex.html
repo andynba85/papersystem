@@ -430,6 +430,7 @@
             let device = navigator.mediaDevices.getUserMedia({audio:true});
             device.then(stream =>{
                 if(recorder === undefined){
+                    alert('1')
                     recorder = new MediaRecorder(stream)
                     recorder.ondataavailable = e =>{
                         chunks.push(e.data);
@@ -467,11 +468,14 @@
             });
 
             if(recorder !== undefined){
+                alert('4')
                 if(control.getAttribute('class').indexOf('stop') !== -1){
+                    alert('2')
                     recorder.stop();
                     control.setAttribute('class','fas fa-microphone')
                 }
                 else{
+                    alert('3')
                     chunks = [];
                     recorder.start();
                     control.setAttribute('class','fas fa-stop')

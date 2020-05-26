@@ -9,6 +9,7 @@
     <script src="https://kit.fontawesome.com/80f6c102d9.js" crossorigin="anonymous"></script>
     <!--Let browser know website is optimized for mobile-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.4/croppie.min.css">
+    <link rel="stylesheet" href="./css/css-loader.css">
     <style>
         body{
             margin:0;
@@ -199,6 +200,7 @@
     </style>
 </head>
 <body>
+    <div id="load" class="loader loader-default is-active" data-text></div>
     <div class='nav'>
         <i class="fas fa-angle-left" onclick="goindex()"></i>
         <h2>Account Setting</h2>
@@ -359,6 +361,7 @@
                     if(data.val().img!=null){
                         document.getElementById('upload').setAttribute("src",data.val().img);
                     }
+                    $('#load').removeClass("is-active");
                 });
                 
             } else {

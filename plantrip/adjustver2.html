@@ -41,6 +41,13 @@ h2{
 	margin-top: 10px;
 	margin-bottom: 10px;
 }
+
+.container-fluid h3{
+	padding-left: 10px;
+	font-size: 22px;
+	font-weight: bold;
+}
+
 .date2{
 	height: 20%;
 	margin-top: 10px;
@@ -55,7 +62,7 @@ h2{
 	border-radius: 10px;
 }
 .fa-edit{
-	margin: 10px 10px 10px;
+	margin: 10px 1px 10px;
 	font-size: 25px;
 }
 .add{
@@ -78,7 +85,7 @@ h2{
 	margin-left: 1px ;  
 	margin-top: 1px ;
 	padding: 5px 10px;
-	background-color: #F8A588;
+	background-color: #3949ab;
 	color: #ffffff;
 	border-radius: 10px;
 	font-size: 18px;
@@ -87,7 +94,7 @@ h2{
 }
 .fa-plus{
 	padding: 5px;
-	color: #F8A588;
+	color: #ffd31d;
 	border-radius: 5px;
 	background-color: #ffffff;
 	font-size: 20px;
@@ -130,11 +137,14 @@ h2{
 
 .content2{
 	/*background-color: #FFEDCE;*/
-	background-color: #FFF396;
+	/*background-color: #ffd31d;*/
+	color: #000;
 	padding: 5px 5px;
 	margin-left: 13%;
-	width: 85%;
+	width: 50%;
 	border-radius: 8px;
+	font-size: 17px;
+	border: 2px #3949ab solid
 }
 .content2::before{
 	display: inline-block;
@@ -172,16 +182,22 @@ h4{
     padding:0.75rem 1.25rem;
     background-color: #FFF;
 	border: none;
+	margin:5px 0 5px;
+	border-radius: 10px;
 }
 .pickdate2{
     display: inline-block;
 	text-align: center;
 	width:32.5%;
 }
+
 .pickdate{
     display: inline-block;
 	text-align: center;
 	width:32.5%;
+}
+.pickdate2 input,.pickdate input{
+	color:#039BE5!important;
 }
 .pickdate2:active{
 	transform: scale(0.8, 0.8);
@@ -212,10 +228,12 @@ h4{
 	width: 85%;
 	top: 5%;
 	left: 15%;
+	font-size: 14px;
+	font-family: 'Noto Sans TC', sans-serif;
 }
 .footer button{
 	margin: 5% 15%;
-	background-color: #f5f5f5;
+	background-color: #3949ab;
 	color: #000000;
 	border-radius: 10px;
 	width: 70%;
@@ -224,13 +242,12 @@ h4{
 
 .footer{
 	background-color: #fff;
-
 	position: fixed;
 	bottom: 0;
 	width:100%;
 }
 .footer button{
-	color: #F8A588;
+	color: #fff;
 	border: none;
 }
 .footer button:active{
@@ -253,10 +270,12 @@ h4{
 #name{
 	background-color: #fff;
 	font-size: 20px;
-	color: #F8A588;
+	color: #3949ab;
 	text-align: center;
 	margin-top: 10px;
 	margin-bottom: 10px;
+	text-decoration: none;
+	font-family: 'Noto Sans TC', sans-serif;
 }
 
 input{
@@ -275,11 +294,11 @@ input[type=text]:not(.browser-default):focus:not([readonly]){
 }
 
 .datepicker-date-display,.timepicker-digital-display{
-    background-color:#fff396;
+    background-color:#3949ab;
 
 }
 .datepicker-cancel,.datepicker-done,.timepicker-close,.timepicker-svg,.timepicker-minutes{
-    color:#fff396;
+    color:#000;
 }
 
 #map{
@@ -290,18 +309,52 @@ input[type=text]:not(.browser-default):focus:not([readonly]){
 	flex-wrap:wrap;
 	flex-flow:row;
 	justify-content: center;
-	padding:5px;
-	margin-top: 5px;
+	padding:10px;
+	margin-top: 15px;
+	background-color: #3949ab;
+	border-radius: 10px;
 }
 #mode .fas{
+	color: #fff;
 	padding-left:5px;
 	flex: 1 1 100px;
-	font-size: 30px;
+	font-size: 25px;
 }
 
 #mode .fa-walking , #mode .fa-bus{
-	font-size: 30px;
+	color: #fff;
+	font-size: 25px;
 	padding-left: 20px;
+}
+.tripname{
+	text-align: center;
+}
+.modal-body{
+	margin-top: 10px;
+}
+
+.modal-body input{
+	text-align: left;
+	width:200px !important;
+	background-color: #e0e0e0!important;
+	border-radius: 5px!important;
+	font-size: 16px!important;
+	padding:2px 5px!important;
+	font-family: 'Noto Sans TC', sans-serif !important;
+}
+
+#modal1 .modal-content{
+	padding: 20px 10px !important;
+}
+
+#modal1{
+	width:90%!important;
+	max-height: 80%!important;
+}
+
+.modal-content h4{
+	font-weight: bold;
+	padding-left: 3px;
 }
 </style>
 </head>
@@ -309,12 +362,17 @@ input[type=text]:not(.browser-default):focus:not([readonly]){
 
 <div class="container-fluid">
 	<i class="fas fa-angle-left" onclick="window.history.back()"></i>
-    <h3>Adjust Your Schedule</h3>
+    <h3>Adjust Your Plan</h3>
 </div>
 <div class="edit">
+	<div class="tripname">
+		<a id="name"class="modal-trigger" href="#modal2"></a>
+		<i id="edit_name" class="fas fa-pen modal-trigger"></i>
+	</div>
+	<!--
 	<div id="name">
-	<i id="edit_name" class="fas fa-pen"></i>
-    </div>
+	</div>
+	-->
 	<div class="date2">
 		<i class="fas fa-edit"></i>
 		<div class="add">
@@ -340,6 +398,23 @@ input[type=text]:not(.browser-default):focus:not([readonly]){
             <a class="modal-trigger" href="#modal1" id="mappp">Map</a>
 		</div>
     </div>
+	
+	<!-- Modal Structure -->
+	<div id="modal2" class="modal">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4>請修改行程名稱</h4>
+			</div>
+			<div class="modal-body">
+				<i class="far fa-edit"></i>
+				<input id="changename" type="text" placeholder="請輸入...">
+			</div>
+		</div>
+		<div class="modal-footer">
+			<a class="modal-close waves-effect waves-green btn-flat" onclick="changetripname()">確定</a>
+			<a class="modal-close waves-effect waves-green btn-flat">取消</a>
+		</div>
+	</div>
 
     <!-- Modal Structure -->
     <div id="modal1" class="modal">
@@ -354,7 +429,7 @@ input[type=text]:not(.browser-default):focus:not([readonly]){
         </div>
         <div id="map"></div>
         <div class="modal-footer">
-        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+        <a href="#!" class="modal-close waves-effect waves-green btn-flat">返回</a>
         </div>
     </div>
 	
@@ -415,6 +490,12 @@ input[type=text]:not(.browser-default):focus:not([readonly]){
 <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-database.js"></script>
 <script src="../database_setup.js"></script>
 <script>
+
+	function changetripname(){
+		var chgname = document.getElementById('changename').value
+		console.log(chgname)
+		document.getElementById('name').innerHTML = chgname
+	}
 
 	//function timenow(){
     var dt = new Date();
@@ -479,7 +560,7 @@ input[type=text]:not(.browser-default):focus:not([readonly]){
 			`<div id="div${i+1}" class="line list-group-item">
 				<div class="glyphicon-move">
 					<h4 class="content2">${selectarray[temp]}</h4>
-					<p id="p_${i+1}">Loreornfacilisis . Duis sagittis ligula in sodales vehicula....</p>
+					<p id="p_${i+1}"></p>
 				</div>
 			</div>`)
 			console.log("div"+(i+1).toString());
@@ -490,6 +571,9 @@ input[type=text]:not(.browser-default):focus:not([readonly]){
 			console.log(temp);
 		}
 	}
+
+
+
 	document.getElementById('listWithHandle').addEventListener('load',getdatabefore());
     
 	console.log(myMap);
@@ -588,7 +672,10 @@ input[type=text]:not(.browser-default):focus:not([readonly]){
 	var directionsRenderer = new google.maps.DirectionsRenderer;
 	var map = new google.maps.Map(document.getElementById('map'), {
 		zoom: 6,
-		center: {lat: 41.85, lng: -87.65}
+		center: {lat: 41.85, lng: -87.65},
+		mapTypeControl:false,
+		streetViewControl:false,
+		zoomControlOptions:{position:google.maps.ControlPosition.LEFT_BOTTOM}
 	});
 	directionsRenderer.setMap(map);
 	//id換成map button的id
@@ -689,7 +776,8 @@ input[type=text]:not(.browser-default):focus:not([readonly]){
 		*/
 		var timedate = document.getElementById('time_date').getAttribute('placeholder'); //日期
 		console.log(time_date);
-		var name = tempp[0].split("=")[1]; //行程名稱
+		//var name = tempp[0].split("=")[1]; //行程名稱
+		var name = document.getElementById('name').value
 		console.log(name);
 		var timetime = document.getElementById('time_time').getAttribute('placeholder'); //日期
 		console.log(timetime)

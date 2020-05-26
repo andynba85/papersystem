@@ -43,10 +43,11 @@ function onStateChanged(user){
       dbtest.ref('users/'+auth.currentUser.uid).update({'onlinestatus':true});
       dbtest.ref('users/'+auth.currentUser.uid).on('value',function(data){
         console.log(data.val().username)
-        document.getElementById('welcomename').innerHTML="Hi，"+ data.val().username;
+        document.getElementById('welcomename').innerHTML="Hi "+ data.val().username;
         if(data.val().img != null){
           document.getElementById('imgProfile').src = data.val().img
         }
+        $('#load').removeClass("is-active");
       });
     }
     else{
@@ -61,10 +62,11 @@ function onStateChanged(user){
             dbtest.ref('users/'+auth.currentUser.uid).update({'onlinestatus':true});
             dbtest.ref('users/'+auth.currentUser.uid).on('value',function(data){
               console.log(data.val().username)
-              document.getElementById('welcomename').innerHTML="Hi，"+ data.val().username;
+              document.getElementById('welcomename').innerHTML="Hi "+ data.val().username;
               if(data.val().img != null){
                 document.getElementById('imgProfile').src = data.val().img
               }
+              $('#load').removeClass("is-active");
             });
             num = true
             return true;
@@ -74,7 +76,8 @@ function onStateChanged(user){
         if(num == false){
           dbtest.ref('users/'+auth.currentUser.uid).update({'onlinestatus':true});
           document.getElementById('imgProfile').src=auth.currentUser.photoURL;
-          document.getElementById('welcomename').innerHTML="Hi，"+auth.currentUser.displayName;
+          document.getElementById('welcomename').innerHTML="Hi "+auth.currentUser.displayName;
+          $('#load').removeClass("is-active");
           dbtest.ref('users/'+ auth.currentUser.uid).set({
             username:auth.currentUser.displayName,
             useremail:auth.currentUser.email,

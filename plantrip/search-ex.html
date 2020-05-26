@@ -57,6 +57,7 @@ input{
 	margin-top: 10px;
 	margin-bottom: 10px;
 	box-shadow: 3px 3px 5px #e0e0e0;
+	font-family: 'Noto Sans TC', sans-serif;
 }
 
 img{
@@ -71,10 +72,12 @@ img{
 }
 
 .text-display{
-	float: right;
+	position: relative;
+	left:10px;
+	display: inline-block;
 	margin-right: 10px;
 	margin-top: 10px;
-	width: 55%;
+	width: 35%;
 	vertical-align: top;
 }
 
@@ -90,6 +93,7 @@ img{
 .container{
 	margin-top: 10px;
 	overflow: auto;
+	height:500px;
 }
 
 .full_star {
@@ -123,24 +127,17 @@ span{
 	position: fixed;
 	left: 0;
 	bottom: 0;
+	padding-top: 15px;
 	text-align: center;
 	z-index:2;
-}
-
-.icon-bar i {
-	 /* Float links side by side */
-	display: inline-block; /* Center-align text */
-	width: 10%; /* Equal width (5 icons with 20% width each = 100%) */
-	padding: 12px 0; /* Some top and bottom padding */
-	transition: all 0.3s ease; /* Add transition for hover effects */
-	color: #bdbdbd; /* White text color */
-	font-size: 30px; /* Increased font size */
 }
 
 .icon-bar span{
 	display: inline-block;
 	font-size: 20px;
 	margin-bottom: 15px;
+	font-weight: bold;
+	font-family: 'Noto Sans TC', sans-serif;
 }
 
 .icon-bar:active {
@@ -159,22 +156,24 @@ span{
 
 .header{
 	display: grid;
+	text-align: center;
 	grid-template-columns: 20% 60% 20%;
 	background-color: #fff;
 	
 }
 .header h2{
 	display: inline-block;
+	padding-top: 2px;
 	margin: 15px 15px; 
-	font-size: 20px;
-	font-family:'Pacifico','Slabo 27px','Dancing Script','Indie Flower','Lobster';
+	font-size: 23px;
+	font-family: 'Noto Sans TC', sans-serif;
 }
 .header img{
 	margin: 10px;
 }
 
 .header i{
-	font-size: 30px;
+	font-size: 25px;
 	margin: 22px 15px;
 }
 .search-result:active{
@@ -196,7 +195,10 @@ h3 , p {
 .ex{
 	text-align: center;
 	margin-top:30%;
+	font-size: 16px;
+	font-family: 'Noto Sans TC', sans-serif;
 }
+
 #search_ex{
 	margin: 10px;
 	font-size: 20px;
@@ -209,7 +211,7 @@ form{
 .search-result img{
 	vertical-align: middle;
 	display: inline-block;
-	height: 25%;
+	height: 64px;
 	width: 30%;
 	border-radius: 5px;
 	margin-top: 10px;
@@ -305,7 +307,7 @@ form{
 }
 
 .detail_bar .fas , .bg .fas{
-	background-color: #ffffff;
+	background-color: #3949ab;
 	padding-top: 5px;
 	padding-bottom: 5px;
 	border-radius: 40px;
@@ -314,7 +316,7 @@ form{
 	width: 16%;
 	right: 0;
 	font-size: 20px;
-	color: #F2CB07;
+	color: #ffffff;
 }
 
 .detail_bar .fas:active , .bg .fas:active{
@@ -323,8 +325,9 @@ form{
 
 .detail{
 	overflow-y: scroll;
-	font-size: 18px;
+	font-size: 16px;
 	margin: 30px;
+	font-family: 'Noto Sans TC', sans-serif;
 }
 
 
@@ -342,10 +345,7 @@ body::webkit-scrollbar{
     height: 400px;
 	z-index:2;
 }
-.fa-hiking{
-	font-size: 40px;
-	color:#FAF385;
-}
+
 
 .plus_bg{
 		float: right;
@@ -371,48 +371,52 @@ body::webkit-scrollbar{
     background-color: #fff;
 }
 
-.lds-facebook {
+.lds-ring {
   display: inline-block;
   position: relative;
   width: 80px;
   height: 80px;
+  left:145px;
+  top:160px;
+  color: #ffd31d;
 }
-.lds-facebook div {
-  display: inline-block;
+.lds-ring div {
+  box-sizing: border-box;
+  display: block;
   position: absolute;
-  left:20px;
-  width: 16px;
-  background: #000;
-  animation: lds-facebook 1.2s cubic-bezier(0, 0.5, 0.5, 1) infinite;
+  width: 64px;
+  height: 64px;
+  margin: 8px;
+  
+  border: 8px solid #ffd31d;
+  border-radius: 50%;
+  animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  border-color: #ffd31d transparent transparent transparent;
 }
-.lds-facebook div:nth-child(1) {
-  top:30px;
-  left: 140px;
-  animation-delay: -0.24s;
+.lds-ring div:nth-child(1) {
+  animation-delay: -0.45s;
 }
-.lds-facebook div:nth-child(2) {
-  left: 164px;
-  animation-delay: -0.12s;
+.lds-ring div:nth-child(2) {
+  animation-delay: -0.3s;
 }
-.lds-facebook div:nth-child(3) {
-  left: 188px;
-  animation-delay: 0;
+.lds-ring div:nth-child(3) {
+  animation-delay: -0.15s;
 }
-@keyframes lds-facebook {
+@keyframes lds-ring {
   0% {
-    top: 20px;
-    height: 64px;
+    transform: rotate(0deg);
   }
-  50%, 100% {
-    top: 36px;
-    height: 32px;
+  100% {
+    transform: rotate(360deg);
   }
 }
+
 </style>
 </head>
 
 <body>
 	<div class="header">
+	
 		<i class="fas fa-arrow-left" onclick="location.href='plancollection-ex.html';"></i>
 		<h2>Search Attraction</h2>
 		<!--<img src="me.jpg" alt="Avatar" class="avatar">-->
@@ -435,7 +439,6 @@ body::webkit-scrollbar{
 	
 	<div id="fixed_wrap">
 		<div id="next" class="icon-bar">
-			<i class="fas fa-hiking"></i>
 			<span>下一步</span>
 		</div>
 	</div>
@@ -460,13 +463,14 @@ body::webkit-scrollbar{
         var url = location.href;
 		var temp = url.split("?");
         var vars = temp[1].split("=");
+		var region;
 
 		document.getElementById('next').addEventListener('click',function(){
 			if( select.length == 0){
 				alert("你還沒選擇景點喔")
 			}
 			else{
-				location.href = "adjustver2.html?name="+vars[1]+"&selectarray="+encodeURI(select);
+				location.href = "adjustver3.html?name="+vars[1]+"&selectarray="+encodeURI(select);
 			}
 		});
 
@@ -478,6 +482,7 @@ body::webkit-scrollbar{
 			x.className = "show";
 			// After 3 seconds, remove the show class from DIV
 			setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+
 		}
 
 		function opendetail(e){
@@ -533,16 +538,35 @@ body::webkit-scrollbar{
 	
 		function showdetail(e,intro){
 			var id = 'show'+ e;
+			console.log(id)
 			document.getElementById(id).innerHTML = intro;
 		}
 
 		let select = [];
 
-		function getselectdata(id,name,lng,lat){
+		function getselectdata(id,name,lng,lat,img,intro){
 			add_spot();
 			document.getElementById('plusout'+id).style.color= '#F5CD05';
-			document.getElementById('plus'+id).style.background = 'green';
+			document.getElementById('plus'+id).style.background = '#ffd31d';
 			select.push([name,lng,lat]);
+			var region = document.getElementById("search").value;
+			var tripdata = {
+				"地區":region,
+				"名字":name,
+				"圖片":img,
+				"介紹":intro,
+				"經度":lng,
+				"緯度":lat
+			}
+			auth.onAuthStateChanged(user => {
+                if (user) {
+                        console.log('user logged in: ', user);
+                        console.log('user logged in: ', user['uid']);
+                        dbtest.ref('users/'+ user['uid']+"/tempplan/第1天/"+name).update(tripdata);
+                }else{
+                    console.log('user logged out: ');
+                }
+            });
 		}
 
 		function Search_Attraction(input){
@@ -589,7 +613,7 @@ body::webkit-scrollbar{
 								</div>	
 							</div>	
 						</div>
-						<div class='plus_bg' onclick="getselectdata(${i},'${attraction_name}','${attraction_lontitude}','${attraction_latitude}')"><i id="plusout${i}" class="fa fa-plus"></i></div>
+						<div class='plus_bg' onclick="getselectdata(${i},'${attraction_name}','${attraction_lontitude}','${attraction_latitude}','${attraction_img}','${attraction_intro}')"><i id="plusout${i}" class="fa fa-plus"></i></div>
 						<div id="Sidenav${i}" class="sidenavself">
 							<div class="bg" style="background-image:url('${attraction_img}')">
 								<i class="fas fa-angle-left" onclick="closedetail(${i})"></i>
@@ -619,7 +643,7 @@ body::webkit-scrollbar{
 		$('#search').change(function(){
 			if($('#search').val()){
 				console.log($('#search').val());
-				document.getElementById('result').innerHTML = `<div class="lds-facebook"><div></div><div></div><div></div></div>`
+				document.getElementById('result').innerHTML = `<div class="lds-ring"><div></div><div></div><div></div><div></div></div>`
 				Search_Attraction($('#search').val());
 			}
 			else{

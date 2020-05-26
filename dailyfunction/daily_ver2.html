@@ -8,7 +8,7 @@
     <link type="text/css" rel="stylesheet" href="./css/materialize.min.css"  media="screen,projection"/>
     <!--Let browser know website is optimized for mobile-->
     <!--google font-->
-    <link href="https://fonts.googleapis.com/css?family=Lacquer|Roboto|Source+Sans+Pro|Squada+One|Sriracha&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/80f6c102d9.js" crossorigin="anonymous"></script>
     <!--調色盤-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/themes/classic.min.css"/> <!-- 'classic' theme -->
@@ -26,6 +26,7 @@
         background-color: #e0e0e0;
         color: #000000;
         overflow: hidden;
+        font-family: 'Noto Sans TC', sans-serif;;
       }
       #show{
         border-style: solid;
@@ -85,6 +86,7 @@
       .container{
         background-color: #ffffff;
         margin-top: 20px;
+        width:370px;
       }
       .fixed-action-button a{
         background-color: #ffffff;
@@ -240,7 +242,7 @@
       
       <div class="combine">
         <a class="btn-floating btn effect">
-          <i onclick="location.href='daily-ex.html'" class="fas fa-arrow-circle-left"></i>
+          <i onclick="location.href='./daily_input.html'" class="fas fa-arrow-circle-left"></i>
         </a>
         <span></span>
       </div>
@@ -457,8 +459,8 @@
     <script>
       
       const canvas = new fabric.Canvas('canvas',{
-        width: 340,
-        height:350
+        width:370,
+        height:280
       });
 
       //alert('fabric.isTouchSupported=' + fabric.isTouchSupported); 
@@ -812,11 +814,13 @@
       const dbtest = firebase.database();
       const auth = firebase.auth();
       */
+      /*
       var url = decodeURI(location.href);
       var temp = url.split("?");
       console.log(temp);
       var name = temp[1].split("=")[1];
-	    console.log(name);
+      console.log(name);
+      */
       const fdownload = document.getElementById('file_download')
       fdownload.addEventListener('click',function(){
         console.log(canvas.toDataURL())
@@ -824,8 +828,8 @@
         if (user) {
                 console.log('user logged in: ', user);
                 console.log('user logged in: ', user['uid']);
-                dbtest.ref('users/'+ user['uid'] +'/diaryset/'+name).update({img:canvas.toDataURL()});
-                setTimeout('location.href = "daily-ex.html"',2000);
+                dbtest.ref('users/'+ user['uid'] +'/DIYtempdiary').update({img:canvas.toDataURL()});
+                setTimeout('location.href = "daily_input.html"',500);
                 
             }else{
                 console.log('user logged out: ');

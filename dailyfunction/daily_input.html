@@ -29,14 +29,14 @@
         }
 
         input[type=text] ,textarea{
-            width: 100%;
+            width: 49.2%;
             padding: 12px 10px;
             margin: 10px 0;
-            display: block;
+            display: inline-block;
             border: 1px solid #ccc;
             border-radius: 4px;
             box-sizing: border-box;
-            font-size: 18px;
+            font-size: 16px;
             font-family: sans-serif;
         }
 
@@ -83,7 +83,7 @@
             border: 1px solid #ccc;
             border-radius: 4px;
             resize: vertical;
-            font-size: 18px;
+            font-size: 16px;
         }
         .header{
             width:100%;
@@ -204,10 +204,35 @@
             grid-template-columns: auto auto;
             grid-gap: 6px;
             font-family: 'Noto Sans TC', sans-serif;
+            margin-bottom: 5px;
         }
         .new_photo{
             font-family: 'Noto Sans TC', sans-serif;
             font-size: 18PX;
+        }
+        .fa-bookmark{
+            position: relative;
+            left:18%;
+            font-size: 23px;
+        }
+        #P{
+            position: relative;
+            left:38%;
+        }
+        .selectplan{
+            display: inline-block;
+        }
+        .selectplan select {
+            background-color: #fff;
+            color: #000;
+            padding: 13px;
+            width: 175px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            -webkit-appearance: button;
+            appearance: button;
+            outline: none;
         }
     </style>
 </head>
@@ -216,6 +241,7 @@
     <div class="header">
         <i onclick="location.href='../new_preindex.html'" class="fas fa-arrow-circle-left"></i>
         <h3>記錄旅遊的美好</h3>
+        <i onclick="location.href='daily-ex.html'" class="far fa-bookmark"></i>
     </div>
     <div class="photo"> 
         
@@ -248,12 +274,21 @@
     <div class="container">
         <form>
             <label for="topic">Topic</label>
-            <input id="topic" type="text" id="topic" name="topic" placeholder="Your topic..">
-
+            <label id="P" for="Plan">Plan</label>
+            <div class="bbb">
+                <input id="topic" type="text"  name="topic" placeholder="Your topic..">
+                <div class="selectplan">
+                    <select name="planlist" id="planlist">
+                        <option value="none">Select plan:</option>
+                    </select>
+                </div>
+                <!--<input id="plan" type="text"  name="topic" placeholder="Your topic..">-->
+            </div>
+        
             <label for="lname">Content</label>
             <textarea id="content" name="content" placeholder="Write something.." style="height:100px"></textarea>
             <div class="option">
-                <div id="collect">收藏貼文</div>
+                <div id="collect" onclick="collectpost()">收藏貼文</div>
                 <div id="pushpost" onclick="pushpost()">上傳貼文</div>
             </div>
             
@@ -277,6 +312,14 @@
                     console.log(data.img)
                     document.getElementById('post').src = data.img;
                 });
+                dbtest.ref('users/'+ user['uid'] +'/planset').once('value',function(snapshot){
+                    var data = snapshot.val()
+                    console.log(data)
+                    snapshot.forEach(function (item) {
+                        document.getElementById('planlist').insertAdjacentHTML('beforeend',
+                            ` <option value="${item.key}">${item.key}</option> `)
+                    })
+                })
         }else{
             console.log('user logged out: ');
         }
@@ -332,18 +375,48 @@
         location.href = './daily_ver2.html';
     }
 
-    function pushpost(){
+    function collectpost(){
         var topic = document.getElementById('topic').value;
         var content = document.getElementById('content').value;
-        var post = document.getElementById('post').src
+        var post = document.getElementById('post').src;
         auth.onAuthStateChanged(user => {
 			if (user) {
                 dbtest.ref('users/'+ user['uid']).once('value',function(snapshot){
                     var data = snapshot.val();
                     console.log(snapshot.val())
-                    dbtest.ref('users/'+ user['uid'] +'/diaryset/'+topic).set({userimg:data.img,username:data.username,topic:topic,content:content,post:post});
-                    dbtest.ref('/onlinepost').push({user:user['uid'],userimg:data.img,username:data.username,topic:topic,content:content,post:post,good:0});
-                    setTimeout('location.href="../new_preindex.html"',500);
+                    dbtest.ref('users/'+ user['uid']+"/diaryset/"+topic).set({userimg:data.img,username:data.username,'topic':topic,'content':content,'img':post,'push':false})
+                    setTimeout('location.href="daily-ex.html"',500);
+                });
+                //dbtest.ref('users/'+ user['uid'] +'/diaryset/'+topic).set({topic:topic,content:content,post:post});
+                //dbtest.ref('/onlinepost').push({user:user['uid'],topic:topic,content:content,post:post});
+                console.log('user logged in: ', user);
+                console.log('user logged in: ', user['uid']);
+            }else{
+                console.log('user logged out: ');
+            }
+        });
+    }
+
+    function pushpost(){
+        var topic = document.getElementById('topic').value;
+        var content = document.getElementById('content').value;
+        var post = document.getElementById('post').src;
+        var plan = document.getElementById('planlist').value;
+        auth.onAuthStateChanged(user => {
+			if (user) {
+                dbtest.ref('users/'+ user['uid']).once('value',function(snapshot){
+                    var data = snapshot.val();
+                    console.log(snapshot.val())
+                    dbtest.ref('users/'+ user['uid'] +'/diaryset/'+topic).set({userimg:data.img,username:data.username,topic:topic,content:content,img:post,plan:plan,push:true});
+                    dbtest.ref('users/'+ user['uid'] +'/planset/').once('value',function(ddd){
+                        ddd.forEach(function(item){
+                            if(item.key == plan){
+                                dbtest.ref('/onlinepost').push({user:user['uid'],userimg:data.img,username:data.username,topic:topic,content:content,post:post,plan:item.val(),good:0});
+                            }
+                        });
+                    })
+                    //dbtest.ref('/onlinepost').push({user:user['uid'],userimg:data.img,username:data.username,topic:topic,content:content,post:post,plan:plan,good:0});
+                    //setTimeout('location.href="../new_preindex.html"',2500);
                 });
                 //dbtest.ref('users/'+ user['uid'] +'/diaryset/'+topic).set({topic:topic,content:content,post:post});
                 //dbtest.ref('/onlinepost').push({user:user['uid'],topic:topic,content:content,post:post});

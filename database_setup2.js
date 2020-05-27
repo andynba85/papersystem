@@ -47,7 +47,7 @@ function onpostchange(){
                 <div class="container">
                     <i id="good${item.key}" class="far fa-heart" onclick="good()"></i>
                     <span id="${item.key}" class="container_span">20個讚</span>
-                    <i class="far fa-compass"></i>
+                    <i onclick="openNav('${item.key}')" class="far fa-compass"></i>
                     <p>${item.val().content}</p>
                 </div>
             </div>`);
@@ -85,7 +85,7 @@ function onStateChanged(user){
             <div class="container">
                 <i id="good${item.key}" class="far fa-heart" onclick="good()"></i>
                 <span id="${item.key}" class="container_span">${item.val().good}個讚</span>
-                <i class="far fa-compass"></i>
+                <i onclick="openNav('${item.key}')" class="far fa-compass"></i>
                 <p>${item.val().content}</p>
             </div>
         </div>`);

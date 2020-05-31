@@ -57,6 +57,7 @@ button {
     <a-text
         value="This content will always face you."
         scale="10 10 10"
+        look-at="[gps-camera]"
         rotation="0 180 0"
         position="0 5 5"
         gps-entity-place="latitude: 24.7764823; longitude: 121.019611;"
@@ -68,47 +69,98 @@ button {
 </a-scene>
 <script>
 
-    const distanceMsg = document.querySelector('[gps-entity-place]').getAttribute('distanceMsg');
-    alert(distanceMsg); 
-    window.onload = () => {
-        let places = staticLoadPlaces();
-        renderPlaces(places);
+    // getting places from APIs
+function loadPlaces(position) {
+    const params = {
+        radius: 300,    // search places not farther than this value (in meters)
+        clientId: 'GOIC5ZWTKLUIBESV5FKIHXESOVPY2KFV2TS42LMFJT152TVB',
+        clientSecret: '2QS2BGWHO2FEQZV1PKCRDVGBCYHJN31KV11ZKTCQ4FMMFB0Y',
+        version: '20300101',    // foursquare versioning, required but unuseful for this demo
     };
 
-    function staticLoadPlaces() {
-        return [
-            {
-                name: 'Magnemite',
-                location: {
-                    lat: 25.0881099,
-                    lng: 121.4701161,
-                }
-            },
-        ];
+    // CORS Proxy to avoid CORS problems
+    const corsProxy = 'https://andynba85.github.io/papersystem/';
+
+    // Foursquare API (limit param: number of maximum places to fetch)
+    const endpoint = `${corsProxy}https://api.foursquare.com/v2/venues/search?intent=checkin
+        &ll=${position.latitude},${position.longitude}
+        &radius=${params.radius}
+        &client_id=${params.clientId}
+        &client_secret=${params.clientSecret}
+        &limit=30 
+        &v=${params.version}`;
+    return fetch(endpoint)
+        .then((res) => {
+            return res.json()
+                .then((resp) => {
+                    return resp.response.venues;
+                })
+        })
+        .catch((err) => {
+            console.error('Error with places API', err);
+        })
+};
+
+
+window.onload = () => {
+    const scene = document.querySelector('a-scene');
+
+    // first get current user location
+    return navigator.geolocation.getCurrentPosition(function (position) {
+
+        // than use it to load from remote APIs some places nearby
+        loadPlaces(position.coords)
+            .then((places) => {
+                places.forEach((place) => {
+                    const latitude = place.location.lat;
+                    const longitude = place.location.lng;
+
+                    // add place name
+                    const placeText = document.createElement('a-link');
+                    placeText.setAttribute('gps-entity-place', `latitude: ${latitude}; longitude: ${longitude};`);
+                    placeText.setAttribute('title', place.name);
+                    placeText.setAttribute('scale', '15 15 15');
+                    
+                    placeText.addEventListener('loaded', () => {
+                        window.dispatchEvent(new CustomEvent('gps-entity-place-loaded'))
+                    });
+
+                    scene.appendChild(placeText);
+                });
+            })
+    },
+        (err) => console.error('Error in retrieving position', err),
+        {
+            enableHighAccuracy: true,
+            maximumAge: 0,
+            timeout: 27000,
+        }
+    );
+};
+
+// this click listener has to be added simply to a click event on an a-entity element
+const clickListener = function (ev) {
+    ev.stopPropagation();
+    ev.preventDefault();
+
+    const name = ev.target.getAttribute('name');
+    const el = ev.detail.intersection && ev.detail.intersection.object.el;
+
+    if (el && el === ev.target) {
+        // after click, we are adding a label with the name of the place
+        const label = document.createElement('span');
+        const container = document.createElement('div');
+        container.setAttribute('id', 'place-label');
+        label.innerText = name;
+        container.appendChild(label);
+        document.body.appendChild(container);
+
+        setTimeout(() => {
+            // that will disappear after less than 2 seconds
+            container.parentElement.removeChild(container);
+        }, 1500);
     }
-
-    function renderPlaces(places) {
-        let scene = document.querySelector('a-scene');
-
-        places.forEach((place) => {
-            let latitude = place.location.lat;
-            let longitude = place.location.lng;
-
-            let model = document.createElement('a-entity');
-            model.setAttribute('gps-entity-place', `latitude: ${latitude}; longitude: ${longitude};`);
-            model.setAttribute('gltf-model', './coin/scene.gltf');
-            model.setAttribute('rotation', '0 180 0');
-            model.setAttribute('position', '0 5 3');
-            model.setAttribute('animation-mixer', '');
-            model.setAttribute('scale', '1 1 1');
-
-            model.addEventListener('loaded', () => {
-                window.dispatchEvent(new CustomEvent('gps-entity-place-loaded'))
-            });
-
-            scene.appendChild(model);
-        });
-    }
+};
 </script>
 </body>
 </html>

@@ -56,7 +56,6 @@ button {
     arjs="sourceType: webcam; sourceWidth:1280; sourceHeight:960; displayWidth: 1280; displayHeight: 960; debugUIEnabled: false;">
     <a-text
         value="This content will always face you."
-        look-at="[gps-camera]"
         scale="10 10 10"
         rotation="0 180 0"
         position="0 5 5"
@@ -99,9 +98,9 @@ button {
             model.setAttribute('gps-entity-place', `latitude: ${latitude}; longitude: ${longitude};`);
             model.setAttribute('gltf-model', './coin/scene.gltf');
             model.setAttribute('rotation', '0 180 0');
-            model.setAttribute('position', '0 5 -5');
+            model.setAttribute('position', '0 5 3');
             model.setAttribute('animation-mixer', '');
-            model.setAttribute('scale', '0.5 0.5 0.5');
+            model.setAttribute('scale', '1 1 1');
 
             model.addEventListener('loaded', () => {
                 window.dispatchEvent(new CustomEvent('gps-entity-place-loaded'))

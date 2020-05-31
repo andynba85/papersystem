@@ -59,7 +59,7 @@ button {
         look-at="[gps-camera]"
         scale="10 10 10"
         rotation="0 180 0"
-        position="0 10 0"
+        position="0 5 5"
         gps-entity-place="latitude: 24.7764823; longitude: 121.019611;"
     ></a-text>
     <a-camera gps-camera="minDistance: 40;alert:true" rotation-reader> </a-camera>
@@ -99,7 +99,7 @@ button {
             model.setAttribute('gps-entity-place', `latitude: ${latitude}; longitude: ${longitude};`);
             model.setAttribute('gltf-model', './coin/scene.gltf');
             model.setAttribute('rotation', '0 180 0');
-            model.setAttribute('position', '0 20 0');
+            model.setAttribute('position', '0 5 -5');
             model.setAttribute('animation-mixer', '');
             model.setAttribute('scale', '0.5 0.5 0.5');
 

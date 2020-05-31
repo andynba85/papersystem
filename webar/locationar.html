@@ -58,8 +58,8 @@ button {
         value="This content will always face you."
         look-at="[gps-camera]"
         scale="10 10 10"
-        rotation="0 90 0"
-        position="0 20 0"
+        rotation="0 180 0"
+        position="0 10 0"
         gps-entity-place="latitude: 24.7764823; longitude: 121.019611;"
     ></a-text>
     <a-camera gps-camera="minDistance: 40;alert:true" rotation-reader> </a-camera>
@@ -68,6 +68,9 @@ button {
     </div>
 </a-scene>
 <script>
+
+    const distanceMsg = document.querySelector('[gps-entity-place]').getAttribute('distanceMsg');
+    alert(distanceMsg); 
     window.onload = () => {
         let places = staticLoadPlaces();
         renderPlaces(places);

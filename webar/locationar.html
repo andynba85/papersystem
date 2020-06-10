@@ -120,10 +120,36 @@ function staticLoadPlaces() {
     ];
 }
 
+function placedetail(id){
+    let params = {
+        radius: 10,    // search places not farther than this value (in meters)
+        clientId: 'GOIC5ZWTKLUIBESV5FKIHXESOVPY2KFV2TS42LMFJT152TVB',
+        clientSecret: '2QS2BGWHO2FEQZV1PKCRDVGBCYHJN31KV11ZKTCQ4FMMFB0Y',
+        version: '20300101',    // foursquare versioning, required but unuseful for this demo
+    };
+    let corsProxy = 'https://cors-anywhere.herokuapp.com/';
+
+    // Foursquare API
+    let endpoint = `https://api.foursquare.com/v2/venues/${id}?client_id=${params.clientId}
+        &client_secret=${params.clientSecret}&v=${params.version}`;
+    console.log(endpoint)
+    return fetch(endpoint)
+        .then((res) => {
+            return res.json()
+                .then((resp) => {
+                    console.log(resp)
+                    return resp.response;
+                })
+        })
+        .catch((err) => {
+            console.error('Error with places API', err);
+        })
+};
+
 // getting places from REST APIs
 function dynamicLoadPlaces(position) {
     let params = {
-        radius: 300,    // search places not farther than this value (in meters)
+        radius: 10,    // search places not farther than this value (in meters)
         clientId: 'GOIC5ZWTKLUIBESV5FKIHXESOVPY2KFV2TS42LMFJT152TVB',
         clientSecret: '2QS2BGWHO2FEQZV1PKCRDVGBCYHJN31KV11ZKTCQ4FMMFB0Y',
         version: '20300101',    // foursquare versioning, required but unuseful for this demo
@@ -133,17 +159,22 @@ function dynamicLoadPlaces(position) {
     let corsProxy = 'https://cors-anywhere.herokuapp.com/';
 
     // Foursquare API
-    let endpoint = `${corsProxy}https://api.foursquare.com/v2/venues/search?intent=checkin
+    let endpoint = `${corsProxy}https://api.foursquare.com/v2/venues/search?
         &ll=${position.latitude},${position.longitude}
         &radius=${params.radius}
         &client_id=${params.clientId}
         &client_secret=${params.clientSecret}
-        &limit=15
+        &limit=1
         &v=${params.version}`;
     return fetch(endpoint)
         .then((res) => {
             return res.json()
                 .then((resp) => {
+                    console.log(resp)
+                    console.log(resp.response.venues)
+                    console.log(resp.response.venues.categories)
+                    console.log(resp.response.tips)
+                    console.log(resp.response.lists)
                     return resp.response.venues;
                 })
         })
@@ -158,7 +189,8 @@ function renderPlaces(places) {
     places.forEach((place) => {
         const latitude = place.location.lat;
         const longitude = place.location.lng;
-
+        console.log(placedetail(place.id))
+        console.log(place.id)
         // add place icon
         const icon = document.createElement('a-image');
         icon.setAttribute('gps-entity-place', `latitude: ${latitude}; longitude: ${longitude}`);

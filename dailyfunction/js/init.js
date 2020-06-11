@@ -1,11 +1,7 @@
 $(document).ready(function () {
-  $('.datepicker').datepicker();
-  $('.fixed-action-btn').floatingActionButton({
-  	direction: 'left',
-  	hoverEnabled: false
+  $('.carousel.carousel-slider').carousel({
+    fullWidth: true,
+    indicators: true
   });
-  $('.modal').modal({
-    opacity:0.3
-  });
-  $('.tooltipped').tooltip();
 });
+

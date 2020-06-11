@@ -80,6 +80,7 @@ function onStateChanged(user){
                 <img class="card_profile_pic" src="${item.val().userimg}">
                 <span class="card_span">${item.val().username}</span>
                 <div class="topic">${item.val().topic}</div>
+                <p>${item.val().pushtime}</p>
             </div>
             <img class="card_img" src="${item.val().post}" alt="Avatar" style="width:100%">
             <div class="container">
@@ -132,6 +133,8 @@ function onStateChanged(user){
               }
               if(data.val().motto != null){
                 document.getElementById('motto').innerHTML = data.val().motto
+              }else{
+                document.getElementById('motto').innerHTML = "探索、冒險、喜歡旅行"
               }
               $('#load').removeClass("is-active");
             });

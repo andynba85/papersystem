@@ -54,14 +54,7 @@ button {
     vr-mode-ui="enabled: false"
     embedded
     arjs="sourceType: webcam; sourceWidth:1280; sourceHeight:960; displayWidth: 1280; displayHeight: 960; debugUIEnabled: false;">
-    <a-text
-        value="This content will always face you."
-        scale="10 10 10"
-        look-at="[gps-camera]"
-        rotation="0 180 0"
-        position="0 5 5"
-        gps-entity-place="latitude: 24.7764823; longitude: 121.019611;"
-    ></a-text>
+    
     <a-camera gps-camera="minDistance: 40;alert:true" rotation-reader> </a-camera>
     <div class="centered">
         <button data-action="change"></button>
@@ -164,7 +157,7 @@ function dynamicLoadPlaces(position) {
         &radius=${params.radius}
         &client_id=${params.clientId}
         &client_secret=${params.clientSecret}
-        &limit=1
+        &limit=15
         &v=${params.version}`;
     return fetch(endpoint)
         .then((res) => {

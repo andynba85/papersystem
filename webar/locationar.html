@@ -10,6 +10,7 @@
 <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
 <script src="https://unpkg.com/aframe-look-at-component@0.8.0/dist/aframe-look-at-component.min.js"></script>
 <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
+<script src="./script.js"></script>
 <style>
     .centered {
     height: 20%;
@@ -54,176 +55,11 @@ button {
     vr-mode-ui="enabled: false"
     embedded
     arjs="sourceType: webcam; sourceWidth:1280; sourceHeight:960; displayWidth: 1280; displayHeight: 960; debugUIEnabled: false;">
-    
+
     <a-camera gps-camera="minDistance: 40;alert:true" rotation-reader> </a-camera>
     <div class="centered">
         <button data-action="change"></button>
     </div>
 </a-scene>
-<script>
-
-window.onload = () => {
-    let method = 'dynamic';
-
-    // if you want to statically add places, de-comment following line
-    //method = 'static';
-
-    if (method === 'static') {
-        let places = staticLoadPlaces();
-        renderPlaces(places);
-    }
-
-    if (method !== 'static') {
-
-        // first get current user location
-        return navigator.geolocation.getCurrentPosition(function (position) {
-
-            // than use it to load from remote APIs some places nearby
-            dynamicLoadPlaces(position.coords)
-                .then((places) => {
-                    renderPlaces(places);
-                })
-        },
-            (err) => console.error('Error in retrieving position', err),
-            {
-                enableHighAccuracy: true,
-                maximumAge: 0,
-                timeout: 27000,
-            }
-        );
-    }
-};
-
-function staticLoadPlaces() {
-    return [
-        {
-            name: "Your place name",
-            location: {
-                lat: 0, // add here latitude if using static data
-                lng: 0, // add here longitude if using static data
-            }
-        },
-        {
-            name: 'Another place name',
-            location: {
-                lat: 0,
-                lng: 0,
-            }
-        }
-    ];
-}
-
-function placedetail(id){
-    let params = {
-        radius: 10,    // search places not farther than this value (in meters)
-        clientId: 'GOIC5ZWTKLUIBESV5FKIHXESOVPY2KFV2TS42LMFJT152TVB',
-        clientSecret: '2QS2BGWHO2FEQZV1PKCRDVGBCYHJN31KV11ZKTCQ4FMMFB0Y',
-        version: '20300101',    // foursquare versioning, required but unuseful for this demo
-    };
-    let corsProxy = 'https://cors-anywhere.herokuapp.com/';
-
-    // Foursquare API
-    let endpoint = `https://api.foursquare.com/v2/venues/${id}?client_id=${params.clientId}
-        &client_secret=${params.clientSecret}&v=${params.version}`;
-    console.log(endpoint)
-    return fetch(endpoint)
-        .then((res) => {
-            return res.json()
-                .then((resp) => {
-                    console.log(resp)
-                    return resp.response;
-                })
-        })
-        .catch((err) => {
-            console.error('Error with places API', err);
-        })
-};
-
-// getting places from REST APIs
-function dynamicLoadPlaces(position) {
-    let params = {
-        radius: 10,    // search places not farther than this value (in meters)
-        clientId: 'GOIC5ZWTKLUIBESV5FKIHXESOVPY2KFV2TS42LMFJT152TVB',
-        clientSecret: '2QS2BGWHO2FEQZV1PKCRDVGBCYHJN31KV11ZKTCQ4FMMFB0Y',
-        version: '20300101',    // foursquare versioning, required but unuseful for this demo
-    };
-
-    // CORS Proxy to avoid CORS problems
-    let corsProxy = 'https://cors-anywhere.herokuapp.com/';
-
-    // Foursquare API
-    let endpoint = `${corsProxy}https://api.foursquare.com/v2/venues/search?
-        &ll=${position.latitude},${position.longitude}
-        &radius=${params.radius}
-        &client_id=${params.clientId}
-        &client_secret=${params.clientSecret}
-        &limit=15
-        &v=${params.version}`;
-    return fetch(endpoint)
-        .then((res) => {
-            return res.json()
-                .then((resp) => {
-                    console.log(resp)
-                    console.log(resp.response.venues)
-                    console.log(resp.response.venues.categories)
-                    console.log(resp.response.tips)
-                    console.log(resp.response.lists)
-                    return resp.response.venues;
-                })
-        })
-        .catch((err) => {
-            console.error('Error with places API', err);
-        })
-};
-
-function renderPlaces(places) {
-    let scene = document.querySelector('a-scene');
-
-    places.forEach((place) => {
-        const latitude = place.location.lat;
-        const longitude = place.location.lng;
-        console.log(placedetail(place.id))
-        console.log(place.id)
-        // add place icon
-        const icon = document.createElement('a-link');
-        icon.setAttribute('gps-entity-place', `latitude: ${latitude}; longitude: ${longitude}`);
-        icon.setAttribute('title', place.name);
-        icon.setAttribute('scale','15 15 15');
-        //icon.setAttribute('src', 'chatbot.jpg');
-        //icon.setAttribute('src', '../assets/map-marker.png');
-
-        // for debug purposes, just show in a bigger scale, otherwise I have to personally go on places...
-        //icon.setAttribute('scale', '20, 20');
-
-        icon.addEventListener('loaded', () => window.dispatchEvent(new CustomEvent('gps-entity-place-loaded')));
-
-        const clickListener = function (ev) {
-            ev.stopPropagation();
-            ev.preventDefault();
-
-            const name = ev.target.getAttribute('name');
-
-            const el = ev.detail.intersection && ev.detail.intersection.object.el;
-
-            if (el && el === ev.target) {
-                const label = document.createElement('span');
-                const container = document.createElement('div');
-                container.setAttribute('id', 'place-label');
-                label.innerText = name;
-                container.appendChild(label);
-                document.body.appendChild(container);
-
-                setTimeout(() => {
-                    container.parentElement.removeChild(container);
-                }, 1500);
-            }
-        };
-
-        icon.addEventListener('click', clickListener);
-
-        scene.appendChild(icon);
-    });
-}
-</script>
 </body>
 </html>

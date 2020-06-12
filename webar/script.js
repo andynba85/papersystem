@@ -137,7 +137,7 @@ function renderPlaces(places) {
 
         // for debug purposes, just show in a bigger scale, otherwise I have to personally go on places...
         //icon.setAttribute('scale', '20, 20');
-        scene.insertAdjacentHTML('afterbegin',`<a-image look-at="[gps-camera]" gps-entity-place="latitude: ${latitude}; longitude: ${longitude};" name="${place.name}" scale="15 15 15" src="./map-marker.png"></a-image>`);
+        scene.insertAdjacentHTML('afterbegin',`<a-image look-at="[gps-camera]" gps-entity-place="latitude: ${latitude}; longitude: ${longitude};" name="${place.name}" scale="0.5 0.5 0.5" src="./map-marker.png"></a-image>`);
 
         icon.addEventListener('loaded', () => {
             window.dispatchEvent(new CustomEvent('gps-entity-place-loaded'))

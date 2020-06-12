@@ -1,35 +1,4 @@
-window.onload = () => {
-    let method = 'dynamic';
-
-    // if you want to statically add places, de-comment following line
-    //method = 'static';
-
-    if (method === 'static') {
-        let places = staticLoadPlaces();
-        renderPlaces(places);
-    }
-
-    if (method !== 'static') {
-
-        // first get current user location
-        return navigator.geolocation.getCurrentPosition(function (position) {
-
-            // than use it to load from remote APIs some places nearby
-            dynamicLoadPlaces(position.coords)
-                .then((places) => {
-                    renderPlaces(places);
-                })
-        },
-            (err) => console.error('Error in retrieving position', err),
-            {
-                enableHighAccuracy: true,
-                maximumAge: 0,
-                timeout: 27000,
-            }
-        );
-    }
-};
-
+/*
 function staticLoadPlaces() {
     return [
         {
@@ -48,7 +17,8 @@ function staticLoadPlaces() {
         }
     ];
 }
-
+*/
+/*
 function placedetail(id){
     let params = {
         radius: 10,    // search places not farther than this value (in meters)
@@ -74,7 +44,40 @@ function placedetail(id){
             console.error('Error with places API', err);
         })
 };
+*/
 
+
+window.onload = () => {
+    let method = 'dynamic';
+
+    // if you want to statically add places, de-comment following line
+    //method = 'static';
+
+    if (method === 'static') {
+        let places = staticLoadPlaces();
+        renderPlaces(places);
+    }
+
+    if (method !== 'static') {
+        
+        // first get current user location
+        return navigator.geolocation.getCurrentPosition(function (position) {
+
+            // than use it to load from remote APIs some places nearby
+            dynamicLoadPlaces(position.coords)
+                .then((places) => {
+                    renderPlaces(places);
+                })
+        },
+            (err) => console.error('Error in retrieving position', err),
+            {
+                enableHighAccuracy: true,
+                maximumAge: 0,
+                timeout: 27000,
+            }
+        );
+    }
+};
 // getting places from REST APIs
 function dynamicLoadPlaces(position) {
     let params = {
@@ -114,24 +117,31 @@ function dynamicLoadPlaces(position) {
 
 function renderPlaces(places) {
     let scene = document.querySelector('a-scene');
-
     places.forEach((place) => {
+        //let gps = document.createAttribute('gps-entity-place')
         const latitude = place.location.lat;
+        console.log(latitude)
         const longitude = place.location.lng;
-        console.log(placedetail(place.id))
+        console.log(longitude)
+        //gps.value=`latitude: ${latitude}; longitude: ${longitude};`
+        //console.log(placedetail(place.id))
         console.log(place.id)
         // add place icon
-        const icon = document.createElement('a-link');
-        icon.setAttribute('gps-entity-place', `latitude: ${latitude}; longitude: ${longitude}`);
-        icon.setAttribute('title', place.name);
+        const icon = document.createElement('a-image');
+        icon.setAttribute('gps-entity-place', `latitude: ${latitude}; longitude: ${longitude};`);
+        //icon.setAttributeNode('gps');
+        icon.setAttribute('name', place.name);
         icon.setAttribute('scale','15 15 15');
-        //icon.setAttribute('src', 'chatbot.jpg');
+        icon.setAttribute('src', 'map-marker.png');
         //icon.setAttribute('src', '../assets/map-marker.png');
 
         // for debug purposes, just show in a bigger scale, otherwise I have to personally go on places...
         //icon.setAttribute('scale', '20, 20');
+        scene.insertAdjacentHTML('afterbegin',`<a-image gps-entity-place="latitude: ${latitude}; longitude: ${longitude};" name="${place.name}" scale="15 15 15" src="./map-marker.png"></a-image>`);
 
-        icon.addEventListener('loaded', () => window.dispatchEvent(new CustomEvent('gps-entity-place-loaded')));
+        icon.addEventListener('loaded', () => {
+            window.dispatchEvent(new CustomEvent('gps-entity-place-loaded'))
+        });
 
         const clickListener = function (ev) {
             ev.stopPropagation();
@@ -156,7 +166,9 @@ function renderPlaces(places) {
         };
 
         icon.addEventListener('click', clickListener);
-
-        scene.appendChild(icon);
+        //scene.appendChild(icon);
+        
     });
 }
+
+

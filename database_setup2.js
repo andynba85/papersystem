@@ -22,10 +22,10 @@ function onfirebaseStateChanged(){
 }
 
 function firebasestagepost(){
-    auth.onAuthStateChanged(onpostchange());
+    auth.onAuthStateChanged(onpostchange);
 }
 
-function onpostchange(){
+function onpostchange(user){
     if(user){
         console.log(auth.currentUser);
         console.log(auth.currentUser.email);
@@ -34,6 +34,7 @@ function onpostchange(){
         dbtest.ref('onlinepost').on('value',function(data){
         console.log(data.val())
           //some類似forEach
+        //document.getElementById('content').innerHTML=""
         //document.getElementById('content').innerHTML=""
         data.forEach(function(item){
             console.log(item.key + " " + item.val())

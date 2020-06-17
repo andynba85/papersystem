@@ -81,7 +81,7 @@ window.onload = () => {
 // getting places from REST APIs
 function dynamicLoadPlaces(position) {
     let params = {
-        radius: 10,    // search places not farther than this value (in meters)
+        radius: 50,    // search places not farther than this value (in meters)
         clientId: 'GOIC5ZWTKLUIBESV5FKIHXESOVPY2KFV2TS42LMFJT152TVB',
         clientSecret: '2QS2BGWHO2FEQZV1PKCRDVGBCYHJN31KV11ZKTCQ4FMMFB0Y',
         version: '20300101',    // foursquare versioning, required but unuseful for this demo
@@ -91,7 +91,7 @@ function dynamicLoadPlaces(position) {
     let corsProxy = 'https://cors-anywhere.herokuapp.com/';
 
     // Foursquare API
-    let endpoint = `${corsProxy}https://api.foursquare.com/v2/venues/search?
+    let endpoint = `${corsProxy}https://api.foursquare.com/v2/venues/search?intent=checkin
         &ll=${position.latitude},${position.longitude}
         &radius=${params.radius}
         &client_id=${params.clientId}
@@ -117,6 +117,7 @@ function dynamicLoadPlaces(position) {
 
 function renderPlaces(places) {
     let scene = document.querySelector('a-scene');
+
     places.forEach((place) => {
         //let gps = document.createAttribute('gps-entity-place')
         const latitude = place.location.lat;
@@ -131,13 +132,13 @@ function renderPlaces(places) {
         icon.setAttribute('gps-entity-place', `latitude: ${latitude}; longitude: ${longitude};`);
         //icon.setAttributeNode('gps');
         icon.setAttribute('name', place.name);
-        icon.setAttribute('scale','15 15 15');
+        icon.setAttribute('scale','15,15');
         icon.setAttribute('src', 'map-marker.png');
         //icon.setAttribute('src', '../assets/map-marker.png');
 
         // for debug purposes, just show in a bigger scale, otherwise I have to personally go on places...
         //icon.setAttribute('scale', '20, 20');
-        scene.insertAdjacentHTML('afterbegin',`<a-image look-at="[gps-camera]" gps-entity-place="latitude: ${latitude}; longitude: ${longitude};" name="${place.name}" scale="0.5 0.5 0.5" src="./map-marker.png"></a-image>`);
+        scene.insertAdjacentHTML('afterbegin',`<a-image gps-entity-place="latitude: ${latitude}; longitude: ${longitude};" name="${place.name}" scale="0.5,0.5" rotation="0 180 0" src="./map-marker.png"></a-image>`);
 
         icon.addEventListener('loaded', () => {
             window.dispatchEvent(new CustomEvent('gps-entity-place-loaded'))

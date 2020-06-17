@@ -16,6 +16,7 @@
             color: #000;
             font-family: 'Noto Sans TC', sans-serif;
             margin:0;
+            
         }
         
         .top_bar{
@@ -676,8 +677,11 @@
 
         const ptr = PullToRefresh.init({
                 mainElement: '#content',
+                refreshTimeout:2000,
                 onRefresh() {
-                    window.location.reload();
+                    //window.location.reload();
+                    document.getElementById('content').innerHTML='';
+                    onfirebaseStateChanged();
                 }
         });
 

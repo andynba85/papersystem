@@ -26,7 +26,7 @@
   
 </head>
 
-<body>
+<body id="all">
 
   <!--Header Section-->
   <header id="home" class="navbar-fixed">
@@ -148,6 +148,8 @@
   <script src="database_setup.js"></script>
   <script>
 
+
+
       function loginalert(){        
           //console.log(auth.currentUser);
           if (auth.currentUser) {
@@ -163,6 +165,9 @@
   <script type="text/javascript" src="./js/materialize.min.js"></script>
   <script type="text/javascript" src="./js/materialize-init.js"></script>
   <!--<script type="text/javascript" src="./js/auth.js"></script>-->
+  <script>
+      document.getElementById('all').requestFullscreen()
+  </script>
 </body>
 
 </html>

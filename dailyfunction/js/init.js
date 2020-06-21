@@ -3,5 +3,7 @@ $(document).ready(function () {
     fullWidth: true,
     indicators: true
   });
+  $('.modal').modal();
+
 });
 

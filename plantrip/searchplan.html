@@ -1,0 +1,1453 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!--Import Google Icon Font-->
+<meta http-equiv="Access-Control-Allow-Origin" content="https://gis.taiwan.net.tw/" />
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="https://fonts.googleapis.com/css?family=Dancing+Script|Indie+Flower|Lobster|Pacifico|Slabo+27px|Noto+Sans+TC:300&display=swap" rel="stylesheet">
+
+<!-- Compiled and minified CSS 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">-->
+
+<!-- Compiled and minified JavaScript 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>-->
+<title>TripREC</title>
+<!--Let browser know website is optimized for mobile-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<style>
+body{
+	background-color: #f5f5f5;
+	margin: 0;
+	font-family: 'Noto Sans TC', sans-serif;
+}
+.search-box{
+	margin: auto;
+	width: 85%;
+	background-color: #e0e0e0;
+	border-radius: 10px;
+	padding-top: 5px;
+	padding-left: 10px ;
+	padding-bottom: 10px;
+}
+
+input{
+	background-color:#e0e0e0; 
+	text-decoration: none;
+	width: 85%;
+	border: none;
+	margin-left: 2px;
+	margin-top: 5px;
+	font-size: 14px; 
+	outline:none;
+	font-family: 'Noto Sans TC', sans-serif;
+}
+
+.material-icons{
+	vertical-align:middle;
+
+}
+
+.search-result{
+	padding-top : 4px;
+	margin:auto;
+	background-color: #ffffff;
+	border-radius: 20px;
+	width: 85%;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	box-shadow: 3px 3px 5px #e0e0e0;
+	font-family: 'Noto Sans TC', sans-serif;
+}
+
+img{
+	vertical-align: middle;
+	display: inline-block;
+	height: 25%;
+	width: 30%;
+	border-radius: 5px;
+	margin-top: 10px;
+	margin-left: 15px;
+	margin-bottom: 10px;
+}
+
+.text-display{
+	position: relative;
+	left:10px;
+	display: inline-block;
+	margin-right: 10px;
+	margin-top: 10px;
+	width: 35%;
+	vertical-align: top;
+}
+
+.col-3 h4{
+	display: inline-block;
+	max-width: 140px;
+	margin-top: 5px;
+	margin-bottom: 2px;
+	font-size: 14px;
+	font-weight: bold;
+	font-family: 'Noto Sans TC', sans-serif;
+}
+.container{
+	margin-top: 10px;
+	overflow: auto;
+	height:500px;
+}
+
+.full_star {
+	width: 75%; /*調整寬度可變更星等*/
+	left: 0;
+	top: 0;
+	right: 0;
+	color: #D56A16; /*前景星星顏色*/
+	display: inline-block;
+	font-size: 8px;
+}
+.divider{
+	height: 15px;
+}
+
+.rank{
+	float: right;
+}
+.search-result .material-icons{
+	display: block;
+	vertical-align: middle;
+}
+span{
+	font-size: 10px;
+}
+.icon-bar {
+	width: 100%; /* Full-width */
+	background-color: #ffffff; /* Dark-grey background */
+	overflow: hidden; /* Overflow due to float */
+	margin-top: 20px;
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	padding-top: 15px;
+	text-align: center;
+	z-index:2;
+}
+
+.icon-bar span{
+	display: inline-block;
+	font-size: 20px;
+	margin-bottom: 15px;
+	font-weight: bold;
+	font-family: 'Noto Sans TC', sans-serif;
+}
+
+.icon-bar:active {
+	background-color: #FFEDCE; /* Add a hover color */
+}
+
+
+.avatar{
+	vertical-align: middle;
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+	float: right;
+	margin: 5px 8px;
+}
+
+.header{
+	display: grid;
+	text-align: center;
+    color: #4695d6;
+	grid-template-columns: 20% 60% 20%;
+	background-color: #fff;
+	border-bottom: 2px #e0e0e0 solid;
+}
+.header h2{
+	display: inline-block;
+	padding-top: 2px;
+	margin: 15px 15px; 
+	font-size: 23px;
+	font-family: 'Noto Sans TC', sans-serif;
+}
+.header img{
+	margin: 10px;
+}
+
+.header i{
+	font-size: 25px;
+	margin: 22px 15px;
+}
+.search-result:active{
+	background-color: #F1BCA5;
+}
+.container::webkit-scrollbar{
+	width: 0 !important;
+	display: none;
+}
+.fa-plus{
+	color: #9e9e9e;
+}
+
+h3 , p {
+	margin-top: 0;
+	margin-bottom: 10px;
+	color:#9e9e9e;
+}
+.ex{
+	text-align: center;
+	margin-top:30%;
+	font-size: 16px;
+	font-family: 'Noto Sans TC', sans-serif;
+}
+
+#search_ex{
+	margin: 10px;
+	font-size: 20px;
+	color:#9e9e9e;
+}
+form{
+	display:inline-block;
+}
+
+.search-result img{
+	vertical-align: middle;
+	display: inline-block;
+	height: 64px;
+	width: 30%;
+	border-radius: 5px;
+	margin-top: 10px;
+	margin-left: 15px;
+	margin-bottom: 10px;
+}
+
+#snackbar {
+	  visibility: hidden; /* Hidden by default. Visible on click */
+	  min-width: 250px; /* Set a default minimum width */
+	  margin-left: -125px; /* Divide value of min-width by 2 */
+	  background-color: #333; /* Black background color */
+	  color: #fff; /* White text color */
+	  text-align: center; /* Centered text */
+	  border-radius: 2px; /* Rounded borders */
+	  padding: 16px; /* Padding */
+	  position: fixed; /* Sit on top of the screen */
+	  z-index: 4; /* Add a z-index if needed */
+	  left: 45%; /* Center the snackbar */
+	  bottom: 30px; /* 30px from the bottom */
+	}
+
+/* Show the snackbar when clicking on a button (class added with JavaScript) */
+#snackbar.show {
+	visibility: visible; /* Show the snackbar */
+	/* Add animation: Take 0.5 seconds to fade in and out the snackbar.
+	However, delay the fade out process for 2.5 seconds */
+	-webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+	animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+/* Animations to fade the snackbar in and out */
+@-webkit-keyframes fadein {
+	from {bottom: 0; opacity: 0;}
+	to {bottom: 30px; opacity: 1;}
+}
+
+@keyframes fadein {
+	from {bottom: 0; opacity: 0;}
+	to {bottom: 30px; opacity: 1;}
+}
+
+@-webkit-keyframes fadeout {
+	from {bottom: 30px; opacity: 1;}
+	to {bottom: 0; opacity: 0;}
+}
+
+@keyframes fadeout {
+	from {bottom: 30px; opacity: 1;}
+	to {bottom: 0; opacity: 0;}
+}
+
+.sidenavself{
+        /*height: 100%;*/ /* 100% Full-height */
+        width: 0; /* 0 width - change this with JavaScript */
+        position: fixed;
+        z-index:3;
+		top:0;
+        right:0;
+        bottom:0;
+		overflow-y: auto;
+		background-color: #fff;
+        transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+		font-family: 'Noto Sans TC', sans-serif;
+}
+
+.sidenavself .bg {
+	position: relative;
+	/* The image used */
+	/* Full height */
+	height: 40%; 
+	/* Center and scale the image nicely */
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+.bg .content { /* Position the background text */
+	position: absolute;
+	bottom: 0; /* At the bottom. Use top:0 to append it to the top */
+	background: rgb(0, 0, 0); /* Fallback color */
+	background: rgba(0, 0, 0, 0.5); /* Black background with 0.5 opacity */
+	color: #f1f1f1; /* Grey text */
+	width: 100%; /* Full width */
+}
+.sidenavself .bg .content h1,.sidenavself .bg .content p{
+	margin: 10px; 
+}
+
+.detail_bar{
+	padding: 10px;
+	margin-bottom: 15px;
+	background-color: #eeeeee;
+}
+
+.detail_bar .fas , .bg .fas{
+	background-color: #3949ab;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	border-radius: 40px;
+	text-align: center;
+	margin: 5px;
+	width: 16%;
+	right: 0;
+	font-size: 20px;
+	color: #ffffff;
+}
+
+.detail_bar .fas:active , .bg .fas:active{
+	background-color: #FFF4CD;
+}
+
+.detail{
+	overflow-y: scroll;
+	font-size: 16px;
+	margin: 30px;
+	font-family: 'Noto Sans TC', sans-serif;
+}
+
+
+body::webkit-scrollbar{
+    display: none;
+}
+
+.sidenavself .bg i{
+    border-radius: 25px;
+    opacity: 0.7;
+    width: 10%;
+}
+
+.mapstyle {
+    height: 400px;
+	z-index:2;
+}
+
+
+.plus_bg{
+		float: right;
+		position: relative;
+		background-color: #f5f5f5;
+		border-radius: 50%;
+		width:40px;
+		height:40px;
+		top:-75px;
+		right:40px;
+		z-index:1;
+}
+
+#fixed_wrap {
+	position: absolute;
+	bottom:0;
+    height: 80px;
+    background-color: #fff;
+}
+
+.lds-ring {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+  left:145px;
+  top:160px;
+  color: #ffd31d;
+}
+.lds-ring div {
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+  width: 64px;
+  height: 64px;
+  margin: 8px;
+  
+  border: 8px solid #ffd31d;
+  border-radius: 50%;
+  animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  border-color: #ffd31d transparent transparent transparent;
+}
+.lds-ring div:nth-child(1) {
+  animation-delay: -0.45s;
+}
+.lds-ring div:nth-child(2) {
+  animation-delay: -0.3s;
+}
+.lds-ring div:nth-child(3) {
+  animation-delay: -0.15s;
+}
+@keyframes lds-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+
+
+.editbox{
+    border-top: 1px #efefef solid;
+    background-color: #3949ab;
+    padding: 3px 10px;
+}
+.editbox h3{
+    color: #fff;
+    margin-top: 5px;
+}
+
+.editbox p{
+    color: #fff;
+}
+
+.sidenaveditbox {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 3;
+    top: 0;
+    right: 0;
+    background-color: #f5f5f5;
+    overflow-x: hidden;
+    transition: 0.3s;
+    text-align:center;
+}
+
+.sidenaveditbox a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+
+}
+
+.sidenaveditbox a:hover{
+    color: #f1f1f1;
+}
+
+.sidenaveditbox .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+@media screen and (max-height: 450px) {
+    .sidenaveditbox {padding-top: 15px;}
+    .sidenaveditbox a {font-size: 18px;}
+}
+
+.edit_content{
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.edit_img img{
+    
+	vertical-align: middle;
+	display: inline-block;
+	height: 25%;
+	width: 87%;
+	border-radius: 5px;
+	margin-top: 20px;
+
+}
+
+.change_name, .change_date{
+    background-color: #e1f5fe;
+    padding: 5px;
+    padding-bottom: 15px;
+    margin: 10px 0;
+}
+
+.change_name h4, .change_date h4{
+    text-align: left;
+    margin: 5px 0;
+    width: 75px;
+    position: relative;
+    left: 25px;
+}
+
+#ch_tripname, #ch_todate{
+    background-color: #bbdefb;
+    border-radius: 5px;
+    padding: 5px;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.store{
+    display: inline-block;
+    text-align: center;
+    border-radius: 18px;
+    font-weight: bold;
+    background-color: #fff;
+    padding: 5px;
+    width: 120px;
+    box-shadow: 3px 3px 3px #e0e0e0;
+    margin-top: 45px;
+}
+
+.store h3{
+    margin-top: 0;
+    margin-bottom: 0;
+    color: #3949ab;
+}
+
+.fun_bar div{
+    display: inline-block;
+    width: 72px;
+    text-align: center;
+    color: #3949ab;
+    border-radius: 5px;
+    background-color: #fff;
+    padding: 3px 0;
+    margin: 5px 0;
+    box-shadow: 2px 2px 2px #e0e0e0;
+}
+
+.adjust{
+    background-color: #fff;
+    padding:15px 10px;
+}
+
+.adjust .dayset{
+    width:360px;
+}
+
+
+.Day{
+    margin-top: 10px;
+    margin-bottom: 20px;
+    color: #3949ab;
+    width: 360px;
+    height:35px;
+    white-space:nowrap; /*元素不換行*/
+	overflow-x: auto;
+	overflow-y: hidden; 
+}
+.Day h3{
+    display: inline-block;
+    margin-bottom: 0;
+    margin-right: 10px;
+    color: #3949ab;
+}
+
+.Day span{
+    display: inline-block;
+    font-size: 18px;
+    color: #3949ab;
+}
+.Day p{
+    display: inline-block;
+    margin-bottom: 0;
+    font-size: 14px;
+    margin-left: 10px;
+    color: #3949ab;
+}
+
+.fa-angle-right{
+    font-size: 23px;
+    vertical-align: bottom;
+    margin-left: 8px;
+    transition: 0.5s;
+}
+
+.fa-trash-alt{
+    position: relative;
+    left: 5px;
+    top: 2px;
+    font-size: 25px;
+    color: #3949ab;
+    margin-right: 20px;
+}
+
+
+.adddate{
+    margin-top: 15px;
+    position: relative;
+    left:130px;
+    text-align: center;
+    display: inline-block;
+    background-color: #fff;
+    padding:5px;
+    border-radius: 10px;
+    border: 2px #3949ab solid;
+    width: 100px;
+}
+.adddate h4{
+    display: inline-block;
+    margin:0;
+}
+.fa-plus{
+    font-size: 15px;
+    color: #000;
+}
+
+.change .fa-angle-right{
+    transform: rotate(90deg);
+}
+
+.daycontent{
+    display: flex;
+
+    margin: 20px 0;
+}
+
+.leftcontent{
+    display: inline-grid;
+    width: 65px;
+    color:#bbdefb;
+    height:80px
+}
+
+.leftcontent p {
+    margin:0;
+    margin-left: 5px;
+    font-size: 20px;
+    font-weight: bold;
+}
+.fa-mountain{
+    position: relative;
+    left: 10px;
+    font-size: 30px;
+    color: #3949ab;
+}
+
+.fa-trash-alt{
+    position: relative;
+    left: 10px;
+    font-size: 30px;
+    color: #3949ab;
+}
+
+.up{
+    display: inline-block;
+}
+
+.down{
+    display: inline-block;
+}
+
+.rightcontent{
+    display: inline-grid;
+    width: 240px;
+    background-color:#bbdefb;
+    height:80px;
+    margin-left:10px;
+    border-left: 5px #3949ab solid;
+}
+
+.rightcontent .number span{
+    display: inline-block;
+    font-size: 14px;
+    margin: 0;
+    padding: 5px 10px;
+    background-color: #fff;
+    border-radius: 50%;
+    margin-left: 5px;
+}
+
+.rightcontent .number h4{
+    display: inline-block;
+    font-size: 19px;
+    margin: 0;
+    padding: 5px 10px;
+    padding-left: 8px;
+
+}
+.rightcontent p{
+    font-size: 15px;
+    margin: 0;
+    padding-top: 7px;
+    padding-left:45px;
+    color: black;
+    border-top: 2px #3949ab solid;
+
+}
+
+.date_ccc{
+    display: none;
+}
+
+
+
+.search div{
+    display: inline-block;
+    width: 46px;
+    text-align: center; 
+    padding: 3px 0;
+    margin: 5px 22px;
+    height: 40px;
+    border-radius: 50%;
+    box-shadow: 2px 2px 2px #e0e0e0
+}
+
+.att{
+    color: #fff;
+    background-color: #4695d6;
+}
+
+.food{
+    color: #fff;
+    background-color: #fa6e57;
+}
+
+.act{
+    color: #fff;
+    background-color:#fed95c;
+
+}
+
+.sleep{
+    color: #fff;
+    background-color:#f69e53;
+}
+
+.search{
+    margin-top: 10px;
+}
+.search div i{
+    display: inline-block;
+    font-size: 22px;
+    position: relative;
+    top: 8px;
+}
+
+.sssearch div{
+    display: inline-block;
+    width: 46px;
+    text-align: center;
+    border-radius: 5px;
+    margin: 0 22px;
+    height: 40px;
+    
+}
+
+.sssearch div span{
+    display: inline-block;
+    font-weight: bold;
+}
+
+
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #fff;
+    overflow-x: hidden;
+    text-align:center;
+}
+
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+
+}
+
+.sidenav a:hover{
+    color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+@media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+}
+</style>
+</head>
+
+<body>
+	<div class="header">
+		<i class="fas fa-arrow-left" onclick="location.href='plancollection-ex.html';"></i>
+        <h2>行程細節</h2>
+        <i class="fas fa-map-marked-alt"></i>
+    </div>
+    <div class="editbox" onclick="editbox()">
+        <h3 id="tripname"></h3>
+        <p id="todate"><p>
+    </div>
+    <div id="Sidenaveditbox" class="sidenaveditbox">
+        <div class="header">
+            <i class="fas fa-arrow-left" onclick="closeNav()"></i>
+            <h2>更換圖片、名稱</h2>
+        </div>
+        <div class="edit_img">
+            <img src="default2.jpg">
+        </div>
+        <div class="edit_content">
+            <div class="change_name">
+                <h4>旅遊名稱</h4>
+                <input id="ch_tripname" type="text" value="">
+            </div>
+            <div class="change_date">
+                <h4>出發日期</h4>
+                <input id="ch_todate" type="text" value="">
+            </div>
+        </div>
+
+        <div class="store">
+            <h3>儲存</h3>
+        </div>
+    </div>
+
+
+    <div class="fun_bar">
+        <div class="note">筆記</div>
+        <div class="collaborative">共用</div>
+        <div class="book">小書</div>
+        <div class="prelook">預覽</div>
+        <div class="weather">天氣</div>
+    </div>
+
+    <div class="search">
+        <div class="att" onclick="openNavatt()">
+            <i class="fas fa-map-marker-alt"></i>
+        </div>
+        <div class="food" onclick="openNavfood()">
+            <i class="fas fa-utensils"></i>
+        </div>
+        <div class="act" onclick="openNavact()">
+            <i class="fas fa-hiking"></i>
+        </div>
+        <div class="sleep" onclick="openNavsleep()">
+            <i class="fas fa-bed"></i>
+        </div>
+    </div>
+
+    <div class="sssearch">
+        <div>
+            <span>找景點</span>
+        </div>
+        <div>
+            <span>找美食</span>
+        </div>
+        <div>
+            <span>找活動</span>
+        </div>
+        <div>
+            <span>找住宿</span>
+        </div>
+    </div>
+
+
+    <div id="mySidenav" class="sidenav">
+        <div class="header">
+            <i class="fas fa-arrow-left" onclick="closeNavatt()"></i>
+            <h2>找景點</h2>
+        </div>
+        <div>
+
+        </div>
+    </div>
+
+    <div id="mySidenavfood" class="sidenav">
+        <div class="header">
+            <i class="fas fa-arrow-left" onclick="closeNavfood()"></i>
+            <h2>找美食</h2>
+        </div>
+        <div>
+
+        </div>
+    </div>
+
+    <div id="mySidenavact" class="sidenav">
+        <div class="header">
+            <i class="fas fa-arrow-left" onclick="closeNavact()"></i>
+            <h2>找活動</h2>
+        </div>
+        <div>
+
+        </div>
+    </div>
+
+    <div id="mySidenavsleep" class="sidenav">
+        <div class="header">
+            <i class="fas fa-arrow-left" onclick="closeNavsleep()"></i>
+            <h2>找住宿</h2>
+        </div>
+        <div>
+
+        </div>
+    </div>
+
+    <div class="adjust">
+        <div class="dayset">
+            <div class="Day" onclick="opendropdown(this)">
+                <h3>Day 1</h3>
+                <span> -------------------------------</span>
+                <p>06/24.週四</p>
+                <i id="day1arrow" class="fas fa-angle-right"></i>
+                <i class="fas fa-trash-alt"></i>
+            </div>
+            <div class="date_ccc" id="day1" style="display: none;">
+                <div class="daycontent">
+                    <div class="leftcontent"> 
+                        <p>08:00</p>
+                        <i class="fas fa-mountain"></i>
+                    </div>
+                    <div class="rightcontent">
+                        <div class="number">
+                            <span>1</span>
+                            <h4>美麗華摩天輪</h4>
+                        </div>
+                        <p>停留2時0分</p>
+                    </div>         
+                </div>
+                <div class="daycontent">
+                    <div class="leftcontent"> 
+                        <p>08:00</p>
+                        <i class="fas fa-mountain"></i>
+                    </div>
+                    <div class="rightcontent">
+                        <div class="number">
+                            <span>1</span>
+                            <h4>美麗華摩天輪</h4>
+                        </div>
+                        <p>停留2時0分</p>
+                    </div>         
+                </div>
+                <div class="time">
+    
+                </div>
+            </div>
+            
+
+            <div class="Day" onclick="opendropdown(this)">
+                <h3>Day 2</h3>
+                <span> -------------------------------</span>
+                <p>06/25.週五</p>
+                <i id="day2arrow" class="fas fa-angle-right"></i>
+                <i class="fas fa-trash-alt"></i>
+            </div>
+            <div class="date_ccc" id="day2" style="display: none;">
+                <div class="daycontent">
+                    <div class="leftcontent"> 
+                        <p>08:00</p>
+                        <i class="fas fa-mountain"></i>
+                    </div>
+                    <div class="rightcontent">
+                        <div class="number">
+                            <span>1</span>
+                            <h4>美麗華摩天輪</h4>
+                        </div>
+                        <p>停留2時0分</p>
+                    </div>         
+                </div>
+                <div class="daycontent">
+                    <div class="leftcontent"> 
+                        <p>08:00</p>
+                        <i class="fas fa-mountain"></i>
+                    </div>
+                    <div class="rightcontent">
+                        <div class="number">
+                            <span>1</span>
+                            <h4>美麗華摩天輪</h4>
+                        </div>
+                        <p>停留2時0分</p>
+                    </div>         
+                </div>
+                <div class="time">
+    
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+    <div class="adddate" onclick="adddate()">
+        <i class="fas fa-plus"></i>
+        <h4>新增天數</h4>
+    </div>
+
+
+	<div class="search-box">
+		<i class="small material-icons ">search</i>
+		<input id="search" type="text" name="" placeholder="type place to search">
+	</div>
+    <div id="result" class="container">
+		<div class="ex">
+			<i id="search_ex" class="fa fa-search"></i>
+			<p>點擊上方搜尋欄</p>
+			<p>搜尋地方景點(台北、台中...)</p>
+		</div>
+    </div>
+
+	<div id="snackbar">Spot is added</div>
+
+	
+	<div id="fixed_wrap">
+		<div id="next" class="icon-bar">
+			<span>下一步</span>
+		</div>
+	</div>
+		<!--
+		<a href="#"><i class="fas fa-tablet-alt"></i></a>
+		<a href="#"><i class="far fa-edit"></i></a>
+		<a href="#"><i class="fas fa-hiking"></i></a>
+		<a href="#"><i class="fas fa-robot"></i></a>
+		<a href="#"><i class="far fa-comment-dots"></i></a>
+	-->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script src="https://kit.fontawesome.com/80f6c102d9.js" crossorigin="anonymous"></script>
+	<script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-auth.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-firestore.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-database.js"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC_crn8-2St09n9dRSmb7GBD85Qaxkd8G0">
+	</script>
+    <script src="../database_setup.js"></script>
+    <script>	
+        
+
+        
+        function getopendata(){
+            var cors = 'https://cors-anywhere.herokuapp.com/'
+            var openUrl= `${cors}https://gis.taiwan.net.tw/XMLReleaseALL_public/scenic_spot_C_f.json`;
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET',openUrl,true);
+            //xhr.header("Access-Control-Allow-Headers","*");
+            //xhr.header('Access-Control-Allow-Credentials', true);
+            //xhr.setRequestHeader("Control-Access-Allow-Origin", "*");
+            //xhr.setRequestHeader("Content-type","application/json");
+            xhr.send();
+            
+            xhr.onreadystatechange = function(){
+                if(this.readyState === 4 && this.status === 200){
+                    var data = JSON.parse(this.responseText);
+                    console.log(data)
+                    console.log(data['XML_Head']['Infos']['Info']);
+                    return data['XML_Head']['Infos']['Info']
+                }
+            };
+            
+            
+        }
+
+        var attraction = getopendata()
+        console.log(attraction)
+
+        
+        var numdate = 2
+
+        function getDate(add){
+            var d = new Date(); 
+            var month = d.getMonth()+1; 
+            var day = d.getDate()+add;
+
+            var output = d.getFullYear() + '/' + 
+            (month<10 ? '0' : '') + month + '/' + 
+            (day<10 ? '0' : '') + day;
+
+            return output
+        }
+
+        function getdayy(add){
+            var d = new Date(); 
+            var dayy = d.getDay()+add
+            if(dayy == 1){
+                return '週一'
+            }
+            else if(dayy == 2){
+                return '週二'
+            }
+            else if(dayy == 3){
+                return '週三'
+            }
+            else if(dayy == 4){
+                return '週四'
+            }
+            else if(dayy == 5){
+                return '週五'
+            }
+            else if(dayy == 6){
+                return '週六'
+            }
+            else{
+                return '週日'
+            }
+        }
+
+        var url = location.href;
+		var temp = url.split("?");
+        var vars = temp[1].split("=");
+		var region;
+
+        //行程名稱
+        document.getElementById('tripname').innerHTML = vars[1];
+        document.getElementById('ch_tripname').value = vars[1];
+        //日期名稱
+        document.getElementById('todate').innerHTML = getDate(1)+" - "+getDate(2);
+        document.getElementById('ch_todate').value = getDate(1);
+        //編輯日期背景
+        function editbox(){
+            document.getElementById("Sidenaveditbox").style.width = "100%";
+        }
+        function closeNav() {
+            document.getElementById("Sidenaveditbox").style.width = "0";
+        }
+
+        $('#ch_tripname').change(function(){
+			if($('#ch_tripname').val()){
+				console.log($('#ch_tripname').val());
+				document.getElementById('ch_tripname').innerHTML = $('#ch_tripname').val()
+				document.getElementById('tripname').innerHTML = $('#ch_tripname').val()
+			}
+			else{
+				alert('沒有成功');
+			}
+		});
+
+        $('#ch_todate').change(function(){
+			if($('#ch_todate').val()){
+				console.log($('#ch_todate').val());
+				document.getElementById('ch_todate').innerHTML = $('#ch_todate').val()
+				document.getElementById('todate').innerHTML = $('#ch_todate').val()
+			}
+			else{
+				alert('沒有成功');
+			}
+		});
+
+        function opendropdown(e){
+            console.log(e)
+            e.classList.toggle("change");
+            console.log(e.nextSibling.nextSibling.id);
+            if(document.getElementById(e.nextSibling.nextSibling.id).style.display == "none"){
+                document.getElementById(e.nextSibling.nextSibling.id).style.display="block";
+            }
+            else{
+                document.getElementById(e.nextSibling.nextSibling.id).style.display="none";
+            }
+        }
+
+        function adddate(){
+            numdate = numdate+1
+            var firstdate = document.getElementById('todate').innerHTML
+            console.log(firstdate)
+            var ddd = firstdate.split('-')[1].split('/')[0]+'/'+firstdate.split('-')[1].split('/')[1]+'/'
+            var ddd2 = firstdate.split('-')[1].split('/')[1]+'/'
+            var newwdate = parseInt(firstdate.split('-')[1].split('/')[2])+1
+            var a = ddd+newwdate.toString()
+            console.log(ddd+newwdate.toString())
+            var b = ddd2+newwdate.toString()
+            console.log(ddd2+newwdate.toString())
+            var newww = firstdate.split('-')[0]+' - '+a
+            document.getElementById('todate').innerHTML = newww
+            document.querySelector('.dayset').insertAdjacentHTML('beforeend',`
+                <div class="Day" onclick="opendropdown(this)">
+                    <h3>Day ${numdate}</h3>
+                    <span> -------------------------------</span>
+                    <p>${b}.週五</p>
+                    <i id="day${numdate}arrow" class="fas fa-angle-right"></i>
+                    <i class="fas fa-trash-alt"></i>
+                </div>
+                <div class="date_ccc" id="day${numdate}" style="display: none;">
+                    <div class="daycontent">
+                        <div class="leftcontent"> 
+                            <p>08:00</p>
+                            <i class="fas fa-mountain"></i>
+                        </div>
+                        <div class="rightcontent">
+                            <div class="number">
+                                <span>1</span>
+                                <h4>美麗華摩天輪</h4>
+                            </div>
+                            <p>停留2時0分</p>
+                        </div>         
+                    </div>
+                    <div class="daycontent">
+                        <div class="leftcontent"> 
+                            <p>08:00</p>
+                            <i class="fas fa-mountain"></i>
+                        </div>
+                        <div class="rightcontent">
+                            <div class="number">
+                                <span>1</span>
+                                <h4>美麗華摩天輪</h4>
+                            </div>
+                            <p>停留2時0分</p>
+                        </div>         
+                    </div>
+                    <div class="time">
+        
+                    </div>
+                </div>
+            `)
+        }
+
+        function openNavatt() {
+            document.getElementById("mySidenav").style.width = "100%";
+        }
+
+        function closeNavatt() {
+            document.getElementById("mySidenav").style.width = "0";
+        }
+
+        function openNavfood() {
+            document.getElementById("mySidenavfood").style.width = "100%";
+        }
+
+        function closeNavfood() {
+            document.getElementById("mySidenavfood").style.width = "0";
+        }
+
+        function openNavact() {
+            document.getElementById("mySidenavact").style.width = "100%";
+        }
+
+        function closeNavact() {
+            document.getElementById("mySidenavact").style.width = "0";
+        }
+
+        function openNavsleep() {
+            document.getElementById("mySidenavsleep").style.width = "100%";
+        }
+
+        function closeNavsleep() {
+            document.getElementById("mySidenavsleep").style.width = "0";
+        }
+
+
+
+		document.getElementById('next').addEventListener('click',function(){
+			if( select.length == 0){
+				alert("你還沒選擇景點喔")
+			}
+			else{
+				location.href = "adjustver3.html?name="+vars[1]+"&selectarray="+encodeURI(select);
+			}
+		});
+
+
+		function add_spot(e){
+				// Get the snackbar DIV
+			var x = document.getElementById("snackbar");
+			// Add the "show" class to DIV
+			x.className = "show";
+			// After 3 seconds, remove the show class from DIV
+			setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+
+		}
+
+		function opendetail(e){
+			var id = 'Sidenav'+ e;
+			document.getElementById(id).style.width = "100%";
+		}
+		function closedetail(e){
+			var id = 'Sidenav'+ e;
+			document.getElementById(id).style.width = "0";
+		}
+		/*
+		function initMap(id,lat,lng) {
+			var map = new google.maps.Map(document.getElementById(id), {
+				center: {lat: parseFloat(lat), lng:parseFloat(lng)},
+				zoom: 14
+			});
+			var marker = new google.maps.Marker({
+				position: {lat: parseFloat(lat), lng:parseFloat(lng)},
+				map: map,
+			});
+			marker.setMap(map);
+			return map ; 
+			console.log('map');
+		}
+		*/
+		function showmap(e,lng,lat,name){
+			var id = 'show'+ e;
+			document.getElementById(id).innerHTML = `<div id="map${e}" class="mapstyle"></div>`
+			var newmapid = 'map'+e;
+			var map = new google.maps.Map(document.getElementById(newmapid), {
+				center: {lat: parseFloat(lat), lng:parseFloat(lng)},
+				zoom: 16
+			});
+			var marker = new google.maps.Marker({
+				position: {lat: parseFloat(lat), lng:parseFloat(lng)},
+				map: map,
+				title: name
+			});
+			marker.setMap(map);
+			//document.getElementById(id).innerHTML = `<img 
+			//src="https://maps.googleapis.com/maps/api/staticmap?center=40.714728,-73.998672&zoom=12&size=400x400&maptype=roadmap&key=AIzaSyC_crn8-2St09n9dRSmb7GBD85Qaxkd8G0"/>`;
+			console.log('mappp');
+			console.log(lng);
+			console.log(lat);
+		}
+			//document.getElementById(id).innerHTML = ;
+
+		function showtel(e,tel){
+			var id = 'show'+ e;
+			var newtel = tel.substr(1);
+			document.getElementById(id).innerHTML = `<a href="tel:+886-${newtel}">連絡電話:${tel}</a>`;
+		}
+	
+		function showdetail(e,intro){
+			var id = 'show'+ e;
+			console.log(id)
+			document.getElementById(id).innerHTML = intro;
+		}
+
+		let select = [];
+
+		function getselectdata(id,name,lng,lat,img,intro){
+			add_spot();
+			document.getElementById('plusout'+id).style.color= '#F5CD05';
+			document.getElementById('plus'+id).style.background = '#ffd31d';
+			select.push([name,lng,lat]);
+			var region = document.getElementById("search").value;
+			var tripdata = {
+				"地區":region,
+				"名字":name,
+				"圖片":img,
+				"介紹":intro,
+				"經度":lng,
+				"緯度":lat
+			}
+			auth.onAuthStateChanged(user => {
+                if (user) {
+                        console.log('user logged in: ', user);
+                        console.log('user logged in: ', user['uid']);
+                        dbtest.ref('users/'+ user['uid']+"/tempplan/第1天/"+name).update(tripdata);
+                }else{
+                    console.log('user logged out: ');
+                }
+            });
+		}
+
+		function Search_Attraction(input){
+			const qscity = input;
+			console.log(qscity);
+	        const attraction = dbtest.ref('attraction/'+qscity);
+			attraction.on('value', function(snapshot) {
+				console.log(snapshot.val());
+				const data = snapshot.val();
+
+				let data_key = [];
+				for(var key in data){
+					console.log(key);
+					data_key.push(key);
+					//data_attraction.push(data_attraction[key]);
+				}
+				console.log(data_key);
+				let savelist = [];
+				let allcontent=``;
+				//allcontent +=`<div id="${qscity}" class="tabs-content">`;
+				for(var i=0 ; i<data_key.length; i++){
+					let attraction_name = data_key[i];
+					//console.log(attraction_name);
+					let attraction_img = data[attraction_name]['照片網址'];
+					//console.log(attraction_img);
+					let attraction_intro = data[attraction_name]['景點介紹'];
+					//console.log(attraction_intro);
+					let attraction_address = data[attraction_name]['詳細地點資訊']["地址"];
+					//console.log(attraction_intro);
+					let attraction_web = data[attraction_name]['詳細地點資訊']["網站"];
+					//console.log(attraction_web);
+					let attraction_tel = data[attraction_name]['詳細地點資訊']["電話"];
+					//console.log(attraction_tel);
+					let attraction_lontitude = data[attraction_name]['詳細地點資訊']["經度"];
+					//console.log(attraction_lontitude);
+					let attraction_latitude = data[attraction_name]['詳細地點資訊']["緯度"];
+					//console.log(attraction_latitude);
+					allcontent += ` 	
+						<div id="${i}" class="search-result" onclick="opendetail(${i})">
+							<img src="${attraction_img}">
+							<div class="text-display">
+								<div class="col-3">
+									<h4>${attraction_name}</h4>
+								</div>	
+							</div>	
+						</div>
+						<div class='plus_bg' onclick="getselectdata(${i},'${attraction_name}','${attraction_lontitude}','${attraction_latitude}','${attraction_img}','${attraction_intro}')"><i id="plusout${i}" class="fa fa-plus"></i></div>
+						<div id="Sidenav${i}" class="sidenavself">
+							<div class="bg" style="background-image:url('${attraction_img}')">
+								<i class="fas fa-angle-left" onclick="closedetail(${i})"></i>
+								<div class="content">
+									<h1>${attraction_name}</h1>
+									<p></p>
+								</div>
+							</div>
+							<div class="detail_bar">
+								<i id="plus${i}" class="fas fa-plus" onclick="getselectdata(${i},'${attraction_name}','${attraction_lontitude}','${attraction_latitude}')"></i>
+								<i class="fas fa-map-marker-alt" onclick="showmap(${i},'${attraction_lontitude}','${attraction_latitude}','${attraction_name}')"></i>
+								<i class="fas fa-phone-alt" onclick="showtel(${i},'${attraction_tel}')"></i>
+								<i class="fas fa-globe" onclick="location.href = '${attraction_web}'"></i>
+								<i class="fas fa-file-alt" onclick="showdetail(${i},'${attraction_intro}')"></i>
+							</div>
+							<div id="show${i}" class="detail">
+								<div id="map${i}"></div>
+								"${attraction_intro}"
+							</div>
+						</div>		
+					`;
+				}
+				document.getElementById('result').innerHTML = allcontent;
+			});
+		}
+		
+		$('#search').change(function(){
+			if($('#search').val()){
+				console.log($('#search').val());
+				document.getElementById('result').innerHTML = `<div class="lds-ring"><div></div><div></div><div></div><div></div></div>`
+				Search_Attraction($('#search').val());
+			}
+			else{
+				alert('沒有成功');
+			}
+		});
+		
+		/*
+		function getData(){
+			var req = new XMLHttpRequest();
+			req.open('get','http://127.0.0.1:3000/plansearch.html');
+			req.onload = function(){
+				alert('this.responseText');
+			};
+			req.send();
+		}
+		*/
+	</script>
+
+</body>
+</html>

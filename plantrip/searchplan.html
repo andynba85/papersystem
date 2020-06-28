@@ -6,10 +6,11 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link href="https://fonts.googleapis.com/css?family=Dancing+Script|Indie+Flower|Lobster|Pacifico|Slabo+27px|Noto+Sans+TC:300&display=swap" rel="stylesheet">
-
+<script src="https://cdn.jsdelivr.net/npm/pickerjs@1.2.1/dist/picker.min.js"></script>
 <!-- Compiled and minified CSS 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">-->
-
+<link  href="./node_modules/pickerjs/dist/picker.css" rel="stylesheet">
+<script src="./node_modules/pickerjs/dist/picker.js"></script>
 <!-- Compiled and minified JavaScript 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>-->
 <title>TripREC</title>
@@ -58,6 +59,7 @@ input{
 	margin-bottom: 10px;
 	box-shadow: 3px 3px 5px #e0e0e0;
 	font-family: 'Noto Sans TC', sans-serif;
+    text-align: left;
 }
 
 img{
@@ -117,7 +119,7 @@ img{
 	vertical-align: middle;
 }
 span{
-	font-size: 10px;
+	font-size: 14px;
 }
 .icon-bar {
 	width: 100%; /* Full-width */
@@ -184,9 +186,7 @@ span{
 	width: 0 !important;
 	display: none;
 }
-.fa-plus{
-	color: #9e9e9e;
-}
+
 
 h3 , p {
 	margin-top: 0;
@@ -307,7 +307,7 @@ form{
 	background-color: #eeeeee;
 }
 
-.detail_bar .fas , .bg .fas{
+.detail_bar .fas {
 	background-color: #3949ab;
 	padding-top: 5px;
 	padding-bottom: 5px;
@@ -319,7 +319,21 @@ form{
 	font-size: 20px;
 	color: #ffffff;
 }
-
+.bg .fa-angle-left{
+    background-color: #3949ab;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-radius: 40px;
+    text-align: center;
+    margin: 5px;
+    width: 16%;
+    right: 0;
+    font-size: 25px;
+    color: #ffffff;
+    position: relative;
+    left: -160px;
+    top: 8px;
+}
 .detail_bar .fas:active , .bg .fas:active{
 	background-color: #FFF4CD;
 }
@@ -520,6 +534,9 @@ body::webkit-scrollbar{
     margin-bottom: 0;
     color: #3949ab;
 }
+.fun_bar{
+    text-align: center;
+}
 
 .fun_bar div{
     display: inline-block;
@@ -529,8 +546,11 @@ body::webkit-scrollbar{
     border-radius: 5px;
     background-color: #fff;
     padding: 3px 0;
-    margin: 5px 0;
     box-shadow: 2px 2px 2px #e0e0e0;
+}
+
+.prelook{
+    margin-bottom: 10px;
 }
 
 .adjust{
@@ -540,6 +560,34 @@ body::webkit-scrollbar{
 
 .adjust .dayset{
     width:360px;
+}
+.previewDay{
+    margin-top: 10px;
+    margin-bottom: 20px;
+    color: #3949ab;
+    width: 360px;
+    white-space:nowrap; /*元素不換行*/
+	overflow-x: auto;
+	overflow-y: hidden; 
+}
+.previewDay h3{
+    display: inline-block;
+    margin-bottom: 0;
+    margin-right: 10px;
+    color: #3949ab;
+}
+
+.previewDay span{
+    display: inline-block;
+    font-size: 18px;
+    color: #3949ab;
+}
+.previewDay p{
+    display: inline-block;
+    margin-bottom: 0;
+    font-size: 14px;
+    margin-left: 10px;
+    color: #3949ab;
 }
 
 
@@ -609,6 +657,7 @@ body::webkit-scrollbar{
 .fa-plus{
     font-size: 15px;
     color: #000;
+    margin-top: 0;
 }
 
 .change .fa-angle-right{
@@ -616,9 +665,7 @@ body::webkit-scrollbar{
 }
 
 .daycontent{
-    display: flex;
-
-    margin: 20px 0;
+    margin: 10px 0;
 }
 
 .leftcontent{
@@ -677,7 +724,7 @@ body::webkit-scrollbar{
 
 .rightcontent .number h4{
     display: inline-block;
-    font-size: 19px;
+    font-size: 16px;
     margin: 0;
     padding: 5px 10px;
     padding-left: 8px;
@@ -795,6 +842,242 @@ body::webkit-scrollbar{
     .sidenav {padding-top: 15px;}
     .sidenav a {font-size: 18px;}
 }
+
+select{
+    width: 139.5px;
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    border-right: 1px #e0e0e0 solid;
+    border-bottom: 1px #e0e0e0 solid;
+    color: #4695d6;
+    font-family: 'Noto Sans TC', sans-serif;
+}
+
+.time {
+    text-align: right;
+    position: relative;
+    left: -40px;
+}
+
+.sure{
+    width: 87px;
+    height: 31px;
+    display: inline-block;
+    padding: 5px 0;
+    /* text-align: center; */
+    background-color: #a5dff9;
+    border-radius: 10px;
+    /* position: relative; */
+    /* left: 143px; */
+    font-size: 18px;
+    font-family: 'Noto Sans TC', sans-serif;
+}
+.plus_bg .fa-plus{
+	color: #fff;
+    margin-top: 11px;
+}
+#test{
+    margin-top: 10px;
+}
+
+
+/* The Modal att(background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 4; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    border-radius: 10px;
+    width: 80%;
+    height: 75%;
+}
+
+/* The Close Button */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+.modalmark h3{
+    color: #3949ab;
+}
+
+.modalmark input, .modalmark p {
+    background-color: #4695d6;
+    padding: 10px;
+    text-align: center;
+    color: #fff;
+    font-size: 18px;
+    border-radius: 12px;
+    width: 278px;
+}
+
+.cancel{
+    background-color: #3949ab;
+    color: #fff;
+    display: inline-block;
+    width: 127px;
+    text-align: center;
+    border-radius: 10px;
+    padding: 8px;
+    font-size: 20px;
+}
+
+.addnew{
+    background-color: #ffd31d;
+    color: #fff;
+    display: inline-block;
+    width: 127px;
+    text-align: center;
+    border-radius: 10px;
+    padding: 8px;
+    font-size: 20px;
+}
+.option{
+    position: fixed;
+    bottom: 13%;
+    left: 12%;
+}
+.daycircle{
+    border-radius: 50%;
+    background-color: #e0e0e0;
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+    margin-bottom: 12px;
+}
+.daycircle span {
+    font-size: 23px;
+    font-weight: bold;
+    position: relative;
+    left: 18px;
+    top: 5px;
+}
+
+#map{
+    background-color: #000;
+    width: 375px;
+    height: 540px;
+}
+#route{
+    text-align: left;
+    white-space: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    width: 375px;
+}
+.daymin{
+    display: inline-block;
+    width: 60px;
+    text-align: center;
+    padding: 5px;
+    margin: 10px 5px;
+    background-color: #e0e0e0;  
+    border-radius: 20px;
+    font-weight: bold;
+}
+.daymincontent{
+    display: inline-block;
+}
+
+.daymincontent span{
+    display: inline-block;
+    background: #3949ab;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    border-radius: 50%;
+    position: relative;
+    top: -2px;
+    color: #fff;
+    font-weight: bold;
+}
+
+.daymincontent p{
+    display: inline-block;
+    margin-bottom: 0px;
+    color: #000;
+}
+
+.fa-map-marker{
+    font-size: 25px;
+    vertical-align: sub;
+}
+.ccc{
+    width:100px;
+}
+
+.previewcontent{
+    color: #000;
+    display: inline-block;
+    width: 375px;
+    height: 180px;
+    white-space: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    text-align: left;
+}
+
+.precontentcontent{
+    margin: 0px 15px;
+    width: 100px;
+    display: inline-block;
+}
+
+.precontentcontent img{
+    margin: 0;
+    width: 100px;
+    height: 100px;
+    display: block;
+}
+.precontentcontent span{
+    display: inline-block;
+    border-radius: 50%;
+    height: 30px;
+    width: 30px;
+    text-align: center;
+    background: #e0e0e0;
+    font-size: 18px;
+    font-weight: bold;
+    margin: 5px 0;
+    position: relative;
+    left: 32px;
+}
+.precontentcontent p{
+    text-align: center;
+    margin: 0;
+    display: block;
+}
+
+.fa-car-side {
+    margin-left: 8px;
+}
 </style>
 </head>
 
@@ -802,7 +1085,7 @@ body::webkit-scrollbar{
 	<div class="header">
 		<i class="fas fa-arrow-left" onclick="location.href='plancollection-ex.html';"></i>
         <h2>行程細節</h2>
-        <i class="fas fa-map-marked-alt"></i>
+        <i class="fas fa-map-marked-alt" onclick="openNavroute()"></i>
     </div>
     <div class="editbox" onclick="editbox()">
         <h3 id="tripname"></h3>
@@ -832,13 +1115,33 @@ body::webkit-scrollbar{
         </div>
     </div>
 
+    
 
-    <div class="fun_bar">
-        <div class="note">筆記</div>
-        <div class="collaborative">共用</div>
-        <div class="book">小書</div>
-        <div class="prelook">預覽</div>
-        <div class="weather">天氣</div>
+    <div id="mySidenavpreview" class="sidenav">
+        <div class="header">
+            <i class="fas fa-arrow-left" onclick="closeNavpreview()"></i>
+            <h2 id="previewname"></h2>
+        </div>
+        <div id="previewdayset" class="previewdayset">
+            <div class="previewDay">
+                <h3>Day 1</h3>
+                <span> -------------------------------</span>
+                <p>06/24.週四</p>
+            </div>
+            <div id="previewday1" class="previewcontent">
+                
+            </div>
+
+            <div class="previewDay">
+                <h3>Day 2</h3>
+                <span> -------------------------------</span>
+                <p>06/25.週五</p>
+            </div>
+            <div id="previewday2" class="previewcontent">
+                
+            </div>
+            
+        </div>
     </div>
 
     <div class="search">
@@ -871,6 +1174,28 @@ body::webkit-scrollbar{
         </div>
     </div>
 
+    <div class="fun_bar">
+        <div class="note" onclick="store()">儲存</div>
+        <!--<div class="collaborative">共用</div>-->
+        <!--<div class="book">小書</div>-->
+        <div class="prelook" onclick="openNavpreview()">預覽</div>
+        <!--<div class="weather">天氣</div>-->
+    </div>
+    <div id="mySidenavroute" class="sidenav">
+        <div class="header">
+            <i class="fas fa-arrow-left" onclick="closeNavroute()"></i>
+            <h2>路線圖</h2>
+        </div>
+            
+        <div id="map">
+
+        </div>
+
+        <div id='route'>
+
+        </div>
+    </div>
+
 
     <div id="mySidenav" class="sidenav">
         <div class="header">
@@ -878,9 +1203,106 @@ body::webkit-scrollbar{
             <h2>找景點</h2>
         </div>
         <div>
+            <select id="att">
+                <option value="">請選擇地區</option>
+                <option value="桃園市">桃園市</option>
+                <option value="台北市">台北市</option>
+                <option value="新北市">新北市</option>
+                <option value="新竹市">新竹市</option>
+                <option value="新竹縣">新竹縣</option>
+                <option value="基隆市">基隆市</option>
+                <option value="宜蘭縣">宜蘭縣</option>
+                <option value="台中市">台中市</option>
+                <option value="彰化縣">彰化縣</option>
+                <option value="苗栗縣">苗栗縣</option>
+                <option value="南投縣">南投縣</option>
+                <option value="雲林縣">雲林縣</option>
+                <option value="嘉義縣">嘉義縣</option>
+                <option value="嘉義市">嘉義市</option>
+                <option value="台南市">台南市</option>
+                <option value="高雄市">高雄市</option>
+                <option value="屏東縣">屏東縣</option>
+                <option value="花蓮縣">花蓮縣</option>
+                <option value="台東縣">台東縣</option>
+                <option value="高雄市">高雄市</option>
+                <option value="台東縣">台東縣</option>
+                <option value="花蓮縣">花蓮縣</option>
+                <option value="連江縣">連江縣</option>
+                <option value="金門縣">金門縣</option>
+                <option value="澎湖縣">澎湖縣</option>
+            </select>
+            <select id="attclass">
+                <option value="">請選擇類別</option>
+                <option value="桃園市">桃園市</option>
+                <option value="台北市">台北市</option>
+                <option value="新北市">新北市</option>
+                <option value="新竹市">新竹市</option>
+                <option value="新竹縣">新竹縣</option>
+                <option value="基隆市">基隆市</option>
+                <option value="宜蘭縣">宜蘭縣</option>
+                <option value="台中市">台中市</option>
+                <option value="彰化縣">彰化縣</option>
+                <option value="苗栗縣">苗栗縣</option>
+                <option value="南投縣">南投縣</option>
+                <option value="雲林縣">雲林縣</option>
+                <option value="嘉義縣">嘉義縣</option>
+                <option value="嘉義市">嘉義市</option>
+                <option value="台南市">台南市</option>
+                <option value="高雄市">高雄市</option>
+                <option value="屏東縣">屏東縣</option>
+                <option value="花蓮縣">花蓮縣</option>
+                <option value="台東縣">台東縣</option>
+                <option value="高雄市">高雄市</option>
+                <option value="台東縣">台東縣</option>
+                <option value="花蓮縣">花蓮縣</option>
+                <option value="連江縣">連江縣</option>
+                <option value="金門縣">金門縣</option>
+                <option value="澎湖縣">澎湖縣</option>
+            </select>
+            <div class="sure" onclick="getatt()">確定</div>
+        </div>
+        <div id="test"></div>
+    </div>
 
+    <!-- The Modal 後面新增的景點-->
+    <div id="Modalatt" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+            
+            <div class="modalmark">
+                <h3>景點名稱</h3>
+                <p id="attname">Some text in the Modal..</p>
+            </div>
+            <div id="numday" class="modalmark">
+                <h3>加入第幾天</h3>
+                <div id="day1circle" class="daycircle" onclick="selectday('day1circle','day1')"><span>1</span></div>
+                <div id="day2circle"class="daycircle" onclick="selectday('day2circle','day2')"><span>2</span></div>
+            </div>
+            <div id="showfirst" class="modalmark" style="display: none;">
+                <h3>啟程時間</h3>
+                <input id="firststarttime" type="text" class="form-control js-time-picker" value="00:00">
+            </div>
+            <div class="modalmark">
+                <h3>停留時間</h3>
+                <input  id="attstay" type="text" class="form-control js-time-picker" value="00:00">
+            </div>
+            <div class="option">
+                <div id="close" class="cancel">取消</div>
+                <div id="addnew" class="addnew" onclick="add_spot()">新增</div>
+            </div>
+            <div style="display:none">
+                <div id="atttemp1"></div>
+                <div id="atttemp2"></div>
+                <div id="atttemp3"></div>
+                <div id="atttemplat"></div>
+                <div id="atttemplng"></div>
+                <img id="atttempimg" src="">
+            </div>
         </div>
     </div>
+    
+
+
 
     <div id="mySidenavfood" class="sidenav">
         <div class="header">
@@ -888,7 +1310,37 @@ body::webkit-scrollbar{
             <h2>找美食</h2>
         </div>
         <div>
-
+            <div>
+                <select name="cars" id="cars">
+                    <option value="桃園市">桃園市</option>
+                    <option value="台北市">台北市</option>
+                    <option value="新北市">新北市</option>
+                    <option value="新竹市">新竹市</option>
+                    <option value="新竹縣">新竹縣</option>
+                    <option value="基隆市">基隆市</option>
+                    <option value="宜蘭縣">宜蘭縣</option>
+                    <option value="台中市">台中市</option>
+                    <option value="彰化縣">彰化縣</option>
+                    <option value="苗栗縣">苗栗縣</option>
+                    <option value="南投縣">南投縣</option>
+                    <option value="雲林縣">雲林縣</option>
+                    <option value="嘉義縣">嘉義縣</option>
+                    <option value="嘉義市">嘉義市</option>
+                    <option value="台南市">台南市</option>
+                    <option value="高雄市">高雄市</option>
+                    <option value="屏東縣">屏東縣</option>
+                    <option value="花蓮縣">花蓮縣</option>
+                    <option value="台東縣">台東縣</option>
+                    <option value="高雄市">高雄市</option>
+                    <option value="台東縣">台東縣</option>
+                    <option value="花蓮縣">花蓮縣</option>
+                    <option value="連江縣">連江縣</option>
+                    <option value="金門縣">金門縣</option>
+                    <option value="澎湖縣">澎湖縣</option>
+                </select>
+                <button onclick="getfood()"></button>
+            </div>
+            <div id="test2"></div>
         </div>
     </div>
 
@@ -898,7 +1350,37 @@ body::webkit-scrollbar{
             <h2>找活動</h2>
         </div>
         <div>
-
+            <div>
+                <select name="cars" id="cars">
+                    <option value="桃園市">桃園市</option>
+                    <option value="台北市">台北市</option>
+                    <option value="新北市">新北市</option>
+                    <option value="新竹市">新竹市</option>
+                    <option value="新竹縣">新竹縣</option>
+                    <option value="基隆市">基隆市</option>
+                    <option value="宜蘭縣">宜蘭縣</option>
+                    <option value="台中市">台中市</option>
+                    <option value="彰化縣">彰化縣</option>
+                    <option value="苗栗縣">苗栗縣</option>
+                    <option value="南投縣">南投縣</option>
+                    <option value="雲林縣">雲林縣</option>
+                    <option value="嘉義縣">嘉義縣</option>
+                    <option value="嘉義市">嘉義市</option>
+                    <option value="台南市">台南市</option>
+                    <option value="高雄市">高雄市</option>
+                    <option value="屏東縣">屏東縣</option>
+                    <option value="花蓮縣">花蓮縣</option>
+                    <option value="台東縣">台東縣</option>
+                    <option value="高雄市">高雄市</option>
+                    <option value="台東縣">台東縣</option>
+                    <option value="花蓮縣">花蓮縣</option>
+                    <option value="連江縣">連江縣</option>
+                    <option value="金門縣">金門縣</option>
+                    <option value="澎湖縣">澎湖縣</option>
+                </select>
+                <button onclick="getact()"></button>
+            </div>
+            <div id="test3"></div>
         </div>
     </div>
 
@@ -908,7 +1390,37 @@ body::webkit-scrollbar{
             <h2>找住宿</h2>
         </div>
         <div>
-
+            <div>
+                <select name="cars" id="cars">
+                    <option value="桃園市">桃園市</option>
+                    <option value="台北市">台北市</option>
+                    <option value="新北市">新北市</option>
+                    <option value="新竹市">新竹市</option>
+                    <option value="新竹縣">新竹縣</option>
+                    <option value="基隆市">基隆市</option>
+                    <option value="宜蘭縣">宜蘭縣</option>
+                    <option value="台中市">台中市</option>
+                    <option value="彰化縣">彰化縣</option>
+                    <option value="苗栗縣">苗栗縣</option>
+                    <option value="南投縣">南投縣</option>
+                    <option value="雲林縣">雲林縣</option>
+                    <option value="嘉義縣">嘉義縣</option>
+                    <option value="嘉義市">嘉義市</option>
+                    <option value="台南市">台南市</option>
+                    <option value="高雄市">高雄市</option>
+                    <option value="屏東縣">屏東縣</option>
+                    <option value="花蓮縣">花蓮縣</option>
+                    <option value="台東縣">台東縣</option>
+                    <option value="高雄市">高雄市</option>
+                    <option value="台東縣">台東縣</option>
+                    <option value="花蓮縣">花蓮縣</option>
+                    <option value="連江縣">連江縣</option>
+                    <option value="金門縣">金門縣</option>
+                    <option value="澎湖縣">澎湖縣</option>
+                </select>
+                <button onclick="getsleep()"></button>
+            </div>
+            <div id="test4"></div>
         </div>
     </div>
 
@@ -922,35 +1434,10 @@ body::webkit-scrollbar{
                 <i class="fas fa-trash-alt"></i>
             </div>
             <div class="date_ccc" id="day1" style="display: none;">
-                <div class="daycontent">
-                    <div class="leftcontent"> 
-                        <p>08:00</p>
-                        <i class="fas fa-mountain"></i>
-                    </div>
-                    <div class="rightcontent">
-                        <div class="number">
-                            <span>1</span>
-                            <h4>美麗華摩天輪</h4>
-                        </div>
-                        <p>停留2時0分</p>
-                    </div>         
-                </div>
-                <div class="daycontent">
-                    <div class="leftcontent"> 
-                        <p>08:00</p>
-                        <i class="fas fa-mountain"></i>
-                    </div>
-                    <div class="rightcontent">
-                        <div class="number">
-                            <span>1</span>
-                            <h4>美麗華摩天輪</h4>
-                        </div>
-                        <p>停留2時0分</p>
-                    </div>         
-                </div>
-                <div class="time">
-    
-                </div>
+                
+                
+                <div id="firstornotday1" style="display: none;">true</div>
+                <div id="firsttime1" style="display: none;"></div>
             </div>
             
 
@@ -962,35 +1449,9 @@ body::webkit-scrollbar{
                 <i class="fas fa-trash-alt"></i>
             </div>
             <div class="date_ccc" id="day2" style="display: none;">
-                <div class="daycontent">
-                    <div class="leftcontent"> 
-                        <p>08:00</p>
-                        <i class="fas fa-mountain"></i>
-                    </div>
-                    <div class="rightcontent">
-                        <div class="number">
-                            <span>1</span>
-                            <h4>美麗華摩天輪</h4>
-                        </div>
-                        <p>停留2時0分</p>
-                    </div>         
-                </div>
-                <div class="daycontent">
-                    <div class="leftcontent"> 
-                        <p>08:00</p>
-                        <i class="fas fa-mountain"></i>
-                    </div>
-                    <div class="rightcontent">
-                        <div class="number">
-                            <span>1</span>
-                            <h4>美麗華摩天輪</h4>
-                        </div>
-                        <p>停留2時0分</p>
-                    </div>         
-                </div>
-                <div class="time">
-    
-                </div>
+                
+                <div id="firstornotday2" style="display: none;">true</div>
+                <div id="firsttime2" style="display: none;"></div>
             </div>
         </div>
         
@@ -1001,34 +1462,8 @@ body::webkit-scrollbar{
         <h4>新增天數</h4>
     </div>
 
-
-	<div class="search-box">
-		<i class="small material-icons ">search</i>
-		<input id="search" type="text" name="" placeholder="type place to search">
-	</div>
-    <div id="result" class="container">
-		<div class="ex">
-			<i id="search_ex" class="fa fa-search"></i>
-			<p>點擊上方搜尋欄</p>
-			<p>搜尋地方景點(台北、台中...)</p>
-		</div>
-    </div>
-
-	<div id="snackbar">Spot is added</div>
-
-	
-	<div id="fixed_wrap">
-		<div id="next" class="icon-bar">
-			<span>下一步</span>
-		</div>
-	</div>
-		<!--
-		<a href="#"><i class="fas fa-tablet-alt"></i></a>
-		<a href="#"><i class="far fa-edit"></i></a>
-		<a href="#"><i class="fas fa-hiking"></i></a>
-		<a href="#"><i class="fas fa-robot"></i></a>
-		<a href="#"><i class="far fa-comment-dots"></i></a>
-	-->
+    <div id="snackbar">Spot is added</div>
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.6.1/Sortable.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 	<script src="https://kit.fontawesome.com/80f6c102d9.js" crossorigin="anonymous"></script>
 	<script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-app.js"></script>
@@ -1038,19 +1473,37 @@ body::webkit-scrollbar{
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC_crn8-2St09n9dRSmb7GBD85Qaxkd8G0">
 	</script>
     <script src="../database_setup.js"></script>
+    
     <script>	
+        document.querySelectorAll('.js-time-picker').forEach(function(e){
+            var picker = new Picker(e, {
+            format: 'HH:mm',
+            headers: true,
+            text: {
+                title: 'Pick a time',
+            },
+        });
+        })
         
 
-        
+        function store(){
+            var name = document.getElementById('tripname').innerHTML
+            auth.onAuthStateChanged(user => {
+                if (user) {
+                        console.log('user logged in: ', user);
+                        console.log('user logged in: ', user['uid']);
+                        dbtest.ref('users/'+ user['uid']+"/planset/"+name).update({'test':111});
+                }else{
+                    console.log('user logged out: ');
+                }
+            });
+        }
+
         function getopendata(){
             var cors = 'https://cors-anywhere.herokuapp.com/'
             var openUrl= `${cors}https://gis.taiwan.net.tw/XMLReleaseALL_public/scenic_spot_C_f.json`;
             var xhr = new XMLHttpRequest();
             xhr.open('GET',openUrl,true);
-            //xhr.header("Access-Control-Allow-Headers","*");
-            //xhr.header('Access-Control-Allow-Credentials', true);
-            //xhr.setRequestHeader("Control-Access-Allow-Origin", "*");
-            //xhr.setRequestHeader("Content-type","application/json");
             xhr.send();
             
             xhr.onreadystatechange = function(){
@@ -1064,9 +1517,416 @@ body::webkit-scrollbar{
             
             
         }
+        /*
+        function getatt(){
+            var region = document.getElementById('cars').value
+            console.log(region)
+            var cors = 'https://cors-anywhere.herokuapp.com/'
+            var openUrl= `${cors}https://gis.taiwan.net.tw/XMLReleaseALL_public/scenic_spot_C_f.json`;
+            $.get(openUrl,function(e){
+                console.log(e)
+                var data = []
+                e['XML_Head']['Infos']['Info'].forEach(function(o){
+                    if(o.Region == region){
+                        console.log(o)
+                        data.push({
+                            '名字':o.Name,
+                            '景點介紹':o.Description,
+                            '城市':o.Region,
+                            '地址':o.Add,
+                            '電話':o.Tel,
+                            '圖片':o.Picture1,
+                            '經度':o.Px,
+                            '緯度':o.Py
+                        })
 
-        var attraction = getopendata()
-        console.log(attraction)
+                        document.getElementById('test').innerHTML+=`<div>${o.Name}</div><img src="${o.Picture1}" width="100px" height="100px"><div>${o.Description}</div>`
+                    }
+                })
+                console.log(data)
+                dbtest.ref("attspot/"+region).set(data)
+            })
+        }
+        dbtest.ref('attspot').set({})
+    */
+        function getatt(){
+            var qscity = document.getElementById('att').value
+	        const attraction = dbtest.ref('attraction/'+qscity);
+			attraction.on('value', function(snapshot) {
+				console.log(snapshot.val());
+				const data = snapshot.val();
+
+				let data_key = [];
+				for(var key in data){
+					console.log(key);
+					data_key.push(key);
+					//data_attraction.push(data_attraction[key]);
+				}
+				console.log(data_key);
+				let savelist = [];
+				let allcontent=``;
+				//allcontent +=`<div id="${qscity}" class="tabs-content">`;
+				for(var i=0 ; i<data_key.length; i++){
+					let attraction_name = data_key[i];
+					//console.log(attraction_name);
+					let attraction_img = data[attraction_name]['照片網址'];
+					//console.log(attraction_img);
+					let attraction_intro = data[attraction_name]['景點介紹'];
+					//console.log(attraction_intro);
+					let attraction_address = data[attraction_name]['詳細地點資訊']["地址"];
+					//console.log(attraction_intro);
+					let attraction_web = data[attraction_name]['詳細地點資訊']["網站"];
+					//console.log(attraction_web);
+					let attraction_tel = data[attraction_name]['詳細地點資訊']["電話"];
+					//console.log(attraction_tel);
+					let attraction_lontitude = data[attraction_name]['詳細地點資訊']["經度"];
+					//console.log(attraction_lontitude);
+					let attraction_latitude = data[attraction_name]['詳細地點資訊']["緯度"];
+					//console.log(attraction_latitude);
+					allcontent += ` 	
+						<div id="${i}" class="search-result" onclick="opendetail(${i})">
+							<img src="${attraction_img}">
+							<div class="text-display">
+								<div class="col-3">
+									<h4>${attraction_name}</h4>
+								</div>	
+							</div>	
+						</div>
+						<div class='plus_bg' onclick="getselectdata('plus${i}',${i},'${attraction_name}','${attraction_lontitude}','${attraction_latitude}','${attraction_img}','${attraction_intro}')">
+                            <i id="plusout${i}" class="fa fa-plus"></i>
+                        </div>
+						<div id="Sidenav${i}" class="sidenavself">
+							<div class="bg" style="background-image:url('${attraction_img}')">
+								<i class="fas fa-angle-left" onclick="closedetail(${i})"></i>
+								<div class="content">
+									<h1>${attraction_name}</h1>
+									<p></p>
+								</div>
+							</div>
+							<div class="detail_bar">
+								<i id="plus${i}" class="fas fa-plus" onclick="getselectdata('plus${i}',${i},'${attraction_name}','${attraction_lontitude}','${attraction_latitude}')"></i>
+								<i class="fas fa-map-marker-alt" onclick="showmap(${i},'${attraction_lontitude}','${attraction_latitude}','${attraction_name}')"></i>
+								<i class="fas fa-phone-alt" onclick="showtel(${i},'${attraction_tel}')"></i>
+								<i class="fas fa-globe" onclick="location.href = '${attraction_web}'"></i>
+								<i class="fas fa-file-alt" onclick="showdetail(${i},'${attraction_intro}')"></i>
+							</div>
+							<div id="show${i}" class="detail">
+								<div id="map${i}"></div>
+								"${attraction_intro}"
+							</div>
+						</div>		
+					`;
+				}
+				document.getElementById('test').innerHTML = allcontent;
+			});
+        }
+
+
+        function computetime(dayid){
+            distance(distanceservice,dayid)
+            var dis = document.getElementById(dayid).querySelectorAll('div.time > span')
+            var starttime = document.getElementById(dayid).querySelector('div.leftcontent > p').innerHTML
+            console.log(starttime)
+            var intervalseq = document.getElementById(dayid).querySelectorAll('div.rightcontent > p')
+            console.log(intervalseq)
+
+            var hour = parseInt(starttime.split(':')[0])
+            var minute = parseInt(starttime.split(':')[1])
+            //var starthour,startminute = transfertime(hour,minute)
+            console.log(hour)
+            console.log(minute)
+
+            var temptime = []
+            temptime.push(starttime)
+            for(var i=0 ;i<intervalseq.length;i++){
+                console.log(intervalseq[i])
+                var staytimehour = parseInt(intervalseq[i].innerHTML.split('時')[0].split('留')[1])
+                var staytimeminute = parseInt(intervalseq[i].innerHTML.split('時')[1].split('分')[0])
+                console.log(staytimehour)
+                console.log(staytimeminute)
+                var temphour = hour+staytimehour
+                var tempminute = minute+staytimeminute//+parseInt(dis[i].innerHTML.split(' ')[0])
+                hour = temphour
+                minute = tempminute
+                if(tempminute>=60){
+                    tempminute = tempminute - 60
+                    temphour = temphour + 1
+                }else{
+
+                }
+                if(temphour>=10){
+                    temphour = temphour.toString()
+                }else{
+                    temphour = '0'+temphour.toString()
+                }
+                if(tempminute>=10){
+                    tempminute = tempminute.toString()
+                }else{
+                    tempminute = '0'+tempminute.toString()
+                }    
+                var result = temphour+":"+tempminute
+                temptime.push(result)
+                console.log(result)
+            }
+            console.log(temptime)
+            var ttt = document.getElementById(dayid).querySelectorAll('div.leftcontent > p')
+            console.log(ttt)
+            for(var i=0 ;i<temptime.length-1;i++){
+                ttt[i].innerHTML = temptime[i]
+            }
+        
+        }
+
+        function add_spot(){
+				// Get the snackbar DIV
+			var x = document.getElementById("snackbar");
+			// Add the "show" class to DIV
+			x.className = "show";
+			// After 3 seconds, remove the show class from DIV
+            setTimeout(function(){ x.className = x.className.replace("show", ""); }, 2000);
+            var lat = document.getElementById('atttemplat').innerHTML
+            var lng = document.getElementById('atttemplng').innerHTML
+            //暫存dayid
+            var dayid = document.getElementById('atttemp1').innerHTML
+            console.log(dayid)
+            var dayfirststartime;
+            //選取的變回底色
+            document.getElementById(dayid+'circle').style.backgroundColor= '#e0e0e0'
+            //景點名稱
+            var name = document.getElementById('atttemp2').innerHTML
+            console.log(name)
+            //待多久時間
+            var staytime = document.getElementById('attstay').value
+            document.getElementById('atttemp3').innerHTML = staytime
+            console.log(staytime)
+
+            var img = document.getElementById('atttempimg').src
+            
+            var hour = staytime.split(':')[0]
+            var minute = staytime.split(':')[1]
+        
+            var len = document.getElementById(dayid).querySelectorAll('div.daycontent').length+1
+            if(document.getElementById('firstornot'+dayid).innerHTML=="true"){
+                //關掉啟程時間
+                document.getElementById('showfirst').style.display ="none"
+                //firstornot false代表已經用掉第一次了
+                document.getElementById('firstornot'+dayid).innerHTML = 'false' 
+                dayfirststartime = document.getElementById('firststarttime').value
+                document.getElementById('firsttime'+dayid.split('y')[1]).innerHTML = dayfirststartime 
+                document.getElementById(dayid).innerHTML += `
+                <div class="daycontent glyphicon-move">
+                    <div class="leftcontent"> 
+                        <p>${dayfirststartime}</p>
+                        <i class="fas fa-mountain"></i>
+                    </div>
+                    <div class="rightcontent">
+                        <div class="number">
+                            <span>1</span>
+                            <h4>${name}</h4>
+                            <p style="display:none">${lat}</p>
+                            <p style="display:none">${lng}</p>
+                            <img src="${img}" style="display:none">
+                        </div>
+                        <p>停留${hour}時${minute}分</p>
+                    </div> 
+                    <div class="time">
+                        
+                    </div> 
+                </div>
+            `
+            }else{
+                document.getElementById(dayid).innerHTML += `
+                <div class="daycontent glyphicon-move">
+                    <div class="leftcontent"> 
+                        <p>08:00</p>
+                        <i class="fas fa-mountain"></i>
+                    </div>
+                    <div class="rightcontent">
+                        <div class="number">
+                            <span>${len}</span>
+                            <h4>${name}</h4>
+                            <p style="display:none">${lat}</p>
+                            <p style="display:none">${lng}</p>
+                            <img src="${img}" style="display:none">
+                        </div>
+                        <p>停留${hour}時${minute}分</p>
+                    </div>
+                    <div class="time">
+                        
+                    </div>      
+                </div>
+                    `
+            }
+            computetime(dayid)
+            
+            var modal = document.getElementById("Modalatt");
+            modal.style.display = 'none';
+                
+            //myMap.set({dayid:[lat,lng]})
+		}
+
+		function opendetail(e){
+			var id = 'Sidenav'+ e;
+			document.getElementById(id).style.width = "100%";
+		}
+		function closedetail(e){
+			var id = 'Sidenav'+ e;
+			document.getElementById(id).style.width = "0";
+		}
+		
+		function showmap(e,lng,lat,name){
+			var id = 'show'+ e;
+			document.getElementById(id).innerHTML = `<div id="map${e}" class="mapstyle"></div>`
+			var newmapid = 'map'+e;
+			var map = new google.maps.Map(document.getElementById(newmapid), {
+				center: {lat: parseFloat(lat), lng:parseFloat(lng)},
+				zoom: 16
+			});
+			var marker = new google.maps.Marker({
+				position: {lat: parseFloat(lat), lng:parseFloat(lng)},
+				map: map,
+				title: name
+			});
+			marker.setMap(map);
+			//document.getElementById(id).innerHTML = `<img 
+			//src="https://maps.googleapis.com/maps/api/staticmap?center=40.714728,-73.998672&zoom=12&size=400x400&maptype=roadmap&key=AIzaSyC_crn8-2St09n9dRSmb7GBD85Qaxkd8G0"/>`;
+			console.log('mappp');
+			console.log(lng);
+			console.log(lat);
+		}
+			//document.getElementById(id).innerHTML = ;
+
+		function showtel(e,tel){
+			var id = 'show'+ e;
+			var newtel = tel.substr(1);
+			document.getElementById(id).innerHTML = `<a href="tel:+886-${newtel}">連絡電話:${tel}</a>`;
+		}
+	
+		function showdetail(e,intro){
+			var id = 'show'+ e;
+			console.log(id)
+			document.getElementById(id).innerHTML = intro;
+		}
+        var myMap = new Map();
+
+		let select = [];
+
+		function getselectdata(did,id,name,lng,lat,img,intro){
+			//add_spot();
+            
+            var modal = document.getElementById("Modalatt");
+            var addbtnout = document.getElementById('plusout'+id);
+            var addbtn = document.getElementById('plus'+id)
+            var span = document.getElementsByClassName("close")[0];
+            document.getElementById('atttemplat').innerHTML = lat
+            document.getElementById('atttemplng').innerHTML = lng
+            document.getElementById('attname').innerHTML = name
+            document.getElementById('atttemp2').innerHTML = name
+            document.getElementById('atttempimg').src = img
+
+            modal.style.display = "block";
+            // When the user clicks on <span> (x), close the modal
+            document.getElementById('close').addEventListener('click',function(){
+                modal.style.display = "none";
+            })
+
+            document.getElementById('addnew').addEventListener('click',function(){
+                select.push([name,lng,lat]);
+                document.getElementById('plusout'+id).style.color= '#F5CD05';
+                document.getElementById('plus'+id).style.background = '#ffd31d';
+            
+                modal.style.display = "none";
+            })
+
+            
+        
+			//select.push([name,lng,lat]);
+            /*
+			var region = document.getElementById("att").value;
+			var tripdata = {
+				"地區":region,
+				"名字":name,
+				"圖片":img,
+				"介紹":intro,
+				"經度":lng,
+				"緯度":lat
+			}
+			auth.onAuthStateChanged(user => {
+                if (user) {
+                        console.log('user logged in: ', user);
+                        console.log('user logged in: ', user['uid']);
+                        dbtest.ref('users/'+ user['uid']+"/tempplan/第1天/"+name).update(tripdata);
+                }else{
+                    console.log('user logged out: ');
+                }
+            });
+            */
+		}
+    
+
+        function getfood(){
+            var region = document.getElementById('cars').value
+            console.log(region)
+            var cors = 'https://cors-anywhere.herokuapp.com/'
+            var openUrl= `${cors}https://gis.taiwan.net.tw/XMLReleaseALL_public/restaurant_C_f.json`;
+            $.get(openUrl,function(e){
+                console.log(e)
+                e['XML_Head']['Infos']['Info'].forEach(function(o){
+                    if(o.Region == region){
+                        console.log(o)
+                        document.getElementById('test2').innerHTML+=`<div>${o.Name}</div><img src="${o.Picture1}" width="100px" height="100px"><div>${o.Description}</div>`
+                    }
+                })
+            })
+        }
+
+/*
+        function getact(){
+            var region = document.getElementById('cars').value
+            console.log(region)
+            var cors = 'https://cors-anywhere.herokuapp.com/'
+            var openUrl= `${cors}http://gis.taiwan.net.tw/XMLReleaseALL_public/activity_C_f.json`;
+            $.get(openUrl,function(e){
+                console.log(e)
+                var data = {}
+                e['XML_Head']['Infos']['Info'].forEach(function(o){
+                    if(o.Region == region){
+                        data.push({
+                            '名字':o.Name,
+                            '景點介紹':o.Description,
+                            '城市':o.Region,
+                            '地址':o.add,
+                            '經度':o.Px,
+                            '緯度':o.Py
+                        })
+                        console.log(o)
+                        document.getElementById('test3').innerHTML+=`<div>${o.Name}</div><img src="${o.Picture1}" width="100px" height="100px"><div>${o.Description}</div>`
+                    }
+                })
+                
+            })
+        }
+
+
+        function getsleep(){
+            var region = document.getElementById('cars').value
+            console.log(region)
+            var cors = 'https://cors-anywhere.herokuapp.com/'
+            var openUrl= `${cors}https://gis.taiwan.net.tw/XMLReleaseALL_public/hotel_C_f.json`;
+            $.get(openUrl,function(e){
+                console.log(e)
+                e['XML_Head']['Infos']['Info'].forEach(function(o){
+                    if(o.Region == region){
+                        console.log(o)
+                        document.getElementById('test4').innerHTML+=`<div>${o.Name}</div><img src="${o.Picture1}" width="100px" height="100px"><div>${o.Description}</div>`
+                    }
+                })
+            })
+        }
+    */
+
+        //var attraction = getopendata()
+        //console.log(attraction)
 
         
         var numdate = 2
@@ -1117,6 +1977,7 @@ body::webkit-scrollbar{
         //行程名稱
         document.getElementById('tripname').innerHTML = vars[1];
         document.getElementById('ch_tripname').value = vars[1];
+        document.getElementById('previewname').innerHTML = vars[1];
         //日期名稱
         document.getElementById('todate').innerHTML = getDate(1)+" - "+getDate(2);
         document.getElementById('ch_todate').value = getDate(1);
@@ -1133,6 +1994,7 @@ body::webkit-scrollbar{
 				console.log($('#ch_tripname').val());
 				document.getElementById('ch_tripname').innerHTML = $('#ch_tripname').val()
 				document.getElementById('tripname').innerHTML = $('#ch_tripname').val()
+                document.getElementById('previewname').innerHTML = $('#ch_tripname').val()
 			}
 			else{
 				alert('沒有成功');
@@ -1161,9 +2023,92 @@ body::webkit-scrollbar{
                 document.getElementById(e.nextSibling.nextSibling.id).style.display="none";
             }
         }
+        
+        //選加入第幾天
+        function selectday(daycircleid,dayid){
+            document.getElementById(daycircleid).style.backgroundColor = '#FFD31D'
+            document.getElementById('atttemp1').innerHTML = dayid
+            
+            if(document.getElementById('firstornot'+dayid).innerHTML == 'true'){
+                console.log('yes first')
+                document.getElementById('showfirst').style.display="block"
+                /*
+                var picker = new Picker(document.querySelectorAll('.js-time-picker'), {
+                    format: 'HH:mm',
+                    headers: true,
+                    text: {
+                        title: 'Pick a time',
+                    },
+                });
+                */
+                
+            }else{
+                console.log('not first')
+            }
+            /*
+            document.getElementById(dayid).innerHTML += `
+            <div class="daycontent">
+                <div class="leftcontent"> 
+                    <p>08:00</p>
+                    <i class="fas fa-mountain"></i>
+                </div>
+                <div class="rightcontent">
+                    <div class="number">
+                        <span>1</span>
+                        <h4>321321321</h4>
+                    </div>
+                    <p>停留2時0分</p>
+                </div>         
+            </div>`
+            */
+        }
+
+        function adjust(){
+
+        }
+
+        // List with handle
+        Sortable.create(day1, {
+            handle: '.glyphicon-move',
+            animation: 150,
+            preventOnFilter: false,
+            onUpdate: function(evt){
+                //distance(distanceservice,'day1')
+                document.getElementById('day1').querySelectorAll('div.leftcontent > p')[0].innerHTML = document.getElementById('firsttime1').innerHTML
+                //console.log(el)
+                var len = document.getElementById('day1').querySelectorAll('div.daycontent')
+                console.log(len)
+                for(var i=0;i<len.length;i++){
+                    document.getElementById('day1').querySelectorAll('div.rightcontent > div.number span')[i].innerHTML = (i+1).toString()
+                }
+                computetime('day1')
+                console.log(evt);
+                //distance(distanceservice,'day1');
+            }
+        });
+
+        Sortable.create(day2, {
+            handle: '.glyphicon-move',
+            animation: 150,
+            preventOnFilter: false,
+            onUpdate: function(evt){
+                //distance(distanceservice,'day2')
+                document.getElementById('day2').querySelectorAll('div.leftcontent > p')[0].innerHTML = document.getElementById('firsttime2').innerHTML  
+                //console.log(el)
+                var len = document.getElementById('day2').querySelectorAll('div.daycontent')
+                console.log(len)
+                for(var i=0;i<len.length;i++){
+                    document.getElementById('day2').querySelectorAll('div.rightcontent > div.number span')[i].innerHTML = (i+1).toString()
+                }
+                computetime('day2')
+                console.log(evt);
+                //distance(distanceservice);
+            }
+        });
 
         function adddate(){
             numdate = numdate+1
+            document.getElementById('numday').innerHTML += `<div id="day${numdate}circle" class="daycircle" onclick="selectday('day${numdate}circle','day${numdate}')"><span>${numdate}</span></div>`
             var firstdate = document.getElementById('todate').innerHTML
             console.log(firstdate)
             var ddd = firstdate.split('-')[1].split('/')[0]+'/'+firstdate.split('-')[1].split('/')[1]+'/'
@@ -1179,42 +2124,46 @@ body::webkit-scrollbar{
                 <div class="Day" onclick="opendropdown(this)">
                     <h3>Day ${numdate}</h3>
                     <span> -------------------------------</span>
-                    <p>${b}.週五</p>
+                    <p>.週五</p>
                     <i id="day${numdate}arrow" class="fas fa-angle-right"></i>
                     <i class="fas fa-trash-alt"></i>
                 </div>
                 <div class="date_ccc" id="day${numdate}" style="display: none;">
-                    <div class="daycontent">
-                        <div class="leftcontent"> 
-                            <p>08:00</p>
-                            <i class="fas fa-mountain"></i>
-                        </div>
-                        <div class="rightcontent">
-                            <div class="number">
-                                <span>1</span>
-                                <h4>美麗華摩天輪</h4>
-                            </div>
-                            <p>停留2時0分</p>
-                        </div>         
-                    </div>
-                    <div class="daycontent">
-                        <div class="leftcontent"> 
-                            <p>08:00</p>
-                            <i class="fas fa-mountain"></i>
-                        </div>
-                        <div class="rightcontent">
-                            <div class="number">
-                                <span>1</span>
-                                <h4>美麗華摩天輪</h4>
-                            </div>
-                            <p>停留2時0分</p>
-                        </div>         
-                    </div>
-                    <div class="time">
-        
-                    </div>
+                        <div id="firstornotday${numdate}" style="display: none;">true</div>
+                        <div id="firsttime${numdate}" style="display: none;"></div>
                 </div>
             `)
+            
+            document.getElementById('previewdayset').innerHTML +=`
+                <div class="previewDay">
+                    <h3>Day ${numdate}</h3>
+                    <span> -------------------------------</span>
+                    <p>${b}.週五</p>
+                </div>
+                <div id="previewday${numdate}" class="previewcontent">
+            
+                </div>
+            `
+        
+            var el = document.getElementById('day'+numdate.toString())
+            Sortable.create(el, {
+            handle: '.glyphicon-move',
+            animation: 150,
+            preventOnFilter: false,
+            onUpdate: function(evt){
+                //distance(distanceservice,'day'+numdate.toString())
+                document.getElementById('day'+numdate.toString()).querySelectorAll('div.leftcontent > p')[0].innerHTML = document.getElementById('firsttime'+numdate.toString()).innerHTML  
+                console.log(el)
+                var len = document.getElementById('day'+numdate.toString()).querySelectorAll('div.daycontent')
+                console.log(len)
+                for(var i=0;i<len.length;i++){
+                    document.getElementById('day'+numdate.toString()).querySelectorAll('div.rightcontent > div.number span')[i].innerHTML = (i+1).toString()
+                }
+                computetime('day'+numdate.toString())
+                console.log(evt);
+                //distance(distanceservice);
+            }
+        });
         }
 
         function openNavatt() {
@@ -1249,8 +2198,69 @@ body::webkit-scrollbar{
             document.getElementById("mySidenavsleep").style.width = "0";
         }
 
+        function openNavroute() {
+            document.getElementById("mySidenavroute").style.width = "100%";
+            var daylist = document.querySelectorAll('div.Day > h3')
+            //var dayattcontent = document.querySelectorAll('div.rightcontent > div.number h4')
+            for(var i=0;i<daylist.length;i++){
+                var date = daylist[i].innerHTML
+                var datedate = date.split(' ')[1]
+                var dayattseq = document.querySelector('#day'+datedate).querySelectorAll('div.rightcontent > div.number span')
+                var dayattcontent = document.querySelector('#day'+datedate).querySelectorAll('div.rightcontent > div.number h4')
+                document.getElementById('route').innerHTML += `
+                    <div class="daymin" onclick="opendaymin('${date}content','day${datedate}')">${date}</div>
+                    <div id="${date}content" class="daymincontent" style="display:none">
+                    </div>
+                `
+                for(var j=0;j<dayattseq.length;j++){
+                    document.getElementById( date + 'content').innerHTML += `
+                        <span>${dayattseq[j].innerHTML}</span>
+                        <p>${dayattcontent[j].innerHTML}</p>
+                    `
+                }
+            }
+        }
 
+        function opendaymin(daymincontent,daynum){
+            document.getElementById(daymincontent).style.display="inline-block"
+            //var directionsRenderer = new google.maps.DirectionsRenderer;
+            calculateAndDisplayRoute(directionsService, directionsRenderer,'DRIVING',daynum);
+        }
 
+        function closeNavroute() {
+            document.getElementById('route').innerHTML= "";
+            document.getElementById("mySidenavroute").style.width = "0";
+        }
+
+        function openNavpreview() {
+            document.getElementById("mySidenavpreview").style.width = "100%";
+            var len = document.querySelectorAll('div.Day').length
+            for(var i=0 ; i<len ;i++){
+                var individualdaylen = document.getElementById('day'+(i+1).toString()).querySelectorAll('div.daycontent').length
+                for(var j=0;j<individualdaylen;j++){
+                    var seq = document.getElementById('day'+(i+1).toString()).querySelectorAll('div.daycontent')[j].querySelector('div.number').querySelector('span').innerHTML
+                    var name = document.getElementById('day'+(i+1).toString()).querySelectorAll('div.daycontent')[j].querySelector('div.number').querySelector('h4').innerHTML
+                    var img = document.getElementById('day'+(i+1).toString()).querySelectorAll('div.daycontent')[j].querySelector('div.number').querySelector('img').src
+                    document.getElementById('previewday'+(i+1).toString()).innerHTML +=`
+                    <div class="precontentcontent">
+                        <img src="${img}" alt="">
+                        <span>${seq}</span>
+                        <p>${name}</p>
+                    </div>
+                `
+                }
+            }
+        }
+
+        function closeNavpreview() {
+            document.getElementById("mySidenavpreview").style.width = "0";
+            var len = document.querySelectorAll('div.Day').length
+            for(var i=0 ; i<len ;i++){
+                document.getElementById('previewday'+(i+1).toString()).innerHTML = ''
+            }
+        }
+
+/*
 		document.getElementById('next').addEventListener('click',function(){
 			if( select.length == 0){
 				alert("你還沒選擇景點喔")
@@ -1260,171 +2270,10 @@ body::webkit-scrollbar{
 			}
 		});
 
+*/
+		
 
-		function add_spot(e){
-				// Get the snackbar DIV
-			var x = document.getElementById("snackbar");
-			// Add the "show" class to DIV
-			x.className = "show";
-			// After 3 seconds, remove the show class from DIV
-			setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
-
-		}
-
-		function opendetail(e){
-			var id = 'Sidenav'+ e;
-			document.getElementById(id).style.width = "100%";
-		}
-		function closedetail(e){
-			var id = 'Sidenav'+ e;
-			document.getElementById(id).style.width = "0";
-		}
 		/*
-		function initMap(id,lat,lng) {
-			var map = new google.maps.Map(document.getElementById(id), {
-				center: {lat: parseFloat(lat), lng:parseFloat(lng)},
-				zoom: 14
-			});
-			var marker = new google.maps.Marker({
-				position: {lat: parseFloat(lat), lng:parseFloat(lng)},
-				map: map,
-			});
-			marker.setMap(map);
-			return map ; 
-			console.log('map');
-		}
-		*/
-		function showmap(e,lng,lat,name){
-			var id = 'show'+ e;
-			document.getElementById(id).innerHTML = `<div id="map${e}" class="mapstyle"></div>`
-			var newmapid = 'map'+e;
-			var map = new google.maps.Map(document.getElementById(newmapid), {
-				center: {lat: parseFloat(lat), lng:parseFloat(lng)},
-				zoom: 16
-			});
-			var marker = new google.maps.Marker({
-				position: {lat: parseFloat(lat), lng:parseFloat(lng)},
-				map: map,
-				title: name
-			});
-			marker.setMap(map);
-			//document.getElementById(id).innerHTML = `<img 
-			//src="https://maps.googleapis.com/maps/api/staticmap?center=40.714728,-73.998672&zoom=12&size=400x400&maptype=roadmap&key=AIzaSyC_crn8-2St09n9dRSmb7GBD85Qaxkd8G0"/>`;
-			console.log('mappp');
-			console.log(lng);
-			console.log(lat);
-		}
-			//document.getElementById(id).innerHTML = ;
-
-		function showtel(e,tel){
-			var id = 'show'+ e;
-			var newtel = tel.substr(1);
-			document.getElementById(id).innerHTML = `<a href="tel:+886-${newtel}">連絡電話:${tel}</a>`;
-		}
-	
-		function showdetail(e,intro){
-			var id = 'show'+ e;
-			console.log(id)
-			document.getElementById(id).innerHTML = intro;
-		}
-
-		let select = [];
-
-		function getselectdata(id,name,lng,lat,img,intro){
-			add_spot();
-			document.getElementById('plusout'+id).style.color= '#F5CD05';
-			document.getElementById('plus'+id).style.background = '#ffd31d';
-			select.push([name,lng,lat]);
-			var region = document.getElementById("search").value;
-			var tripdata = {
-				"地區":region,
-				"名字":name,
-				"圖片":img,
-				"介紹":intro,
-				"經度":lng,
-				"緯度":lat
-			}
-			auth.onAuthStateChanged(user => {
-                if (user) {
-                        console.log('user logged in: ', user);
-                        console.log('user logged in: ', user['uid']);
-                        dbtest.ref('users/'+ user['uid']+"/tempplan/第1天/"+name).update(tripdata);
-                }else{
-                    console.log('user logged out: ');
-                }
-            });
-		}
-
-		function Search_Attraction(input){
-			const qscity = input;
-			console.log(qscity);
-	        const attraction = dbtest.ref('attraction/'+qscity);
-			attraction.on('value', function(snapshot) {
-				console.log(snapshot.val());
-				const data = snapshot.val();
-
-				let data_key = [];
-				for(var key in data){
-					console.log(key);
-					data_key.push(key);
-					//data_attraction.push(data_attraction[key]);
-				}
-				console.log(data_key);
-				let savelist = [];
-				let allcontent=``;
-				//allcontent +=`<div id="${qscity}" class="tabs-content">`;
-				for(var i=0 ; i<data_key.length; i++){
-					let attraction_name = data_key[i];
-					//console.log(attraction_name);
-					let attraction_img = data[attraction_name]['照片網址'];
-					//console.log(attraction_img);
-					let attraction_intro = data[attraction_name]['景點介紹'];
-					//console.log(attraction_intro);
-					let attraction_address = data[attraction_name]['詳細地點資訊']["地址"];
-					//console.log(attraction_intro);
-					let attraction_web = data[attraction_name]['詳細地點資訊']["網站"];
-					//console.log(attraction_web);
-					let attraction_tel = data[attraction_name]['詳細地點資訊']["電話"];
-					//console.log(attraction_tel);
-					let attraction_lontitude = data[attraction_name]['詳細地點資訊']["經度"];
-					//console.log(attraction_lontitude);
-					let attraction_latitude = data[attraction_name]['詳細地點資訊']["緯度"];
-					//console.log(attraction_latitude);
-					allcontent += ` 	
-						<div id="${i}" class="search-result" onclick="opendetail(${i})">
-							<img src="${attraction_img}">
-							<div class="text-display">
-								<div class="col-3">
-									<h4>${attraction_name}</h4>
-								</div>	
-							</div>	
-						</div>
-						<div class='plus_bg' onclick="getselectdata(${i},'${attraction_name}','${attraction_lontitude}','${attraction_latitude}','${attraction_img}','${attraction_intro}')"><i id="plusout${i}" class="fa fa-plus"></i></div>
-						<div id="Sidenav${i}" class="sidenavself">
-							<div class="bg" style="background-image:url('${attraction_img}')">
-								<i class="fas fa-angle-left" onclick="closedetail(${i})"></i>
-								<div class="content">
-									<h1>${attraction_name}</h1>
-									<p></p>
-								</div>
-							</div>
-							<div class="detail_bar">
-								<i id="plus${i}" class="fas fa-plus" onclick="getselectdata(${i},'${attraction_name}','${attraction_lontitude}','${attraction_latitude}')"></i>
-								<i class="fas fa-map-marker-alt" onclick="showmap(${i},'${attraction_lontitude}','${attraction_latitude}','${attraction_name}')"></i>
-								<i class="fas fa-phone-alt" onclick="showtel(${i},'${attraction_tel}')"></i>
-								<i class="fas fa-globe" onclick="location.href = '${attraction_web}'"></i>
-								<i class="fas fa-file-alt" onclick="showdetail(${i},'${attraction_intro}')"></i>
-							</div>
-							<div id="show${i}" class="detail">
-								<div id="map${i}"></div>
-								"${attraction_intro}"
-							</div>
-						</div>		
-					`;
-				}
-				document.getElementById('result').innerHTML = allcontent;
-			});
-		}
 		
 		$('#search').change(function(){
 			if($('#search').val()){
@@ -1436,17 +2285,254 @@ body::webkit-scrollbar{
 				alert('沒有成功');
 			}
 		});
-		
-		/*
-		function getData(){
-			var req = new XMLHttpRequest();
-			req.open('get','http://127.0.0.1:3000/plansearch.html');
-			req.onload = function(){
-				alert('this.responseText');
-			};
-			req.send();
-		}
 		*/
+        var directionsService = new google.maps.DirectionsService;
+        var directionsRenderer = new google.maps.DirectionsRenderer;
+        var distanceservice = new google.maps.DistanceMatrixService;
+        var styledMapType = new google.maps.StyledMapType(
+            [
+              {elementType: 'geometry', stylers: [{color: '#ebe3cd'}]},
+              {elementType: 'labels.text.fill', stylers: [{color: '#523735'}]},
+              {elementType: 'labels.text.stroke', stylers: [{color: '#f5f1e6'}]},
+              {
+                featureType: 'administrative',
+                elementType: 'geometry.stroke',
+                stylers: [{color: '#c9b2a6'}]
+              },
+              {
+                featureType: 'administrative.land_parcel',
+                elementType: 'geometry.stroke',
+                stylers: [{color: '#dcd2be'}]
+              },
+              {
+                featureType: 'administrative.land_parcel',
+                elementType: 'labels.text.fill',
+                stylers: [{color: '#ae9e90'}]
+              },
+              {
+                featureType: 'landscape.natural',
+                elementType: 'geometry',
+                stylers: [{color: '#dfd2ae'}]
+              },
+              {
+                featureType: 'poi',
+                elementType: 'geometry',
+                stylers: [{color: '#dfd2ae'}]
+              },
+              {
+                featureType: 'poi',
+                elementType: 'labels.text.fill',
+                stylers: [{color: '#93817c'}]
+              },
+              {
+                featureType: 'poi.park',
+                elementType: 'geometry.fill',
+                stylers: [{color: '#a5b076'}]
+              },
+              {
+                featureType: 'poi.park',
+                elementType: 'labels.text.fill',
+                stylers: [{color: '#447530'}]
+              },
+              {
+                featureType: 'road',
+                elementType: 'geometry',
+                stylers: [{color: '#f5f1e6'}]
+              },
+              {
+                featureType: 'road.arterial',
+                elementType: 'geometry',
+                stylers: [{color: '#fdfcf8'}]
+              },
+              {
+                featureType: 'road.highway',
+                elementType: 'geometry',
+                stylers: [{color: '#f8c967'}]
+              },
+              {
+                featureType: 'road.highway',
+                elementType: 'geometry.stroke',
+                stylers: [{color: '#e9bc62'}]
+              },
+              {
+                featureType: 'road.highway.controlled_access',
+                elementType: 'geometry',
+                stylers: [{color: '#e98d58'}]
+              },
+              {
+                featureType: 'road.highway.controlled_access',
+                elementType: 'geometry.stroke',
+                stylers: [{color: '#db8555'}]
+              },
+              {
+                featureType: 'road.local',
+                elementType: 'labels.text.fill',
+                stylers: [{color: '#806b63'}]
+              },
+              {
+                featureType: 'transit.line',
+                elementType: 'geometry',
+                stylers: [{color: '#dfd2ae'}]
+              },
+              {
+                featureType: 'transit.line',
+                elementType: 'labels.text.fill',
+                stylers: [{color: '#8f7d77'}]
+              },
+              {
+                featureType: 'transit.line',
+                elementType: 'labels.text.stroke',
+                stylers: [{color: '#ebe3cd'}]
+              },
+              {
+                featureType: 'transit.station',
+                elementType: 'geometry',
+                stylers: [{color: '#dfd2ae'}]
+              },
+              {
+                featureType: 'water',
+                elementType: 'geometry.fill',
+                stylers: [{color: '#b9d3c2'}]
+              },
+              {
+                featureType: 'water',
+                elementType: 'labels.text.fill',
+                stylers: [{color: '#92998d'}]
+              }
+            ],
+            {name: 'Styled Map'});
+        var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 13,
+            center: {lat: 24.7775961, lng: 120.9768711},
+            mapTypeControl:false,
+            streetViewControl:false,
+            zoomControlOptions:{position:google.maps.ControlPosition.LEFT_BOTTOM}
+        });
+        map.mapTypes.set('styled_map',styledMapType)
+        map.setMapTypeId('styled_map');
+        directionsRenderer.setMap(map);
+        function calculateAndDisplayRoute(directionsService, directionsRenderer, mode,daynum) {
+            
+            var waypts = [];
+            var checkboxArray = document.getElementById(daynum).querySelectorAll('div.number > p'); //list-item數目-2
+            for (var i = 2; i < (checkboxArray.length)-2; i+=2) {
+                waypts.push({
+                    location: {lng:parseFloat(checkboxArray[i+1].innerHTML),lat:parseFloat(checkboxArray[i].innerHTML)},
+                    stopover: true
+                }); 
+            }
+            console.log(waypts)
+            console.log(checkboxArray)
+            directionsService.route({
+                origin: {lng:parseFloat(checkboxArray[1].innerHTML),lat:parseFloat(checkboxArray[0].innerHTML)},
+                destination: {lng:parseFloat(checkboxArray[(checkboxArray.length)-1].innerHTML),lat:parseFloat(checkboxArray[(checkboxArray.length)-2].innerHTML)},
+                waypoints: waypts,
+                optimizeWaypoints: true,
+                travelMode: mode
+            }, function(response, status) {
+                if (status === 'OK') {
+                    directionsRenderer.setDirections(response);
+                } 
+                else {
+                    window.alert('Directions request failed due to ' + status);
+                }
+            });
+        }
+	
+        function distance(directionsService,daynum){	
+            var checkboxArray = document.getElementById(daynum).querySelectorAll('div.number > p');
+            var waypts = [];
+            for (var i = 0; i < checkboxArray.length; i+=2){
+                waypts.push({lng:parseFloat(checkboxArray[i+1].innerHTML),lat:parseFloat(checkboxArray[i].innerHTML)});	
+            }
+            console.log(waypts);
+
+            directionsService.getDistanceMatrix({
+                origins: waypts,
+                destinations: waypts,
+                travelMode: 'DRIVING',
+                unitSystem: google.maps.UnitSystem.METRIC,
+                avoidHighways: false,
+                avoidTolls: false
+            }, function(response, status) {
+                if (status !== 'OK') {
+                    alert('Error was: ' + status);
+                } 
+                else {
+                    console.log(response)
+                    var originList = response.originAddresses;
+                    console.log(originList);
+                    var destinationList = response.destinationAddresses;
+                    console.log(destinationList);
+
+                    var timelen = document.getElementById(daynum).querySelectorAll('div.time').length
+                    var timetime = document.getElementById(daynum).querySelectorAll('div.time')
+                    var nameSeq = document.getElementById(daynum).querySelectorAll('h4');
+                    for(var i=0;i<timelen;i++){
+                        timetime[i].innerHTML = ''
+                    }
+                    for(var i=0;i<timelen-1;i++){
+                        var result = response.rows[i+1].elements[i].duration.text
+                        console.log(result)
+                        timetime[i].innerHTML += `<span>${result}</span>`
+                        timetime[i].innerHTML += `<i class="fas fa-car-side"></i>`
+                    }
+                    //computetime(daynum)
+                    /*
+                    for (var j = 0 ; j < originList.length; j++){
+                        var outputDiv = document.getElementById('p_'+(j+1).toString());
+                        console.log(outputDiv);
+                        outputDiv.innerHTML = '';
+                    }
+                    
+                    var distanceSeq = document.querySelectorAll('div.glyphicon-move > p');
+                    var nameSeq = document.querySelectorAll('h4.content2');
+                    console.log(distanceSeq[0]);
+                    console.log(distanceSeq[1]);
+                    console.log(distanceSeq[2]);
+                    console.log(nameSeq[0].innerText);
+                    console.log(nameSeq[1]);
+                    console.log(nameSeq[2]);
+                    for (var i = 0; i < originList.length; i++) {
+                        var outputDiv = distanceSeq[i];
+                        //var outputName = nameSeq[i];
+                        console.log(outputDiv);
+                        
+                        //outputDiv.innerHTML = originList[(distanceSeq[i].id).split('_')[1]-1] + ' to ' + destinationList[(distanceSeq[i+1].id).split('_')[1]-1] + ': ' + results.distance.text + ' in ' + results.duration.text + '<br>';
+                        if( i != originList.length-1 ){
+                            var results = response.rows[(distanceSeq[i].id).split('_')[1]-1].elements[(distanceSeq[i+1].id).split('_')[1]-1];
+                            outputDiv.innerHTML = nameSeq[i].innerText + ' to ' + nameSeq[i+1].innerText + ': <br> 距離 : ' + results.distance.text + ' 時間 : ' + results.duration.text;
+                            console.log(outputDiv);
+                        }
+                        else{
+                            outputDiv.innerHTML = '最後一個行程'+ nameSeq[i].innerText +' : <br> 祝您有個美好的Ending'
+                            console.log(outputDiv);
+                        }
+                    }
+                    */
+                }
+                
+                }	
+            );
+        }
+
+        
+        
+        //id換成map button的id
+        /*
+        document.getElementById('mappp').addEventListener('click', function() {
+            calculateAndDisplayRoute(directionsService, directionsRenderer,'DRIVING');
+        });
+        */
+        document.getElementById('mode').addEventListener('click',function(e){
+            var selectmode = e.target.id;
+            console.log(selectmode);
+            calculateAndDisplayRoute(directionsService, directionsRenderer, selectmode);
+        });
+        
+        //document.querySelectorAll('.list-group-item').addEventListener('dragend',distance(distanceservice));
+        
+        //distance(distanceservice);
 	</script>
 
 </body>

@@ -1126,7 +1126,7 @@ select{
             <div class="previewDay">
                 <h3>Day 1</h3>
                 <span> -------------------------------</span>
-                <p>06/24.週四</p>
+                <p>07/01.週三</p>
             </div>
             <div id="previewday1" class="previewcontent">
                 
@@ -1135,7 +1135,7 @@ select{
             <div class="previewDay">
                 <h3>Day 2</h3>
                 <span> -------------------------------</span>
-                <p>06/25.週五</p>
+                <p>07/02.週四</p>
             </div>
             <div id="previewday2" class="previewcontent">
                 
@@ -1233,31 +1233,14 @@ select{
             </select>
             <select id="attclass">
                 <option value="">請選擇類別</option>
-                <option value="桃園市">桃園市</option>
-                <option value="台北市">台北市</option>
-                <option value="新北市">新北市</option>
-                <option value="新竹市">新竹市</option>
-                <option value="新竹縣">新竹縣</option>
-                <option value="基隆市">基隆市</option>
-                <option value="宜蘭縣">宜蘭縣</option>
-                <option value="台中市">台中市</option>
-                <option value="彰化縣">彰化縣</option>
-                <option value="苗栗縣">苗栗縣</option>
-                <option value="南投縣">南投縣</option>
-                <option value="雲林縣">雲林縣</option>
-                <option value="嘉義縣">嘉義縣</option>
-                <option value="嘉義市">嘉義市</option>
-                <option value="台南市">台南市</option>
-                <option value="高雄市">高雄市</option>
-                <option value="屏東縣">屏東縣</option>
-                <option value="花蓮縣">花蓮縣</option>
-                <option value="台東縣">台東縣</option>
-                <option value="高雄市">高雄市</option>
-                <option value="台東縣">台東縣</option>
-                <option value="花蓮縣">花蓮縣</option>
-                <option value="連江縣">連江縣</option>
-                <option value="金門縣">金門縣</option>
-                <option value="澎湖縣">澎湖縣</option>
+                <option value="歷史古蹟">歷史古蹟</option>
+                <option value="公園綠地">公園綠地</option>
+                <option value="觀光夜市">觀光夜市</option>
+                <option value="百貨商圈">百貨商圈</option>
+                <option value="休閒娛樂">休閒娛樂</option>
+                <option value="宗教寺廟">宗教寺廟</option>
+                <option value="藝術空間">藝術空間</option>
+                
             </select>
             <div class="sure" onclick="getatt()">確定</div>
         </div>
@@ -1429,7 +1412,7 @@ select{
             <div class="Day" onclick="opendropdown(this)">
                 <h3>Day 1</h3>
                 <span> -------------------------------</span>
-                <p>06/24.週四</p>
+                <p>07/01.週三</p>
                 <i id="day1arrow" class="fas fa-angle-right"></i>
                 <i class="fas fa-trash-alt"></i>
             </div>
@@ -1444,7 +1427,7 @@ select{
             <div class="Day" onclick="opendropdown(this)">
                 <h3>Day 2</h3>
                 <span> -------------------------------</span>
-                <p>06/25.週五</p>
+                <p>07/02.週四</p>
                 <i id="day2arrow" class="fas fa-angle-right"></i>
                 <i class="fas fa-trash-alt"></i>
             </div>
@@ -1979,7 +1962,7 @@ select{
         document.getElementById('ch_tripname').value = vars[1];
         document.getElementById('previewname').innerHTML = vars[1];
         //日期名稱
-        document.getElementById('todate').innerHTML = getDate(1)+" - "+getDate(2);
+        document.getElementById('todate').innerHTML = '20200701'+" - "+'20200702';
         document.getElementById('ch_todate').value = getDate(1);
         //編輯日期背景
         function editbox(){
@@ -2124,7 +2107,7 @@ select{
                 <div class="Day" onclick="opendropdown(this)">
                     <h3>Day ${numdate}</h3>
                     <span> -------------------------------</span>
-                    <p>.週五</p>
+                    <p>07/03.週五</p>
                     <i id="day${numdate}arrow" class="fas fa-angle-right"></i>
                     <i class="fas fa-trash-alt"></i>
                 </div>
